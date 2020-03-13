@@ -5,27 +5,15 @@ import { jsx } from '@emotion/core';
 import { useTheme } from 'emotion-theming';
 import { Link } from 'react-router-dom';
 import { Button, Icon } from 'semantic-ui-react';
-import logo from '../images/logo.png';
+import Banner from './Banner';
 
 function Landing() {
   const theme = useTheme();
   const size = '2.1rem';
 
   return (
-    <>
-      <div
-        css={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          height: '7vh',
-          backgroundColor: theme.colors.blue
-        }}
-      >
-        <img src={logo} alt="Co-Make Logo"/>
-      </div>
-
-      
+    <div>
+      <Banner />
       <div
         css={{
           width: '60%',
@@ -60,7 +48,7 @@ function Landing() {
           </Button>
         </Link>
       </div>
-    </>
+    </div>
   )
 };
 

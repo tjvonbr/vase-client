@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Redirect, Link } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import { ThemeProvider } from 'emotion-theming';
 import Register from './components/Register';
 import Login from './components/Login';
@@ -18,14 +18,13 @@ const theme = {
   }
 }
 
-
 function App() {
   return (
     <ThemeProvider theme={theme}>
       <div className="App">
         <Route exact path="/" component={Landing} />
-        <Route exact path="/profile/:id" component={Profile} />
-        <Route exact path="/login" component={Login} />
+        <Route path="/profile/:id" component={Profile} />
+        <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
         <Route path="/addIssue" component={AddIssue} />
       </div>
