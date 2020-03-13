@@ -4,6 +4,7 @@ import React from 'react';
 import { css, jsx } from '@emotion/core';
 import { useTheme } from 'emotion-theming';
 import NavBarLink from './NavBarLink';
+import logo from '../images/logo.png';
 
 function NavBar() {
   const theme = useTheme();
@@ -13,14 +14,37 @@ function NavBar() {
       <nav
         css={{
           display: 'flex',
-          height: '5vh',
+          justifyContent: 'space-between',
+          height: '7vh',
           backgroundColor: theme.colors.blue
         }}
       >
-        <NavBarLink 
-          path={'/login'} 
-          page={'Login'}  
-        />
+        <div
+          css={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            marginLeft: '10px'
+          }}
+        >
+          <img src={logo} alt="Co-Make Logo"/>
+        </div>
+
+        <div>
+          <NavBarLink 
+            path={'/login'} 
+            page={'Login'}  
+          />
+        </div>
+
+        <div>
+          <p
+            css={{
+              color: theme.colors.white
+            }}
+          >Social Media Links</p>
+        </div>
+
       </nav>
     </>
   )
