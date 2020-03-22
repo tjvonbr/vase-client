@@ -1,42 +1,53 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Button, Form, Grid, Header, Image, Message, Segment, Dimmer, Loader } from 'semantic-ui-react'
-import '../styles/addIssue.css'
-import Upgrade from '../images/bermuda/bermuda-upgrade.png'
+import { useParams } from 'react-router-dom';
+import { 
+  Button, 
+  Form, 
+  Grid, 
+  Header, 
+  Image, 
+  Message, 
+  Segment, 
+  Dimmer, 
+  Loader } 
+from 'semantic-ui-react';
+import '../styles/addIssue.css';
+import Banner from './Banner';
+import Upgrade from '../images/bermuda/bermuda-upgrade.png';
+
 
 function AddIssue(props) {
-  const [createIssue, setCreateIssue] = useState({ zipCode: localStorage.getItem("zipcode"), user_id: localStorage.getItem("id"), category: "" });
+  const [createIssue, setCreateIssue] = useState({ 
+    zipcode: localStorage.getItem("zipcode"), 
+    user_id: localStorage.getItem("id"), 
+    title: "",
+    description: "" });
   const [isLoading, setIsLoading] = useState(false)
 
-  // Functionality for Post Request
-  const addIssue = data => {
-      console.log("passIn data", data);
-      let token = JSON.parse(localStorage.getItem('token'))
-      let localId = JSON.parse(localStorage.getItem('id'))
-      axios
-        .post('https://co-make.herokuapp.com/issues', data, {
-          headers: {
-            Authorization: token
-          }
-         })
-        .then( res => {
-          // let thisUser = res.data.filter( user => user.id === localId )
-          console.log("SUCCESS", res.data)
+  // Functionality for posting an issue
+  function addIssue(data) {
+    // Fetching token and user ID from local storage
+    let token = window.localStorage.getItem('token')
+    let id = window.localStorage.getItem('id');
 
-          props.history.push('/')
-          setIsLoading(false);
+    axios
+      .post('https://comake-be.herokuapp.com/issues', data, {
+        headers: {
+          Authorization: token
+        }
       })
-        .catch( err => console.log("OH NO AN ERROR HAPPENED", err))
+      .then(response => {
+        // let thisUser = res.data.filter( user => user.id === localId )
+        console.log("ADD ISSUE", response.data)
+        // props.history.push(`/profile/${id}`)
+        setIsLoading(false);
+      })
+      .catch( err => console.log("OH NO AN ERROR HAPPENED", err))
   }
 
   function handleChange(event) {
     const updatedIssues = { ...createIssue, [event.target.name]: event.target.value };
-    console.log(
-      "handleChange",
-      event.target.name,
-      event.target.value,
-      updatedIssues
-    );
     setCreateIssue(updatedIssues);
   };
 
@@ -44,12 +55,13 @@ function AddIssue(props) {
     setIsLoading(true);
     event.preventDefault();
     console.log("createIssue", createIssue);
+    setCreateIssue({ title: "", description: "", zipCode: localStorage.getItem("zipcode"), user_id: localStorage.getItem("id")});
     addIssue(createIssue);
-    setCreateIssue({ issue_name: "", category: "", description: "", zipCode: localStorage.getItem("zipcode"), user_id: localStorage.getItem("id") });
   };
 
   return (
     <>
+    <Banner />
     <Dimmer active={ isLoading ? true : false }>
         <Loader>Loading</Loader>
       </Dimmer>
@@ -64,31 +76,23 @@ function AddIssue(props) {
             <Form.Input
             fluid
             icon='flag'
-            name="issue_name"
-            value={createIssue.issue_name}
-            onChange={handleChange}
             iconPosition='left'
-            placeholder='Issue Name'
+            type='text'
+            name="title"
+            value={createIssue.title}
+            onChange={handleChange}
+
+            placeholder='Issue Title'
             />
 
             <Form.Input
               fluid
               icon='address card'
               iconPosition='left'
-              placeholder='Description'
               type='text'
               name="description"
+              placeholder='Issue Description'
               value={createIssue.description}
-              onChange={handleChange}
-            />
-            <Form.Input
-              fluid
-              icon='image'
-              iconPosition='left'
-              placeholder='Picture'
-              type='text'
-              name="picture"
-              value={createIssue.picture}
               onChange={handleChange}
             />
 
