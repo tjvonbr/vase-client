@@ -33,9 +33,10 @@ function Login(props) {
       axios
         .post("https://comake-be.herokuapp.com/auth/login", inputData)
         .then(response => {
-          const { id, token } = response.data;
+          const { id, token, zipcode } = response.data;
           window.localStorage.setItem('id', id);
           window.localStorage.setItem('token', token);
+          window.localStorage.setItem('zipcode', zipcode)
           setIsLoading(false);
           props.history.push(`/profile/${id}`)
         })

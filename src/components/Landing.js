@@ -40,11 +40,11 @@ function Landing() {
         <p css={{fontSize: `${size}`}}>If you're a returning visitor, we'd like to welcome you back! You can click the 'Login' button in the top-right corner of your screen!</p>
 
         {/* Link to login page */}
-        <Link to='/register'>
+        <Link to='/login'>
           <Button
             size='massive'
             color='blue'>
-              Register
+              Login
           </Button>
         </Link>
       </div>
