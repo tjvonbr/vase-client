@@ -14,6 +14,12 @@ function NavBarLink(props) {
       css={{
         color: theme.colors.white,
         padding: '10px',
+        fontSize: '16px',
+        fontWeight: 600,
+        '&:hover': {
+          textDecoration: 'underline',
+          color: theme.colors.white
+        }
       }}
     >
       {props.page}
