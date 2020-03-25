@@ -26,27 +26,28 @@ function NavBar() {
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            marginLeft: '10px'
+            marginLeft: '20px',
           }}
         >
           <img src={logo} alt="Co-Make Logo"/>
+
+          <div css={{ marginLeft: '20px '}}>
+            <NavBarLink 
+              path={`/profile/${id}`}
+              page={'Profile'}
+            />
+            <NavBarLink 
+              path={'/community'}
+              page={'Your Community'}
+            />
+            <NavBarLink 
+              path={'/logout'} 
+              page={'Logout'}  
+            />
+          </div>
         </div>
 
-        <div>
-          <NavBarLink 
-            path={`/profile/${id}`}
-            page={'PROFILE'}
-          />
-          <NavBarLink 
-            path={'/community'}
-            page={'YOUR COMMUNITY'}
-          />
-          <NavBarLink 
-            path={'/logout'} 
-            page={'LOGOUT'}  
-          />
 
-        </div>
 
         <div>
           <p
