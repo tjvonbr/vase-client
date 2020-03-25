@@ -12,7 +12,8 @@ function NavBarLink(props) {
     <NavLink 
       to={props.path}
       css={{
-        color: theme.colors.white
+        color: theme.colors.white,
+        padding: '10px',
       }}
     >
       {props.page}

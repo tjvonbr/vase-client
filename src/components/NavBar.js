@@ -9,6 +9,8 @@ import logo from '../images/logo.png';
 function NavBar() {
   const theme = useTheme();
 
+  const id = window.localStorage.getItem('id');
+
   return (
     <>
       <nav
@@ -32,9 +34,18 @@ function NavBar() {
 
         <div>
           <NavBarLink 
-            path={'/login'} 
-            page={'Login'}  
+            path={`/profile/${id}`}
+            page={'PROFILE'}
           />
+          <NavBarLink 
+            path={'/community'}
+            page={'YOUR COMMUNITY'}
+          />
+          <NavBarLink 
+            path={'/logout'} 
+            page={'LOGOUT'}  
+          />
+
         </div>
 
         <div>

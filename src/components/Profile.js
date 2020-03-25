@@ -5,7 +5,7 @@ import { css, jsx } from '@emotion/core';
 import { useTheme } from 'emotion-theming';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import Banner from './Banner';
+import NavBar from './NavBar';
 import { Button, Card, Icon, Image } from 'semantic-ui-react'
 import IssueCard from './IssueCard';
 import profile_placeholder from '../images/profile_placeholder.png';
@@ -30,7 +30,7 @@ function Profile(props) {
     // Fetches user data to populate profile card with proper information
     function fetchUser() {
       axios
-        .get(`https://comake-be.herokuapp.com/users/${id}`, {
+        .get(`http://localhost:3000/users/${id}`, {
           headers: {
             Authorization: token
           }
@@ -46,7 +46,7 @@ function Profile(props) {
     // Fetches the issues created by the logged user
     function fetchIssues() {
       axios
-        .get(`https://comake-be.herokuapp.com/users/${id}/issues`, {
+        .get(`http://localhost:3000/users/${id}/issues`, {
           headers: {
             Authorization: token
           }
@@ -61,7 +61,7 @@ function Profile(props) {
 
     return (
       <>
-        <Banner />
+        <NavBar />
         <div
           css={{
             display: 'flex',

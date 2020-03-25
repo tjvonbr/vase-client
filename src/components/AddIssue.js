@@ -25,6 +25,9 @@ function AddIssue(props) {
     description: "" });
   const [isLoading, setIsLoading] = useState(false)
 
+  let token = window.localStorage.getItem('token')
+  let id = window.localStorage.getItem('id')
+
   // Functionality for posting an issue
   function addIssue(data) {
     // Fetching token and user ID from local storage
@@ -32,15 +35,14 @@ function AddIssue(props) {
     let id = window.localStorage.getItem('id');
 
     axios
-      .post('https://comake-be.herokuapp.com/issues', data, {
+      .post('http://localhost:3000/issues', data, {
         headers: {
           Authorization: token
         }
       })
       .then(response => {
-        // let thisUser = res.data.filter( user => user.id === localId )
-        console.log("ADD ISSUE", response.data)
-        // props.history.push(`/profile/${id}`)
+
+        props.history.push(`/profile/${id}`)
         setIsLoading(false);
       })
       .catch( err => console.log("OH NO AN ERROR HAPPENED", err))
