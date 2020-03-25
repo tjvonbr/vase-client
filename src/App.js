@@ -5,7 +5,9 @@ import Register from './components/Register';
 import Login from './components/Login';
 import Profile from './components/Profile';
 import AddIssue from './components/AddIssue';
+import Community from './components/Community';
 import Landing from './components/Landing';
+import Logout from './components/Logout';
 
 // Theme colors
 const theme = {
@@ -26,7 +28,9 @@ function App() {
         <Route path="/profile/:id" component={Profile} />
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
-        <Route path="/addIssue" component={AddIssue} />
+        <Route path="/addissue" component={AddIssue} />
+        <Route path="/community" component={Community} />
+        <Route path="/logout" component={Logout} />
       </div>
     </ThemeProvider>
   );

@@ -7,34 +7,36 @@ import { Button, Card } from 'semantic-ui-react'
 
 function IssueCard({ issue }) {
   const [currentIssue, setCurrentIssue] =  useState(issue);
-  const [editedIssue, setEditedIssue] = useState(issue);
+  const [editedIssue, setEditedIssue] = useState(currentIssue);
 
   // Local storage management
   const token = window.localStorage.getItem('token');
   
   // Issue ID to be used as dynamic param
-  const issueId = issue.id;
+  const id = issue.id;
+
+  console.log("EDITED ISSUE", editedIssue);
 
   // Once chevron is clicked, the # of upvotes increases by 1
   function upvoteIssue() {
     // Change state to +1 for upvote
-    setEditedIssue({ ...editedIssue, upvotes: currentIssue.upvotes + 1 });
+    setEditedIssue({ upvotes: editedIssue.upvotes + 1 });
 
     axios
-      .put(`https://comake-be.herokuapp.com/issues/${issueId}`, editedIssue, {
+      .put(`http://localhost:3000/issues/${id}`, editedIssue, {
         headers: {
           Authorization: token
         }
       })
       .then(response => {
-        setCurrentIssue(response.data);
+        // When I log the response, the first click doesn't increase upvote, but the second click does
+        console.log("RESPONSE", response.data)
+        setCurrentIssue(response.data)
       })
       .catch(error => {
         console.log(error);
       })
-  }
-
-  console.log(editedIssue);
+  };
 
   return (
     <>
@@ -55,7 +57,7 @@ function IssueCard({ issue }) {
           <Button
             size='huge'
             icon='heart'
-            label={{ as: 'a', basic: true, content: currentIssue.upvotes }}
+            label={{ as: 'p', basic: true, content: editedIssue.upvotes }}
             labelPosition='right'
             onClick={upvoteIssue}
           />

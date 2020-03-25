@@ -34,7 +34,7 @@ function Register(props) {
     e.preventDefault()
     setIsLoading(true)
       axios
-        .post("https://comake-be.herokuapp.com/auth/register", credentials)
+        .post("http://localhost:3000/auth/register", credentials)
         .then(response => {
           console.log(response);
           props.history.push("/");
