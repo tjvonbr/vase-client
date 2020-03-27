@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { css, jsx } from '@emotion/core';
 import { useTheme } from 'emotion-theming';
 import axios from 'axios';
+import CommunityIssues from './CommunityIssues';
 import NavBar from './NavBar';
 
 function Community() {
@@ -24,7 +25,7 @@ function Community() {
         }
       })
       .then(response => {
-        console.log(response);
+        setCommIssues(response.data);
       })
       .catch(error => {
         console.log(error);
@@ -32,7 +33,23 @@ function Community() {
   };
 
   return (
+    <>
     <NavBar />
+
+    <div
+      css={{
+        marginTop: '400px',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+      }}
+    >
+      <h3 
+        css={{ borderBottom: '2px solid black' }}>Community concerns posted for {zip}:
+      </h3>
+      <CommunityIssues issues={commIssues} />
+    </div>
+    </>
   )
 };
 

@@ -106,7 +106,7 @@ function AddIssue(props) {
         <Message>
             Cancel?
             <Button className="register-button"
-            onClick={()=> props.history.push('/')}
+            onClick={()=> props.history.goBack()}
             content='Go Back'
             positive
             size='medium' />

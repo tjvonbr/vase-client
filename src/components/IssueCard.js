@@ -3,11 +3,12 @@
 import React, { useState } from 'react';
 import { jsx } from '@emotion/core';
 import axios from 'axios';
-import { Button, Card } from 'semantic-ui-react'
+import { Button, Card, Icon, Label } from 'semantic-ui-react'
 
 function IssueCard({ issue }) {
   const [currentIssue, setCurrentIssue] =  useState(issue);
   const [editedIssue, setEditedIssue] = useState(currentIssue);
+  const [voted, setVoted] = useState(null);
 
   // Local storage management
   const token = window.localStorage.getItem('token');
@@ -21,7 +22,8 @@ function IssueCard({ issue }) {
   function upvoteIssue() {
     // Change state to +1 for upvote
     setEditedIssue({ upvotes: editedIssue.upvotes + 1 });
-
+   
+    // Request to increment upvote by +1
     axios
       .put(`http://localhost:3000/issues/${id}`, editedIssue, {
         headers: {
@@ -36,11 +38,19 @@ function IssueCard({ issue }) {
       .catch(error => {
         console.log(error);
       })
+
+    // Change voting status
+    if (!voted) {
+      setVoted(true);
+    } else {
+      return voted
+    }
+
   };
 
   return (
     <>
-      <Card>
+      <Card raised>
         <Card.Content>
           <Card.Header>{ issue.title }</Card.Header>
           <Card.Meta>{ issue.zipcode }</Card.Meta>
@@ -54,13 +64,18 @@ function IssueCard({ issue }) {
            marginBottom: '10px'
          }}
         >
-          <Button
-            size='huge'
-            icon='heart'
-            label={{ as: 'p', basic: true, content: editedIssue.upvotes }}
-            labelPosition='right'
-            onClick={upvoteIssue}
-          />
+        <Button as='div' labelPosition='right' disabled={ voted ? true : false } >
+          <Button 
+          color={ voted ? 'gray' : 'red' }
+          size='large' 
+          onClick={upvoteIssue}>
+            <Icon name='thumbs up outline' />
+            Upvote
+          </Button>
+          <Label as='p' basic color={ voted ? 'gray' : 'red' } pointing='left'>
+            {currentIssue.upvotes}
+          </Label>
+        </Button>
         </div>
       </Card>
     </>
