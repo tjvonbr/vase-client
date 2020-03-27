@@ -4,6 +4,7 @@ import React from 'react';
 import { css, jsx } from '@emotion/core';
 import { useTheme } from 'emotion-theming';
 import NavBarLink from './NavBarLink';
+import SocialBar from './SocialBar';
 import logo from '../images/logo.png';
 
 function NavBar() {
@@ -47,16 +48,7 @@ function NavBar() {
           </div>
         </div>
 
-
-
-        <div>
-          <p
-            css={{
-              color: theme.colors.white
-            }}
-          >Social Media Links</p>
-        </div>
-
+        <SocialBar />
       </nav>
     </>
   )

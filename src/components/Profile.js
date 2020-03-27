@@ -7,7 +7,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import NavBar from './NavBar';
 import { Button, Card, Icon, Image } from 'semantic-ui-react'
-import IssueCard from './IssueCard';
+import IssuesList from './IssuesList';
 import profile_placeholder from '../images/profile_placeholder.png';
 
 function Profile(props) {
@@ -24,7 +24,6 @@ function Profile(props) {
 
     useEffect(() => {
       fetchUser();
-      fetchIssues();
     }, [])
 
     // Fetches user data to populate profile card with proper information
@@ -40,22 +39,6 @@ function Profile(props) {
         })
         .catch(error => {
           console.log(error);
-        })
-    };
-
-    // Fetches the issues created by the logged user
-    function fetchIssues() {
-      axios
-        .get(`http://localhost:3000/users/${id}/issues`, {
-          headers: {
-            Authorization: token
-          }
-        })
-        .then(response => {
-          setIssues(response.data);
-        })
-        .catch(err => {
-          console.log(err)
         })
     };
 
@@ -137,7 +120,7 @@ function Profile(props) {
               }}
             >Issues created by { currentUser.username }:</h3>
           </div>
-          {issues.map(issue => <IssueCard issue={issue} key={issue.id} /> )}
+          <IssuesList />
         </div>
       </>
     )
