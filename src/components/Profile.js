@@ -24,7 +24,23 @@ function Profile(props) {
 
     useEffect(() => {
       fetchUser();
-    }, [])
+      fetchIssues();
+    }, [issues])
+
+    function fetchIssues() {
+      axios
+        .get(`http://localhost:3000/users/${id}/issues`, {
+          headers: {
+            Authorization: token
+          }
+        })
+        .then(response => {
+          setIssues(response.data);
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    };
 
     // Fetches user data to populate profile card with proper information
     function fetchUser() {
@@ -120,7 +136,7 @@ function Profile(props) {
               }}
             >Issues created by { currentUser.username }:</h3>
           </div>
-          <IssuesList />
+          <IssuesList issues={issues} />
         </div>
       </>
     )
