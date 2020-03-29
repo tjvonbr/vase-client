@@ -7,43 +7,24 @@ import IssueCard from './IssueCard';
 import axios from 'axios';
 import { Grid } from 'semantic-ui-react';
 
-function IssuesList(props) {
-  const [issues, setIssues] = useState([]);
-
+function IssuesList({ issues }) {
   // Local storage management
   let token = window.localStorage.getItem('token')
   let id = window.localStorage.getItem('id')
-
-  useEffect(() => {
-    fetchIssues();
-  }, []);
-
-  // Fetches the issues created by the logged user
-  function fetchIssues() {
-    axios
-      .get(`http://localhost:3000/users/${id}/issues`, {
-        headers: {
-          Authorization: token
-        }
-      })
-      .then(response => {
-        setIssues(response.data);
-      })
-      .catch(err => {
-        console.log(err)
-      })
-  };
-
+  
   return (
     <div
       css={{
+        margin: '0 auto',
         marginTop: '20px',
+        width: '700px',
         display: 'grid',
-        gridTemplateColumns: '45% 45%',
-        gridGap: '20px',
-        placeContent: 'center',
-
-
+        gridTemplateColumns: '48% 48%',
+        gridTemplateRows: '48% 48%',
+        gridColumnGap: '4%',
+        gridRowGap: '4%',
+        justifyItems: 'center',
+        /* alignItems: 'center' */
       }}
     >
       {issues.map(issue => <IssueCard issue={issue} key={issue.id} /> )}

@@ -2,8 +2,9 @@
 
 import React, { useState } from 'react';
 import { jsx } from '@emotion/core';
+import { useTheme } from 'emotion-theming';
 import axios from 'axios';
-import { Button, Card, Icon, Label } from 'semantic-ui-react'
+import { Button, Card, Icon, Label } from 'semantic-ui-react';
 
 function IssueCard({ issue }) {
   const [currentIssue, setCurrentIssue] =  useState(issue);
@@ -39,18 +40,21 @@ function IssueCard({ issue }) {
         console.log(error);
       })
 
-    // Change voting status
-    if (!voted) {
-      setVoted(true);
-    } else {
-      return voted
-    }
+
+    // if (!voted) {
+    //   setVoted(true);
+    // } else {
+    //   return voted
+    // }
 
   };
 
   return (
     <>
-      <Card raised>
+      <Card raised style={{
+        height: '250px',
+        width: '300px',
+      }}>
         <Card.Content>
           <Card.Header>{ issue.title }</Card.Header>
           <Card.Meta>{ issue.zipcode }</Card.Meta>
@@ -59,23 +63,23 @@ function IssueCard({ issue }) {
           </Card.Description>
         </Card.Content>
         <div
-         css={{
-           marginLeft: '12px',
-           marginBottom: '10px'
-         }}
+        css={{
+          marginLeft: '12px',
+          marginBottom: '10px'
+        }}
         >
-        <Button as='div' labelPosition='right' disabled={ voted ? true : false } >
-          <Button 
-          color={ voted ? 'gray' : 'red' }
-          size='large' 
-          onClick={upvoteIssue}>
-            <Icon name='thumbs up outline' />
-            Upvote
+          <Button as='div' labelPosition='right' disabled={false} >
+            <Button 
+            color={ voted ? 'gray' : 'facebook' }
+            size='large' 
+            onClick={upvoteIssue}>
+              <Icon name='thumbs up outline' />
+              Upvote
+            </Button>
+            <Label as='p' basic color={ voted ? 'gray' : 'blue' } pointing='left'>
+              {currentIssue.upvotes}
+            </Label>
           </Button>
-          <Label as='p' basic color={ voted ? 'gray' : 'red' } pointing='left'>
-            {currentIssue.upvotes}
-          </Label>
-        </Button>
         </div>
       </Card>
     </>
