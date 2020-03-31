@@ -25,7 +25,7 @@ function Profile(props) {
     useEffect(() => {
       fetchUser();
       fetchIssues();
-    }, [issues])
+    }, [])
 
     function fetchIssues() {
       axios
@@ -136,7 +136,7 @@ function Profile(props) {
               }}
             >Issues created by { currentUser.username }:</h3>
           </div>
-          <IssuesList issues={issues} />
+          <IssuesList issues={issues} fetch={fetchIssues} />
         </div>
       </>
     )

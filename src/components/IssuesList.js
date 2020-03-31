@@ -2,34 +2,47 @@
 
 import React, { useEffect, useState } from 'react';
 import { css, jsx } from '@emotion/core';
-import { useTheme } from 'emotion-theming';
 import IssueCard from './IssueCard';
-import axios from 'axios';
-import { Grid } from 'semantic-ui-react';
 
-function IssuesList({ issues }) {
+function IssuesList({ issues, fetch }) {
   // Local storage management
   let token = window.localStorage.getItem('token')
   let id = window.localStorage.getItem('id')
+
+  if (issues.length < 1) {
+    // If user hasn't posted yet, render this:
+    return (
+      <div css={{ marginTop: '20px' }}>
+        <h3>You haven't posted any community concerns yet!</h3>
+      </div>  
+    )
+  } else {
+    return (
+      <div
+        css={{
+          margin: '0 auto',
+          marginTop: '20px',
+          width: '700px',
+          display: 'grid',
+          gridTemplateColumns: '48% 48%',
+          gridTemplateRows: '48% 48%',
+          gridColumnGap: '4%',
+          gridRowGap: '4%',
+          justifyItems: 'center',
+          /* alignItems: 'center' */
+        }}
+      >
+        {issues.map(issue => (
+          <IssueCard 
+            issue={issue}
+            fetch={fetch} 
+            key={issue.id} 
+          /> ))}
+      </div>
+    )
+  }
   
-  return (
-    <div
-      css={{
-        margin: '0 auto',
-        marginTop: '20px',
-        width: '700px',
-        display: 'grid',
-        gridTemplateColumns: '48% 48%',
-        gridTemplateRows: '48% 48%',
-        gridColumnGap: '4%',
-        gridRowGap: '4%',
-        justifyItems: 'center',
-        /* alignItems: 'center' */
-      }}
-    >
-      {issues.map(issue => <IssueCard issue={issue} key={issue.id} /> )}
-    </div>
-  )
+
 };
 
 export default IssuesList;

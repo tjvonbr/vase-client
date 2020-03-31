@@ -1,6 +1,6 @@
 /** @jsx jsx */
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { jsx } from '@emotion/core';
 import { useTheme } from 'emotion-theming';
 import axios from 'axios';
@@ -16,8 +16,6 @@ function IssueCard({ issue }) {
   
   // Issue ID to be used as dynamic param
   const id = issue.id;
-
-  console.log("EDITED ISSUE", editedIssue);
 
   // Once chevron is clicked, the # of upvotes increases by 1
   function upvoteIssue() {
@@ -53,7 +51,7 @@ function IssueCard({ issue }) {
     <>
       <Card raised style={{
         height: '250px',
-        width: '300px',
+        width: '500px',
       }}>
         <Card.Content>
           <Card.Header>{ issue.title }</Card.Header>
