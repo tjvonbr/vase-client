@@ -20,7 +20,7 @@ function Register(props) {
     email: "", 
     password : "", 
     username: "", 
-    zipCode: ""
+    zipcode: ""
   });
   const [isLoading, setIsLoading] = useState(false);
 
@@ -37,12 +37,15 @@ function Register(props) {
         .post("http://localhost:3000/auth/register", credentials)
         .then(response => {
           console.log(response);
-          props.history.push("/");
+          const token = window.localStorage.setItem('token', response.data.token);
+          const id = window.localStorage.setItem('id', response.data.id);
+          console.log(token)
+          props.history.push(`/profile/${id}`);
           setIsLoading(false);
         })
 
         .catch(err => {
-          throw new Error("Oh no!  There was an issue registering you!  Please try again!", err);
+          console.log(err);;
         });
   }
 
@@ -85,9 +88,9 @@ function Register(props) {
                 icon='map'
                 iconPosition='left'
                 placeholder='Zipcode'
-                type='zipCode'
-                name="zipCode"
-                value={credentials.zipCode}
+                type='zipcode'
+                name="zipcode"
+                value={credentials.zipcode}
                 onChange={handleInput}
               />
 
@@ -110,7 +113,7 @@ function Register(props) {
           <Message>
             Return to Login?
             <Button className="register-button"
-            onClick={()=> props.history.push('/login')}
+            onClick={()=> props.history.push('/profile/')}
             content='Back'
             positive
             size='mini' />
