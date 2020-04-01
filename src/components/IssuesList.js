@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { css, jsx } from '@emotion/core';
-import IssueCard from './IssueCard';
+import ProfIssueCard from './ProfIssueCard';
 
 function IssuesList({ issues, fetch }) {
   // Local storage management
@@ -29,11 +29,10 @@ function IssuesList({ issues, fetch }) {
           gridColumnGap: '4%',
           gridRowGap: '4%',
           justifyItems: 'center',
-          /* alignItems: 'center' */
         }}
       >
         {issues.map(issue => (
-          <IssueCard 
+          <ProfIssueCard 
             issue={issue}
             fetch={fetch} 
             key={issue.id} 

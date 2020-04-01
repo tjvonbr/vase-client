@@ -13,9 +13,6 @@ import profile_placeholder from '../images/profile_placeholder.png';
 function Profile(props) {
     const [currentUser, setCurrentUser] = useState("");
     const [issues, setIssues] = useState([]);
-    const [isEditingUser, setIsEditingUser] = useState(false);
-    const [isEditingIssue, setIsEditingIssue] = useState(false);
-    const [issueToUpdate, setIssueToUpdate] = useState({})
     let token = window.localStorage.getItem('token')
     let id = window.localStorage.getItem('id')
 
