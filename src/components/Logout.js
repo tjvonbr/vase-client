@@ -1,20 +1,14 @@
 /** @jsx jsx */
 
 import React, { useState } from 'react';
-import { css, jsx } from '@emotion/core';
+import { jsx } from '@emotion/core';
 import { useTheme } from 'emotion-theming';
 import { 
   Button, 
-  Form, 
   Grid, 
   Header, 
-  Image, 
-  Message, 
-  Segment, 
-  Dimmer, 
-  Loader }
+  Image }
 from 'semantic-ui-react'
-import { Redirect } from 'react-router-dom';
 import NavBar from './NavBar';
 import comeback from '../images/bermuda/bermuda-come-back-later.png';
 

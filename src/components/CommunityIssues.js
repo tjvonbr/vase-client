@@ -3,24 +3,27 @@
 import React, { useState, useEffect } from 'react';
 import { css, jsx } from '@emotion/core';
 import { useTheme } from 'emotion-theming';
-import IssueCard from './IssueCard';
+import CommIssueCard from './CommIssueCard';
 
 function CommunityIssues({ issues }) {
+  const theme = useTheme();
 
   return (
     <div
       css={{
-        marginTop: '20px',
+        paddingTop: '20px',
+        paddingBottom: '40px',
+        marginBottom: '100px',
         width: '700px',
         display: 'grid',
-        gridTemplateColumns: '49% 49%',
-        gridColumnGap: '2%',
-        gridRowGap: '2%',
-        alignItems: 'center',
+        gridTemplateColumns: '48% 48%',
+        gridColumnGap: '4%',
+        gridRowGap: '4%',
         justifyItems: 'center',
+        backgroundColor: theme.colors.blue,
         }}
     >  
-      {issues.map(issue => <IssueCard issue={issue} key={issue.id} />)}
+      {issues.map(issue => <CommIssueCard issue={issue} key={issue.id} />)}
     </div>
   )
 }

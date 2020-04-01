@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
 import { 
   Button, 
   Form, 
@@ -28,6 +27,21 @@ function AddIssue(props) {
   let token = window.localStorage.getItem('token')
   let id = window.localStorage.getItem('id')
 
+  const addPostedIssue = () => {
+    axios
+      .put(`http://localhost:3000/users/${id}`, {
+        headers: {
+          Authorization: token
+        }
+      })
+      .then(response => {
+        console.log(response.data);
+      })
+      .catch(error => {
+        console.log(error);
+      })
+  };
+
   // Functionality for posting an issue
   function addIssue(data) {
     // Fetching token and user ID from local storage
@@ -41,7 +55,6 @@ function AddIssue(props) {
         }
       })
       .then(response => {
-
         props.history.push(`/profile/${id}`)
         setIsLoading(false);
       })

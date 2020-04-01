@@ -5,12 +5,13 @@ import { css, jsx } from '@emotion/core';
 import { useTheme } from 'emotion-theming';
 import axios from 'axios';
 import CommunityIssues from './CommunityIssues';
-import IssueCard from './IssueCard';
+import MostPopular from './MostPopular';
 import NavBar from './NavBar';
 
 function Community() {
   const [commIssues, setCommIssues] = useState([]);
   const [mostPopular, setMostPopular] = useState({});
+
   useEffect(() => {
     fetchCommIssues();
   }, []);
@@ -37,34 +38,30 @@ function Community() {
       })
   };
 
-  console.log(mostPopular);
-
   return (
     <>
-    <NavBar />
-    <div
-      css={{
-        margin: '20px 0px',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-
-      }}
-    >
-      <h3>Top concern in {zip}:</h3>
-      <IssueCard issue={mostPopular} />
-    </div>
-    <div
-      css={{
-        marginBottom: '100px',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-      }}
-    >
-      <h3>All community concerns posted in {zip}:</h3>
-      <CommunityIssues issues={commIssues} />
-    </div>
+      <NavBar />
+      <div
+        css={{
+          margin: '20px 0px',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
+      >
+        <h3>Top concern in {zip}:</h3>
+        <MostPopular issue={mostPopular} />
+      </div>
+      <div
+        css={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
+      >
+        <h3>All community concerns posted in {zip}:</h3>
+        <CommunityIssues issues={commIssues} />
+      </div>
     </>
   )
 };
