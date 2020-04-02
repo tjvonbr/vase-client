@@ -7,6 +7,7 @@ import axios from 'axios';
 import CommunityIssues from './CommunityIssues';
 import MostPopular from './MostPopular';
 import NavBar from './NavBar';
+import NoIssues from './NoIssues';
 
 function Community() {
   const [commIssues, setCommIssues] = useState([]);
@@ -38,32 +39,36 @@ function Community() {
       })
   };
 
-  return (
-    <>
-      <NavBar />
-      <div
-        css={{
-          margin: '20px 0px',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}
-      >
-        <h3>Top concern in {zip}:</h3>
-        <MostPopular issue={mostPopular} />
-      </div>
-      <div
-        css={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}
-      >
-        <h3>All community concerns posted in {zip}:</h3>
-        <CommunityIssues issues={commIssues} />
-      </div>
-    </>
-  )
+  if (commIssues < 1) {
+    return <NoIssues />
+  } else {
+    return (
+      <>
+        <NavBar /> 
+        <div
+          css={{
+            margin: '20px 0px',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          <h3>Top concern in {zip}:</h3>
+          <MostPopular issue={mostPopular} />
+        </div>
+        <div
+          css={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          <h3>All community concerns posted in {zip}:</h3>
+          <CommunityIssues issues={commIssues} />
+        </div>
+      </>
+    )
+  }
 };
 
 export default Community;

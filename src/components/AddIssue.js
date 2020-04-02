@@ -12,7 +12,7 @@ import {
   Loader } 
 from 'semantic-ui-react';
 import '../styles/addIssue.css';
-import Banner from './Banner';
+import NavBar from './NavBar';
 import Upgrade from '../images/bermuda/bermuda-upgrade.png';
 
 
@@ -76,7 +76,7 @@ function AddIssue(props) {
 
   return (
     <>
-    <Banner />
+    <NavBar />
     <Dimmer active={ isLoading ? true : false }>
         <Loader>Loading</Loader>
       </Dimmer>
