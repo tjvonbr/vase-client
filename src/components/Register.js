@@ -17,6 +17,8 @@ import Success from '../images/bermuda/bermuda-success.png'
 
 function Register(props) {
   const [credentials, setCredentials] = useState({
+    first_name: "",
+    last_name: "",
     email: "", 
     password : "", 
     username: "", 
@@ -36,14 +38,11 @@ function Register(props) {
       axios
         .post("http://localhost:3000/auth/register", credentials)
         .then(response => {
-          console.log(response);
           const token = window.localStorage.setItem('token', response.data.token);
           const id = window.localStorage.setItem('id', response.data.id);
-          console.log(token)
-          props.history.push(`/profile/${id}`);
           setIsLoading(false);
+          props.history.push(`/profile/${id}`);
         })
-
         .catch(err => {
           console.log(err);;
         });
@@ -64,15 +63,37 @@ function Register(props) {
           <Header as="h4" color='green' textAlign='center'>{props.message}</Header>
           <Form size='massive' onSubmit={loginHandler}>
             <Segment stacked>
+              {/* First Name */}
               <Form.Input
-              fluid icon='mail'
-              name="email"
-              value={credentials.email}
-              onChange={handleInput}
-              iconPosition='left'
-              placeholder='E-mail address'
+                fluid icon='mail'
+                name="first_name"
+                value={credentials.first_name}
+                onChange={handleInput}
+                iconPosition='left'
+                placeholder='First Name'
               />
 
+              {/* Last Name */}
+              <Form.Input
+                fluid icon='mail'
+                name="last_name"
+                value={credentials.last_name}
+                onChange={handleInput}
+                iconPosition='left'
+                placeholder='Last Name'
+              />
+
+              {/* Email */}
+              <Form.Input
+                fluid icon='mail'
+                name="email"
+                value={credentials.email}
+                onChange={handleInput}
+                iconPosition='left'
+                placeholder='E-mail address'
+              />
+
+              {/* Username */}
               <Form.Input
                 fluid
                 icon='user'
@@ -83,6 +104,8 @@ function Register(props) {
                 value={credentials.username}
                 onChange={handleInput}
               />
+
+              {/* Zipcode */}
               <Form.Input
                 fluid
                 icon='map'
@@ -94,6 +117,7 @@ function Register(props) {
                 onChange={handleInput}
               />
 
+              {/* Password */}
               <Form.Input
                 fluid
                 icon='lock'
