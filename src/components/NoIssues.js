@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from 'react';
 import { css, jsx } from '@emotion/core';
-import { useTheme } from 'emotion-theming';
 import { useHistory } from 'react-router-dom';
 import { Button, Grid, Header, Image } from 'semantic-ui-react';
 import img from '../images/bermuda/bermuda-no-comments.png';

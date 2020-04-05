@@ -65,7 +65,7 @@ function Register(props) {
             <Segment stacked>
               {/* First Name */}
               <Form.Input
-                fluid icon='mail'
+                fluid icon='address card'
                 name="first_name"
                 value={credentials.first_name}
                 onChange={handleInput}
@@ -75,7 +75,7 @@ function Register(props) {
 
               {/* Last Name */}
               <Form.Input
-                fluid icon='mail'
+                fluid icon='address card outline'
                 name="last_name"
                 value={credentials.last_name}
                 onChange={handleInput}
@@ -137,7 +137,7 @@ function Register(props) {
           <Message>
             Return to Login?
             <Button className="register-button"
-            onClick={()=> props.history.push('/profile/')}
+            onClick={()=> props.history.push('/login/')}
             content='Back'
             positive
             size='mini' />
