@@ -84,7 +84,7 @@ function AddIssue(props) {
       <Grid.Column style={{ maxWidth: 450 }}>
           <Image src={Upgrade} centered size="small" />
         <Header as='h2' textAlign='center'>
-          Add a new Issue
+          Add a new issue!
         </Header>
         <Form size='large' onSubmit={handleSubmit}>
           <Segment stacked>

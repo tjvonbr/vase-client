@@ -6,6 +6,7 @@ import { jsx } from '@emotion/core';
 import placeholder from '../images/profile_placeholder.png';
 
 const MostPopular = props => {
+  console.log("MOST POPULAR CARD", props)
   return (
     <Card
       style={{
@@ -26,7 +27,7 @@ const MostPopular = props => {
           src={placeholder} 
           size='tiny' 
           circular 
-          style={{ marginTop: '10px', marginLeft: '10px' }}  
+          style={{ marginTop: '10px', marginLeft: '10px', border: '1px solid black' }}  
         />
       </Card.Header>
       <div

@@ -4,6 +4,7 @@ import { ThemeProvider } from 'emotion-theming';
 import Register from './components/Register';
 import Login from './components/Login';
 import Profile from './components/Profile';
+import ProfileEdit from './components/ProfileEdit';
 import AddIssue from './components/AddIssue';
 import Community from './components/Community';
 import Landing from './components/Landing';
@@ -25,7 +26,8 @@ function App() {
     <ThemeProvider theme={theme}>
       <div className="App">
         <Route exact path="/" component={Landing} />
-        <Route path="/profile/:id" component={Profile} />
+        <Route exact path="/profile/:id" component={Profile} />
+        <Route path="/profile/:id/edit" component={ProfileEdit} />
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
         <Route path="/addissue" component={AddIssue} />

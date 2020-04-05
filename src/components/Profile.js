@@ -57,7 +57,7 @@ function Profile(props) {
 
     return (
       <>
-        <NavBar />
+        <NavBar user={currentUser} />
         <div
           css={{
             display: 'flex',
@@ -108,15 +108,17 @@ function Profile(props) {
               </Button>
             </Link>
 
-            <Button 
-              icon 
-              labelPosition="left"
-              color="facebook"
-              size="huge"
-              >
-              <Icon name="redo" />
-              Edit Profile
-            </Button>
+            <Link to={`/profile/${id}/edit`}>
+              <Button 
+                icon 
+                labelPosition="left"
+                color="facebook"
+                size="huge"
+                >
+                <Icon name="redo" />
+                Edit Profile
+              </Button>
+            </Link>
           </div>
 
           <div
