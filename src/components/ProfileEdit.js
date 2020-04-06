@@ -16,6 +16,8 @@ import '../styles/addIssue.css';
 import NavBar from './NavBar';
 import Logo from '../images/bermuda/waiting-4.png';
 
+
+// Send current user via props below
 const ProfileEdit = props => {
   const [editProfile, setEditProfile] = useState({
     firstName: "",
