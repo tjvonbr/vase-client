@@ -20,7 +20,6 @@ function CommunityIssues({ issues }) {
         gridColumnGap: '4%',
         gridRowGap: '4%',
         justifyItems: 'center',
-        backgroundColor: theme.colors.blue,
         }}
     >  
       {issues.map(issue => <CommIssueCard issue={issue} key={issue.id} />)}

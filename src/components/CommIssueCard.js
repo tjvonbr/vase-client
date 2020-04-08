@@ -11,6 +11,7 @@ function CommIssueCard({ issue }) {
 
   // Local storage management
   const token = window.localStorage.getItem('token');
+  const user_id = window.localStorage.getItem('id');
   
   // Issue ID to be used as dynamic param
   const id = issue.id;
@@ -54,7 +55,7 @@ function CommIssueCard({ issue }) {
           margin: '10px 12px',
         }}
         >
-          <Button as='div' labelPosition='right' disabled={false} >
+          <Button as='div' labelPosition='right' disabled={issue.user_id === user_id ? false : true}>
             <Button 
             color='facebook'
             size='large' 

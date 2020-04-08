@@ -8,7 +8,6 @@ import SocialBar from './SocialBar';
 import logo from '../images/logo.png';
 
 const NavBar = props => {
-  console.log(props);
   const theme = useTheme();
 
   const id = window.localStorage.getItem('id');

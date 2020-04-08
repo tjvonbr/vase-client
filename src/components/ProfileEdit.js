@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { 
   Button, 
@@ -9,8 +9,7 @@ import {
   Message, 
   Segment, 
   Dimmer, 
-  Loader,
-  TextArea } 
+  Loader } 
 from 'semantic-ui-react';
 import '../styles/addIssue.css';
 import NavBar from './NavBar';
@@ -22,19 +21,34 @@ const ProfileEdit = props => {
   const [editProfile, setEditProfile] = useState({
     firstName: "",
     lastName: "",
-    bio: "",
-  })
-  const [isLoading, setIsLoading] = useState(false)
+    email: "",
+    bio: ""
+  });
+  const [isLoading, setIsLoading] = useState(false);
+  let token = window.localStorage.getItem('token')
+  let id = window.localStorage.getItem('id')
 
+  // Handle submit
   const handleSubmit = () => {
-    console.log("SUBMITTED");
-  }
+    axios
+      .put(`http://localhost:3000/users/${id}`, editProfile, {
+        headers: {
+          Authorization: token
+        }
+      })
+      .then(response => {
+        console.log(response.data);
+        props.history.push(`/profile/${id}`)
+      })
+      .catch(error => {
+        console.log(error);
+      })
+  };
 
-  const handleChange = event => {
-    const updated = { ...editProfile, [event.target.name]: event.target.value };
-    setEditProfile(updated);
-    console.log(updated)
-  }
+  // Handle input
+  function handleInput(e) {
+    setEditProfile({ ...editProfile, [e.target.name]: e.target.value });
+  };
 
   return (
 <>
@@ -57,8 +71,8 @@ const ProfileEdit = props => {
             type='text'
             name="firstName"
             value={editProfile.firstName}
-            onChange={handleChange}
-            placeholder='First name'
+            onChange={handleInput}
+            placeholder={props.location.state.user.first_name}
           />
           <Form.Input
             fluid
@@ -66,19 +80,20 @@ const ProfileEdit = props => {
             iconPosition='left'
             type='text'
             name="lastName"
-            placeholder='Last Name'
+            placeholder={props.location.state.user.last_name}
             value={editProfile.lastName}
-            onChange={handleChange}
+            onChange={handleInput}
           />
+          {/* Check in to icon */}
           <Form.TextArea
-            fluid
             icon='mail'
-            iconPosition='left'
             type='text'
             name="bio"
-            placeholder='Bio -- please limit to 255 characters!'
+            placeholder={props.location.state.user.bio ? 
+              props.location.state.user.bio : 
+              'Bio -- please limit to 255 characters!'}
             value={editProfile.bio}
-            onChange={handleChange}
+            onChange={handleInput}
           />
           <Button type="submit" color='facebook' fluid size='large'>
             Save Changes
