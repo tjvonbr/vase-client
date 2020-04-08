@@ -39,21 +39,24 @@ function Profile(props) {
         })
     };
 
-    // Fetches user data to populate profile card with proper information
-    function fetchUser() {
-      axios
-        .get(`http://localhost:3000/users/${id}`, {
-          headers: {
-            Authorization: token
-          }
-        })
-        .then(response => {
-          setCurrentUser(response.data);
-        })
-        .catch(error => {
-          console.log(error);
-        })
-    };
+  // Fetches user data to populate profile card with proper information
+  // Already wrote this in Profile component
+  function fetchUser() {
+    axios
+      .get(`http://localhost:3000/users/${id}`, {
+        headers: {
+          Authorization: token
+        }
+      })
+      .then(response => {
+        setCurrentUser(response.data);
+      })
+      .catch(error => {
+        console.log(error);
+      })
+  };
+
+
 
     return (
       <>
@@ -108,7 +111,12 @@ function Profile(props) {
               </Button>
             </Link>
 
-            <Link to={`/profile/${id}/edit`}>
+            <Link 
+              to={{
+                pathname: `/profile/${id}/edit`,
+                state: {user: currentUser}
+              }}
+            >
               <Button 
                 icon 
                 labelPosition="left"

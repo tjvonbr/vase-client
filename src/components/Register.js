@@ -36,7 +36,7 @@ function Register(props) {
     e.preventDefault()
     setIsLoading(true)
       axios
-        .post("http://localhost:3000/auth/register", credentials)
+        .post('http://localhost:3000/auth/register', credentials)
         .then(response => {
           const token = window.localStorage.setItem('token', response.data.token);
           const id = window.localStorage.setItem('id', response.data.id);
