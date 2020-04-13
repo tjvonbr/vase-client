@@ -10,7 +10,7 @@
 Co-Make is an application designed to project citizens’ voices within their local communities by providing them the ability to post issues or concerns within their communities that they would like to see addressed by their local governments. Once an issue or concern is posted, fellow citizens would be able to upvote the ones they’d like to see addressed--essentially creating a prioritized list of actions for local governments created by its constituents.
 
 ### User Flow
-1.  You live in a small town <10,000 people and notice there are several bad accidents every year at a particularly dangerous intersection with blind corners and want to voice your concern within the community.
+1.  You live in a city or town and notice there are several bad accidents every year at a particularly dangerous intersection with blind corners and want to voice your concern within the community.
 2.  You login to your Co-Make account and create an issue with a description, location, and call-to-action.
 3.  Over time, people who login and live in the same zip code can upvote your concern (illustrating greater need for action) or refrain from upvoting (illustrating less need for action).
 
