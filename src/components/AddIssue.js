@@ -17,6 +17,11 @@ import Upgrade from '../images/bermuda/bermuda-upgrade.png';
 
 
 function AddIssue(props) {
+  // Variable to reference in PUT request
+  const numPosts = props.location.state.user.posted_issues;
+  const token = window.localStorage.getItem('token');
+  const id = window.localStorage.getItem('id');
+
   const [createIssue, setCreateIssue] = useState({ 
     zipcode: localStorage.getItem("zipcode"), 
     user_id: localStorage.getItem("id"), 
@@ -24,41 +29,32 @@ function AddIssue(props) {
     description: "" });
   const [isLoading, setIsLoading] = useState(false)
 
-  let token = window.localStorage.getItem('token')
-  let id = window.localStorage.getItem('id')
-
-  const addPostedIssue = () => {
+  // Functionality for increasing users # of posted issues +1
+  function addIssuesPosted() {
     axios
-      .put(`http://localhost:3000/users/${id}`, {
+      .put(`http://localhost:4000/users/${id}`, { posted_issues: numPosts + 1 }, {
         headers: {
           Authorization: token
         }
       })
-      .then(response => {
-        console.log(response.data);
-      })
-      .catch(error => {
-        console.log(error);
-      })
+      .then(response => console.log(response))
+      .catch(error => console.log(error))
   };
 
   // Functionality for posting an issue
   function addIssue(data) {
-    // Fetching token and user ID from local storage
-    let token = window.localStorage.getItem('token')
-    let id = window.localStorage.getItem('id');
-
     axios
-      .post('http://localhost:3000/issues', data, {
+      .post('http://localhost:4000/issues', data, {
         headers: {
           Authorization: token
         }
       })
       .then(response => {
+        addIssuesPosted();
         props.history.push(`/profile/${id}`)
         setIsLoading(false);
       })
-      .catch( err => console.log("OH NO AN ERROR HAPPENED", err))
+      .catch(error => console.log(error))
   }
 
   function handleChange(event) {

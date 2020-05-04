@@ -26,13 +26,13 @@ function EditProfile(props) {
         let localId = JSON.parse(localStorage.getItem('id'))
         console.log("input", input)
         axios
-           .put(`https://co-make.herokuapp.com/users/${localId}`, input, {
+           .put(`http://localhost:4000/users/${localId}`, input, {
               headers: {
                 Authorization: token
               }
              })
             .then( res => {
-              axios.get(`https://co-make.herokuapp.com/users/${localId}/issues`, {
+              axios.get(`http://localhost:4000/users/${localId}/issues`, {
                 headers: {
                   Authorization: token
                 }

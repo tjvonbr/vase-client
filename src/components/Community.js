@@ -22,7 +22,7 @@ function Community() {
 
   function fetchCommIssues() {
     axios
-      .get(`http://localhost:3000/issues/zip/${zip}`, {
+      .get(`http://localhost:4000/issues/zip/${zip}`, {
         headers: {
           Authorization: token
         }

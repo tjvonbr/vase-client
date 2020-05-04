@@ -21,8 +21,8 @@ import Logo from '../images/bermuda/waiting-4.png';
 // Send current user via props below
 const ProfileEdit = props => {
   const [editProfile, setEditProfile] = useState({
-    firstName: "",
-    lastName: "",
+    first_name: "",
+    last_name: "",
     email: "",
     bio: ""
   });
@@ -33,7 +33,7 @@ const ProfileEdit = props => {
   // Handle submit
   const handleSubmit = () => {
     axios
-      .put(`http://localhost:3000/users/${id}`, editProfile, {
+      .put(`http://localhost:4000/users/${id}`, editProfile, {
         headers: {
           Authorization: token
         }
@@ -71,8 +71,8 @@ const ProfileEdit = props => {
             icon='address card'
             iconPosition='left'
             type='text'
-            name="firstName"
-            value={editProfile.firstName}
+            name="first_name"
+            value={editProfile.first_name}
             onChange={handleInput}
             placeholder={props.location.state.user.first_name}
           />
@@ -81,9 +81,9 @@ const ProfileEdit = props => {
             icon='address card outline'
             iconPosition='left'
             type='text'
-            name="lastName"
+            name="last_name"
             placeholder={props.location.state.user.last_name}
-            value={editProfile.lastName}
+            value={editProfile.last_name}
             onChange={handleInput}
           />
           {/* Check in to icon */}
