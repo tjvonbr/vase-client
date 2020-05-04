@@ -17,9 +17,6 @@ function Login(props) {
   const [inputData, setInputData] = useState({username: "", password: ""});
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
-  
-  // Still would like to checkout React Router's Redirect API to
-  // use in place of props.history.push()
 
   // Input handler
   const handleInput = e => {
@@ -31,7 +28,7 @@ function Login(props) {
     setIsLoading(true);
     e.preventDefault();
       axios
-        .post("http://localhost:3000/auth/login", inputData)
+        .post("http://localhost:4000/auth/login", inputData)
         .then(response => {
           const { id, token, zipcode } = response.data;
           window.localStorage.setItem('id', id);

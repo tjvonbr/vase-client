@@ -26,7 +26,7 @@ function Profile(props) {
 
     function fetchIssues() {
       axios
-        .get(`http://localhost:3000/users/${id}/issues`, {
+        .get(`http://localhost:4000/users/${id}/issues`, {
           headers: {
             Authorization: token
           }
@@ -43,7 +43,7 @@ function Profile(props) {
   // Already wrote this in Profile component
   function fetchUser() {
     axios
-      .get(`http://localhost:3000/users/${id}`, {
+      .get(`http://localhost:4000/users/${id}`, {
         headers: {
           Authorization: token
         }
@@ -99,7 +99,12 @@ function Profile(props) {
               marginTop: '20px'
             }}
           >
-            <Link to="/addIssue">
+            <Link 
+              to={{
+                pathname: "/addIssue",
+                state: {user: currentUser}
+              }}
+            >
               <Button 
                 icon 
                 labelPosition="left"
