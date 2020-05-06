@@ -16,6 +16,7 @@ import Success from '../images/bermuda/bermuda-success.png'
 
 
 function Register(props) {
+  // Check to see if there is an easier way to initialize this
   const [credentials, setCredentials] = useState({
     first_name: "",
     last_name: "",
@@ -40,6 +41,7 @@ function Register(props) {
         .then(response => {
           const token = window.localStorage.setItem('token', response.data.token);
           const id = window.localStorage.setItem('id', response.data.id);
+          const zipcode = window.localStorage.setItem('zipcode', response.data.zipcode);
           setIsLoading(false);
           props.history.push(`/profile/${id}`);
         })
