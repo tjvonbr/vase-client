@@ -56,8 +56,6 @@ function Profile(props) {
       })
   };
 
-
-
     return (
       <>
         <NavBar user={currentUser} />

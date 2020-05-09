@@ -11,6 +11,7 @@ const NavBar = props => {
   const theme = useTheme();
 
   const id = window.localStorage.getItem('id');
+  const zip = window.localStorage.getItem('zipcode');
 
   return (
     <>
@@ -38,7 +39,7 @@ const NavBar = props => {
               page={'Profile'}
             />
             <NavBarLink 
-              path={'/community'}
+              path={`/community/${zip}`}
               page={'Your Community'}
             />
             <NavBarLink 

@@ -1,14 +1,12 @@
 /** @jsx jsx */
 
-import React, { useEffect, useState } from 'react';
+import { useState, useReducer } from 'react';
 import { jsx } from '@emotion/core';
 import axios from 'axios';
 import { Button, Card, Icon, Label } from 'semantic-ui-react';
 import ResolvedStatus from './ResolvedStatus';
 
 function CommIssueCard({ issue }) {
-  const [currentIssue, setCurrentIssue] =  useState(issue);
-
   // Local storage management
   const token = window.localStorage.getItem('token');
   const user_id = window.localStorage.getItem('id');
@@ -16,11 +14,19 @@ function CommIssueCard({ issue }) {
   // Issue ID to be used as dynamic param
   const id = issue.id;
 
+  const [currentIssue, setCurrentIssue] =  useState(issue);
+  const [upvoteData, setUpvoteData] = useState({
+    user_id: user_id,
+    issue_id: id
+  })
+
+  console.log("UPVOTE DATA", upvoteData);
+
   // Once chevron is clicked, the # of upvotes increases by 1
-  function upvoteIssue() {
+  function increaseUpvoteBy1() {
     // Request to increment upvote by +1
     axios
-      .put(`http://localhost:3000/issues/${id}`, {upvotes: currentIssue.upvotes+1}, {
+      .put(`http://localhost:4000/issues/${id}`, {upvotes: currentIssue.upvotes+1}, {
         headers: {
           Authorization: token
         }
@@ -31,6 +37,22 @@ function CommIssueCard({ issue }) {
       })
       .catch(error => {
         console.log(error);
+      })
+  };
+
+  // Function that actually creates the upvote
+  function addUpvote(userId) {
+    axios
+      .post(`http://localhost:4000/issues/${id}/upvotes`, upvoteData, {
+        headers: {
+          Authorization: token
+        }
+      })
+      .then(response => {
+        console.log(response);
+      })
+      .catch(error => {
+        console.log(error)
       })
   };
 
@@ -55,11 +77,11 @@ function CommIssueCard({ issue }) {
           margin: '10px 12px',
         }}
         >
-          <Button as='div' labelPosition='right' disabled={issue.user_id === user_id ? false : true}>
+          <Button as='div' labelPosition='right' disabled={issue.user_id == user_id ? true : false}>
             <Button 
             color='facebook'
             size='large' 
-            onClick={upvoteIssue}>
+            onClick={addUpvote}>
               <Icon name='thumbs up outline' />
               Upvote
             </Button>
