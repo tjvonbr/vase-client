@@ -2,11 +2,7 @@ import React from 'react'
 import { Card, Icon, Image } from 'semantic-ui-react';
 import '../styles/ProfileStyles.css';
 
-
-
-const ProfileCard = (props) => {
-  console.log(props)
-
+function ProfileCard(props) {
   return (
     <Card className='cardstyle' raised='true'>
       <Image src={props.currentUser.picture} wrapped ui={false} />

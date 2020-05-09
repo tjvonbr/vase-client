@@ -31,7 +31,7 @@ function App() {
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
         <Route path="/addissue" component={AddIssue} />
-        <Route path="/community" component={Community} />
+        <Route path="/community/:zipcode" component={Community} />
         <Route path="/logout" component={Logout} />
       </div>
     </ThemeProvider>

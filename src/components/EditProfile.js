@@ -31,15 +31,15 @@ function EditProfile(props) {
                 Authorization: token
               }
              })
-            .then( res => {
+            .then(res => {
               axios.get(`http://localhost:4000/users/${localId}/issues`, {
                 headers: {
                   Authorization: token
                 }
-               }).then( res => {
+               }).then(res => {
                  console.log("NEW DATA FROM SERVER", res)
                  props.setCurrentUser(res.data)
-               }).catch( err => {
+               }).catch(err => {
                  console.log("OH NO", err)
                })
           })

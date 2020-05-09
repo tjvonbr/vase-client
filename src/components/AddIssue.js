@@ -21,10 +21,11 @@ function AddIssue(props) {
   const numPosts = props.location.state.user.posted_issues;
   const token = window.localStorage.getItem('token');
   const id = window.localStorage.getItem('id');
+  const zipcode = window.localStorage.getItem('zipcode');
 
   const [createIssue, setCreateIssue] = useState({ 
-    zipcode: localStorage.getItem("zipcode"), 
-    user_id: localStorage.getItem("id"), 
+    zipcode: zipcode,
+    user_id: id, 
     title: "",
     description: "" });
   const [isLoading, setIsLoading] = useState(false)
@@ -66,7 +67,7 @@ function AddIssue(props) {
     setIsLoading(true);
     event.preventDefault();
     console.log("createIssue", createIssue);
-    setCreateIssue({ title: "", description: "", zipCode: localStorage.getItem("zipcode"), user_id: localStorage.getItem("id")});
+    setCreateIssue({ title: "", description: "", zipcode: localStorage.getItem("zipcode"), user_id: localStorage.getItem("id")});
     addIssue(createIssue);
   };
 
