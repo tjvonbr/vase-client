@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from 'react';
 import { css, jsx } from '@emotion/core';
-import { useTheme } from 'emotion-theming';
 import axios from 'axios';
 import CommunityIssues from './CommunityIssues';
 import MostPopular from './MostPopular';
@@ -28,7 +27,6 @@ function Community() {
         }
       })
       .then(response => {
-        console.log("FETCH ISSUES RESPONSE", response.data);
         setCommIssues(response.data);
         setMostPopular(response.data.reduce((prev, current) => {
           return (prev.upvotes > current.upvotes) ? prev : current

@@ -1,6 +1,6 @@
 /** @jsx jsx */
 
-import { useState, useReducer } from 'react';
+import { useState } from 'react';
 import { jsx } from '@emotion/core';
 import axios from 'axios';
 import { Button, Card, Icon, Label } from 'semantic-ui-react';
@@ -19,8 +19,6 @@ function CommIssueCard({ issue }) {
     user_id: user_id,
     issue_id: id
   })
-
-  console.log("UPVOTE DATA", upvoteData);
 
   // Once chevron is clicked, the # of upvotes increases by 1
   function increaseUpvoteBy1() {
@@ -41,15 +39,15 @@ function CommIssueCard({ issue }) {
   };
 
   // Function that actually creates the upvote
-  function addUpvote(userId) {
+  function addUpvote(data) {
     axios
-      .post(`http://localhost:4000/issues/${id}/upvotes`, upvoteData, {
+      .post(`http://localhost:4000/issues/${id}/upvotes`, data, {
         headers: {
           Authorization: token
         }
       })
       .then(response => {
-        console.log(response);
+        increaseUpvoteBy1();
       })
       .catch(error => {
         console.log(error)

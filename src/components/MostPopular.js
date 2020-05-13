@@ -7,7 +7,6 @@ import MemberProfileP from './MemberProfileP';
 import placeholder from '../images/profile_placeholder.png';
 
 const MostPopular = props => {
-  console.log("MOST POPULAR CARD", props)
   return (
     <Card
       style={{
