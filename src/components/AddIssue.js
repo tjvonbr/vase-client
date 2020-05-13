@@ -66,7 +66,6 @@ function AddIssue(props) {
   function handleSubmit(event) {
     setIsLoading(true);
     event.preventDefault();
-    console.log("createIssue", createIssue);
     setCreateIssue({ title: "", description: "", zipcode: localStorage.getItem("zipcode"), user_id: localStorage.getItem("id")});
     addIssue(createIssue);
   };
@@ -124,10 +123,7 @@ function AddIssue(props) {
       </Grid.Column>
     </Grid>
 </>
-
   )
-
-
 }
 
 export default AddIssue;
