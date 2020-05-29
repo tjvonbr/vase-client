@@ -13,6 +13,8 @@ from 'semantic-ui-react'
 import axios from 'axios';
 import Welcome from '../images/bermuda/sign-in-4.png'
 
+// Place authenticated user information into context object
+
 function Login(props) {
   const [inputData, setInputData] = useState({username: "", password: ""});
   const [isLoading, setIsLoading] = useState(false);
