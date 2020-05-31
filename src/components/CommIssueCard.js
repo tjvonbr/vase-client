@@ -39,15 +39,15 @@ function CommIssueCard({ issue }) {
   };
 
   // Function that actually creates the upvote
-  function addUpvote(data) {
+  function addUpvote(upvoteData) {
     axios
-      .post(`http://localhost:4000/issues/${id}/upvotes`, data, {
+      .post(`http://localhost:4000/issues/${id}/upvotes`, upvoteData, {
         headers: {
           Authorization: token
         }
       })
       .then(response => {
-        increaseUpvoteBy1();
+        console.log(response)
       })
       .catch(error => {
         console.log(error)

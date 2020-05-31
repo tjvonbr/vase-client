@@ -21,12 +21,12 @@ function Login(props) {
   const [errorMessage, setErrorMessage] = useState('');
 
   // Input handler
-  const handleInput = e => {
+  function handleInput(e) {
     setInputData({ ...inputData, [e.target.name]: e.target.value });
   };
 
   // Submission handler
-  const loginHandler = e => {
+  function loginHandler(e) {
     setIsLoading(true);
     e.preventDefault();
       axios
