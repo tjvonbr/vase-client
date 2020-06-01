@@ -7,18 +7,21 @@ import { Button, Card, Icon, Label } from 'semantic-ui-react';
 import ResolvedStatus from './ResolvedStatus';
 
 function CommIssueCard({ issue }) {
+  const [currentIssue, setCurrentIssue] =  useState(issue);
+  const [hasVoted, setHasVoted] = useState(false);
+
   // Local storage management
   const token = window.localStorage.getItem('token');
-  const user_id = window.localStorage.getItem('id');
-  
+  const user_id = JSON.parse(window.localStorage.getItem('id'));
+
   // Issue ID to be used as dynamic param
   const id = issue.id;
+  console.log(id)
 
-  const [currentIssue, setCurrentIssue] =  useState(issue);
-  const [upvoteData, setUpvoteData] = useState({
-    user_id: user_id,
+  const upvoteData = {
+    user_id: JSON.parse(window.localStorage.getItem('id')),
     issue_id: id
-  })
+  }
 
   // Once chevron is clicked, the # of upvotes increases by 1
   function increaseUpvoteBy1() {
@@ -39,15 +42,13 @@ function CommIssueCard({ issue }) {
   };
 
   // Function that actually creates the upvote
-  function addUpvote(upvoteData) {
+  function addUpvote() {
+    console.log(upvoteData)
     axios
-      .post(`http://localhost:4000/issues/${id}/upvotes`, upvoteData, {
-        headers: {
-          Authorization: token
-        }
-      })
-      .then(response => {
-        console.log(response)
+      .post(`http://localhost:4000/issues/${id}/upvotes`, upvoteData)
+      .then(() => {
+        increaseUpvoteBy1()
+        setHasVoted(true)
       })
       .catch(error => {
         console.log(error)
@@ -75,7 +76,7 @@ function CommIssueCard({ issue }) {
           margin: '10px 12px',
         }}
         >
-          <Button as='div' labelPosition='right' disabled={issue.user_id == user_id ? true : false}>
+          <Button as='div' labelPosition='right' disabled={issue.user_id === user_id ? true : false || hasVoted == true}>
             <Button 
             color='facebook'
             size='large' 
