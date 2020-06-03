@@ -1,14 +1,22 @@
 /** @jsx jsx */
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { jsx } from '@emotion/core';
 import axios from 'axios';
 import { Button, Card, Icon, Label } from 'semantic-ui-react';
 import ResolvedStatus from './ResolvedStatus';
 
-function CommIssueCard({ issue }) {
+function CommIssueCard({ issue, upvotes }) {
   const [currentIssue, setCurrentIssue] =  useState(issue);
-  const [hasVoted, setHasVoted] = useState(false);
+  const [alreadyVoted, setAlreadyVoted] = useState(false)
+
+  useEffect(() => {
+    upvotes.forEach(vote => {
+      if (vote.issue_id === issue.id) {
+        setAlreadyVoted(true)
+      }
+    })
+  }, [upvotes])
 
   // Local storage management
   const token = window.localStorage.getItem('token');
@@ -16,8 +24,8 @@ function CommIssueCard({ issue }) {
 
   // Issue ID to be used as dynamic param
   const id = issue.id;
-  console.log(id)
 
+  // Upvote data to be passed with the addUpvote request
   const upvoteData = {
     user_id: JSON.parse(window.localStorage.getItem('id')),
     issue_id: id
@@ -27,7 +35,7 @@ function CommIssueCard({ issue }) {
   function increaseUpvoteBy1() {
     // Request to increment upvote by +1
     axios
-      .put(`http://localhost:4000/issues/${id}`, {upvotes: currentIssue.upvotes+1}, {
+      .put(`http://localhost:4000/issues/${id}`, {upvotes: currentIssue.upvotes + 1}, {
         headers: {
           Authorization: token
         }
@@ -48,12 +56,14 @@ function CommIssueCard({ issue }) {
       .post(`http://localhost:4000/issues/${id}/upvotes`, upvoteData)
       .then(() => {
         increaseUpvoteBy1()
-        setHasVoted(true)
       })
       .catch(error => {
         console.log(error)
       })
   };
+
+  // Essentially prevents the user from voting more than once--return value is stored in state 
+
 
   return (
     <div>
@@ -76,7 +86,10 @@ function CommIssueCard({ issue }) {
           margin: '10px 12px',
         }}
         >
-          <Button as='div' labelPosition='right' disabled={issue.user_id === user_id ? true : false || hasVoted == true}>
+          <Button 
+            as='div' 
+            labelPosition='right' 
+            disabled={issue.user_id === user_id ? true : false || alreadyVoted ? true : false}>
             <Button 
             color='facebook'
             size='large' 

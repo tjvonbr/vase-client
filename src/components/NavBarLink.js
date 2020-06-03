@@ -1,7 +1,7 @@
 /** @jsx jsx */
 
 import React from 'react';
-import { css, jsx } from '@emotion/core';
+import { jsx } from '@emotion/core';
 import { useTheme } from 'emotion-theming';
 import { NavLink } from 'react-router-dom';
 

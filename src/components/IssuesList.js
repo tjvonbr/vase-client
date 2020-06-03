@@ -1,7 +1,7 @@
 /** @jsx jsx */
 
-import React, { useEffect, useState } from 'react';
-import { css, jsx } from '@emotion/core';
+import React from 'react';
+import { jsx } from '@emotion/core';
 import ProfIssueCard from './ProfIssueCard';
 
 function IssuesList({ issues, fetch }) {

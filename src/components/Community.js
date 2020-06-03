@@ -1,7 +1,7 @@
 /** @jsx jsx */
 
 import React, { useEffect, useState } from 'react';
-import { css, jsx } from '@emotion/core';
+import { jsx } from '@emotion/core';
 import axios from 'axios';
 import CommunityIssues from './CommunityIssues';
 import MostPopular from './MostPopular';
@@ -9,17 +9,20 @@ import NavBar from './NavBar';
 import NoIssues from './NoIssues';
 
 function Community() {
-  const [commIssues, setCommIssues] = useState([]);
+  const [communityIssues, setCommunityIssues] = useState([]);
+  const [userVotes, setUserVotes] = useState([])
   const [mostPopular, setMostPopular] = useState({});
 
   useEffect(() => {
-    fetchCommIssues();
-  }, []);
+    fetchUserVotes();
+    fetchCommunityIssues();
+  }, [userVotes]);
 
   const token = window.localStorage.getItem('token');
   const zip = window.localStorage.getItem('zipcode');
+  const id = window.localStorage.getItem('id')
 
-  function fetchCommIssues() {
+  function fetchCommunityIssues() {
     axios
       .get(`http://localhost:4000/issues/zip/${zip}`, {
         headers: {
@@ -27,7 +30,7 @@ function Community() {
         }
       })
       .then(response => {
-        setCommIssues(response.data);
+        setCommunityIssues(response.data);
         setMostPopular(response.data.reduce((prev, current) => {
           return (prev.upvotes > current.upvotes) ? prev : current
         }));
@@ -37,7 +40,20 @@ function Community() {
       })
   };
 
-  if (commIssues < 1) {
+  function fetchUserVotes() {
+    axios
+      .get(`http://localhost:4000/users/${id}/upvotes`, {
+        headers: {
+          Authorization: token
+        }
+      })
+      .then(response => {
+        setUserVotes(response.data)
+      })
+      .catch(error => console.log(error))
+  }
+
+  if (communityIssues < 1) {
     return <NoIssues />
   } else {
     return (
@@ -62,7 +78,7 @@ function Community() {
           }}
         >
           <h3>All community concerns posted in {zip}:</h3>
-          <CommunityIssues issues={commIssues} />
+          <CommunityIssues issues={communityIssues} upvotes={userVotes} />
         </div>
       </>
     )

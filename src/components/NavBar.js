@@ -1,13 +1,13 @@
 /** @jsx jsx */
 
 import React from 'react';
-import { css, jsx } from '@emotion/core';
+import { jsx } from '@emotion/core';
 import { useTheme } from 'emotion-theming';
 import NavBarLink from './NavBarLink';
 import SocialBar from './SocialBar';
 import logo from '../images/logo.png';
 
-const NavBar = props => {
+function NavBar(props) {
   const theme = useTheme();
 
   const id = window.localStorage.getItem('id');

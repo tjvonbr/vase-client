@@ -1,10 +1,10 @@
 /** @jsx jsx */
 
-import React, { useState, useEffect } from 'react';
-import { css, jsx } from '@emotion/core';
+import React from 'react';
+import { jsx } from '@emotion/core';
 import { Icon } from 'semantic-ui-react';
 
-const ResolvedStatus = ({ issue }) => {
+function ResolvedStatus({ issue }) {
   return (
     <div
       css={{
