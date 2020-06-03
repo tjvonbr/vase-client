@@ -33,7 +33,7 @@ function Register(props) {
   };
 
   // Submission handler
-  const loginHandler = e => {
+  function loginHandler(e) {
     e.preventDefault()
     setIsLoading(true)
       axios

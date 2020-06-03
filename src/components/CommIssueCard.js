@@ -1,30 +1,41 @@
 /** @jsx jsx */
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { jsx } from '@emotion/core';
 import axios from 'axios';
 import { Button, Card, Icon, Label } from 'semantic-ui-react';
 import ResolvedStatus from './ResolvedStatus';
 
-function CommIssueCard({ issue }) {
+function CommIssueCard({ issue, upvotes }) {
+  const [currentIssue, setCurrentIssue] =  useState(issue);
+  const [alreadyVoted, setAlreadyVoted] = useState(false)
+
+  useEffect(() => {
+    upvotes.forEach(vote => {
+      if (vote.issue_id === issue.id) {
+        setAlreadyVoted(true)
+      }
+    })
+  }, [upvotes])
+
   // Local storage management
   const token = window.localStorage.getItem('token');
-  const user_id = window.localStorage.getItem('id');
-  
+  const user_id = JSON.parse(window.localStorage.getItem('id'));
+
   // Issue ID to be used as dynamic param
   const id = issue.id;
 
-  const [currentIssue, setCurrentIssue] =  useState(issue);
-  const [upvoteData, setUpvoteData] = useState({
-    user_id: user_id,
+  // Upvote data to be passed with the addUpvote request
+  const upvoteData = {
+    user_id: JSON.parse(window.localStorage.getItem('id')),
     issue_id: id
-  })
+  }
 
   // Once chevron is clicked, the # of upvotes increases by 1
   function increaseUpvoteBy1() {
     // Request to increment upvote by +1
     axios
-      .put(`http://localhost:4000/issues/${id}`, {upvotes: currentIssue.upvotes+1}, {
+      .put(`http://localhost:4000/issues/${id}`, {upvotes: currentIssue.upvotes + 1}, {
         headers: {
           Authorization: token
         }
@@ -39,20 +50,20 @@ function CommIssueCard({ issue }) {
   };
 
   // Function that actually creates the upvote
-  function addUpvote(upvoteData) {
+  function addUpvote() {
+    console.log(upvoteData)
     axios
-      .post(`http://localhost:4000/issues/${id}/upvotes`, upvoteData, {
-        headers: {
-          Authorization: token
-        }
-      })
-      .then(response => {
-        console.log(response)
+      .post(`http://localhost:4000/issues/${id}/upvotes`, upvoteData)
+      .then(() => {
+        increaseUpvoteBy1()
       })
       .catch(error => {
         console.log(error)
       })
   };
+
+  // Essentially prevents the user from voting more than once--return value is stored in state 
+
 
   return (
     <div>
@@ -75,7 +86,10 @@ function CommIssueCard({ issue }) {
           margin: '10px 12px',
         }}
         >
-          <Button as='div' labelPosition='right' disabled={issue.user_id == user_id ? true : false}>
+          <Button 
+            as='div' 
+            labelPosition='right' 
+            disabled={issue.user_id === user_id ? true : false || alreadyVoted ? true : false}>
             <Button 
             color='facebook'
             size='large' 

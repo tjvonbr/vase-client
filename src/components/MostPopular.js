@@ -1,12 +1,12 @@
 /** @jsx jsx */
 
-import React, { useState, useEffect } from 'react';
-import { Button, Card, Icon, Image, Label } from 'semantic-ui-react';
+import React from 'react';
+import { Card, Image } from 'semantic-ui-react';
 import { jsx } from '@emotion/core';
 import MemberProfileP from './MemberProfileP';
 import placeholder from '../images/profile_placeholder.png';
 
-const MostPopular = props => {
+function MostPopular(props) {
   return (
     <Card
       style={{

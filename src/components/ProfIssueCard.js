@@ -1,12 +1,11 @@
 /** @jsx jsx */
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { jsx } from '@emotion/core';
-import axios from 'axios';
-import { Button, Card, Icon, Label } from 'semantic-ui-react';
+import { Card } from 'semantic-ui-react';
 import ResolvedStatus from './ResolvedStatus';
 
-const ProfIssueCard = ({ issue }) => {
+function ProfIssueCard({ issue }) {
   return (
     <div>
       <Card raised style={{

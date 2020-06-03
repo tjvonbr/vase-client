@@ -1,13 +1,9 @@
 /** @jsx jsx */
 
-import React, { useState, useEffect } from 'react';
-import { css, jsx } from '@emotion/core';
-import { useTheme } from 'emotion-theming';
+import { jsx } from '@emotion/core';
 import CommIssueCard from './CommIssueCard';
 
-function CommunityIssues({ issues }) {
-  const theme = useTheme();
-
+function CommunityIssues({ issues, upvotes }) {
   return (
     <div
       css={{
@@ -22,7 +18,7 @@ function CommunityIssues({ issues }) {
         justifyItems: 'center',
         }}
     >  
-      {issues.map(issue => <CommIssueCard issue={issue} key={issue.id} />)}
+      {issues.map(issue => <CommIssueCard issue={issue} upvotes={upvotes} key={issue.id} />)}
     </div>
   )
 }

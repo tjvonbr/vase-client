@@ -1,7 +1,7 @@
 /** @jsx jsx */
 
 import React, { useState, useEffect } from 'react';
-import { css, jsx } from '@emotion/core';
+import { jsx } from '@emotion/core';
 import { useTheme } from 'emotion-theming';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
@@ -83,10 +83,8 @@ function Profile(props) {
                 </Card.Description>
               </Card.Content>
               <Card.Content extra>
-                <a>
                   <Icon name='user' />
                     Posted Issues: {currentUser.posted_issues}
-                </a>
               </Card.Content>
             </Card>
           </div>
