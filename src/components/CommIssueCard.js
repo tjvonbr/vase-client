@@ -51,7 +51,6 @@ function CommIssueCard({ issue, upvotes }) {
 
   // Function that actually creates the upvote
   function addUpvote() {
-    console.log(upvoteData)
     axios
       .post(`http://localhost:4000/issues/${id}/upvotes`, upvoteData)
       .then(() => {
@@ -61,9 +60,6 @@ function CommIssueCard({ issue, upvotes }) {
         console.log(error)
       })
   };
-
-  // Essentially prevents the user from voting more than once--return value is stored in state 
-
 
   return (
     <div>
