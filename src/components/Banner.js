@@ -2,11 +2,10 @@
 
 import React from 'react';
 import { jsx } from '@emotion/core';
-import { useTheme } from 'emotion-theming';
 import logo from '../images/logo.png';
 
 function Banner() {
-  const theme = useTheme();
+
 
   return (
     <div
@@ -15,7 +14,7 @@ function Banner() {
         justifyContent: 'center',
         alignItems: 'center',
         height: '7vh',
-        backgroundColor: theme.colors.blue
+        backgroundColor: '#21316C'
       }}
     >
       <img src={logo} alt="Co-Make Logo"/>

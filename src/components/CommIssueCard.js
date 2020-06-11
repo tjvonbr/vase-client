@@ -75,21 +75,21 @@ function CommIssueCard({ issue, upvotes }) {
           </Card.Description>
         </Card.Content>
         <div
-        css={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'end',
-          margin: '10px 12px',
-        }}
+          css={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'end',
+            margin: '10px 12px',
+          }}
         >
           <Button 
             as='div' 
             labelPosition='right' 
             disabled={issue.user_id === user_id ? true : false || alreadyVoted ? true : false}>
             <Button 
-            color='facebook'
-            size='large' 
-            onClick={addUpvote}>
+              color='facebook'
+              size='large' 
+              onClick={addUpvote}>
               <Icon name='thumbs up outline' />
               Upvote
             </Button>
