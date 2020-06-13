@@ -2,23 +2,32 @@
 
 import React from 'react';
 import { jsx } from '@emotion/core';
-import { useTheme } from 'emotion-theming';
-import logo from '../images/logo.png';
 
 function Banner() {
-  const theme = useTheme();
-
   return (
     <div
       css={{
+        width: '100%',
+        height: '7vh',
         display: 'flex',
         justifyContent: 'center',
-        alignItems: 'center',
-        height: '7vh',
-        backgroundColor: theme.colors.blue
+        background: 'none',
+        position: 'absolute',
+        top: '0',
+        zIndex: '1'
       }}
     >
-      <img src={logo} alt="Co-Make Logo"/>
+      <p
+        css={{
+          fontSize: '32px',
+          fontWeight: '600',
+          letterSpacing: '2px',
+          color: '#fff',
+          textTransform: 'lowercase'
+        }}
+      >
+        Vase
+      </p>
     </div>
   )
 };
