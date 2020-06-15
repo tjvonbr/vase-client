@@ -5,6 +5,7 @@ import { jsx, keyframes } from '@emotion/core';
 import { Link } from 'react-router-dom';
 import { Button, Icon } from 'semantic-ui-react';
 import Banner from './Banner';
+import PhoneIcon from './PhoneIcon';
 
 function Landing() {
   return (
@@ -18,7 +19,7 @@ function Landing() {
       <div 
         css={{
           width: '100%',
-          height: '700px',
+          height: '600px',
           background: 'linear-gradient(150deg, #53f 15%, #05d5ff 70%, #a6ffcb 94%)',
           transform: 'skewY(-10deg)',
           transformOrigin: '0',
@@ -65,14 +66,15 @@ function Landing() {
             textTransform: 'uppercase',
             '&:hover': {
               cursor: 'pointer',
-              transform: 'translateY(1px)'
+              transform: 'translateY(1px)',
+              boxShadow: '0 12px 8px rgba(50, 50, 93. .20)'
             }
           }}
         >
           Get Started
         </button>
       </section>
-
+      <PhoneIcon />
     </header>
   )
 };
