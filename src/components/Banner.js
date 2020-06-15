@@ -21,7 +21,7 @@ function Banner() {
         css={{
           fontSize: '32px',
           fontWeight: '600',
-          letterSpacing: '2px',
+          letterSpacing: '-2px',
           color: '#fff',
           textTransform: 'lowercase'
         }}
