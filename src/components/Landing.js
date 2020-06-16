@@ -1,11 +1,12 @@
 /** @jsx jsx */
 
 import React from 'react';
-import { jsx, keyframes } from '@emotion/core';
+import { jsx, css, keyframes } from '@emotion/core';
 import { Link } from 'react-router-dom';
 import { Button, Icon } from 'semantic-ui-react';
 import Banner from './Banner';
 import PhoneIcon from './PhoneIcon';
+import TabletIcon from './TabletIcon';
 
 function Landing() {
   return (
@@ -74,7 +75,15 @@ function Landing() {
           Get Started
         </button>
       </section>
-      <PhoneIcon />
+      <div
+				css={css`
+					display: flex
+				`}
+      >
+        <PhoneIcon />
+				<TabletIcon />
+      </div>
+   
     </header>
   )
 };
