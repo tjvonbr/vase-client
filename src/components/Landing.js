@@ -1,20 +1,43 @@
 /** @jsx jsx */
 
 import React from 'react';
-import { jsx, css, keyframes } from '@emotion/core';
+import { jsx, css } from '@emotion/core';
 import { Link } from 'react-router-dom';
-import { Button, Icon } from 'semantic-ui-react';
 import Banner from './Banner';
-import PhoneIcon from './PhoneIcon';
-import TabletIcon from './TabletIcon';
+import DeviceContainer from './DeviceContainer'
+
+const featuresTemplate = css`
+	width: 50%;
+`;
+
+const featuresH2 = css`
+	color: #E66868;
+	font-size: 21px;
+	font-weight: 600;
+	text-transform: uppercase;
+	padding: 20px 0 20px 20px;
+	margin-bottom: 50px;
+	letter-spacing: .025em
+`;
+
+const featuresP = css`
+	width: 95%;
+	color: #EB8686;
+	font-size: 17px;
+	padding: 0 0 20px 20px;
+	line-height: 28px;
+`;
 
 function Landing() {
   return (
+		<div>
     <header
-      css={{
-        display: 'block',
-        overflow: 'hidden'
-      }}
+      css={css`
+        display: block;
+        overflow: hidden;
+				width: 100%;
+				height: 700px;
+      `}
     >
       <Banner />
       <div 
@@ -26,65 +49,103 @@ function Landing() {
           transformOrigin: '0',
           zIndex: 0
         }}
-      >
-      </div>
-      <section
-        css={{
-          width: '500px',
-          height: '700px',
-          position: 'absolute',
-          top: '200px',
-          left: '200px',
-          color: '#fff',
-        }}
-      >
-        <h1
-          css={{
-            letterSpacing: '2px'
-          }}
-        >A new way to engage</h1>
-        <p
-          css={{
-            color: 'rgb(217, 252, 255)',
-            fontSize: '17px',
-            lineHeight: '1.8'
-          }}
-        >
-          Vase is the smart approach to engaging with your neighbors.  See what others are up to on your block.  Check in to see what issues within your community need to be addressed.  Give your local officials an idea of what concerns you most.  Vase turns the web into a virtual town hall.  How will you help build your community?
-        </p>
-        <button
-          css={{
-            height: '40px',
-            border: 'none',
-            background: '#3ecf8e',
-            color: '#fff',
-            fontSize: '15px',
-            fontWeight: '600',
-            textShadow: '0 1px 3px rgba(36, 180, 126, .4)',
-            borderRadius: '4px',
-            padding: '0 14px',
-            boxShadow: '0 10px 6px rgba(50, 50, 93, .11)',
-            textTransform: 'uppercase',
-            '&:hover': {
-              cursor: 'pointer',
-              transform: 'translateY(1px)',
-              boxShadow: '0 12px 8px rgba(50, 50, 93. .20)'
-            }
-          }}
-        >
-          Get Started
-        </button>
+      />
+      <section css={css`display: flex;`}>
+				<div
+					css={css`
+						width: 500px;
+						height: 900px;
+						position: absolute;
+						top: 200px;
+						left: 200px;
+						color: #fff;
+					`}
+     		>	
+					<h1
+						css={css`
+							letterSpacing: 2px;
+							font-size: 40px;
+						`}
+					>A new way to engage</h1>
+					<p
+						css={{
+							color: 'rgb(217, 252, 255)',
+							fontSize: '17px',
+							lineHeight: '1.8'
+						}}
+					>
+						Vase is the smart approach to engaging with your neighbors.
+						See what others are up to on your block.
+						Check in to see what issues within your community need to be addressed.
+						Give your local officials an idea of what concerns you most.  
+						Vase turns the web into a virtual town hall.  
+						How will you help build your community?
+					</p>
+					<button
+						css={{
+							height: '40px',
+							border: 'none',
+							background: '#3ecf8e',
+							color: '#fff',
+							fontSize: '15px',
+							fontWeight: '600',
+							textShadow: '0 1px 3px rgba(36, 180, 126, .4)',
+							borderRadius: '4px',
+							padding: '0 14px',
+							boxShadow: '0 10px 6px rgba(50, 50, 93, .11)',
+							textTransform: 'uppercase',
+							'&:hover': {
+								cursor: 'pointer',
+								transform: 'translateY(1px)',
+							}
+						}}
+					>
+						Get Started
+					</button>
+				</div>
+				<DeviceContainer />
       </section>
-      <div
-				css={css`
-					display: flex
-				`}
-      >
-        <PhoneIcon />
-				<TabletIcon />
-      </div>
-   
     </header>
+		<section
+				css={css`
+					display: flex;
+					flex-direction: column;
+					align-items: center;
+					width: 100%;
+					height: 500px;
+				`}
+			>
+				<div
+					css={css`
+						display: flex;
+						border: 1px solid black;
+						width: 50%;
+						height: 500px;
+					`}
+				>
+					<section css={css`${featuresTemplate}`}>
+						<h2 css={css`${featuresH2}`}>
+							Upvote community projects
+						</h2>
+						<p css={css`${featuresP}`}>
+							We believe in democratic reform at all levels of government,
+							and we understand that not everyone has time to attend town hall meetings,
+							public demonstrations, or even vote for local offices.  Make your voice heard by creating community
+							concerns and allow others to upvote it to let local officials know what you
+							deem important.
+						</p>
+					</section>
+					<section css={css`${featuresTemplate}`}>
+						<h2 css={css`${featuresH2}`}>
+							Organize community events
+						</h2>
+						<p css={css`${featuresP}`}>
+
+						</p>
+					</section>
+				</div>
+		</section>
+		</div>
   )
 };
 

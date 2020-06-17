@@ -8,6 +8,7 @@ import tabletIcon from '../images/tablet.svg';
 const tabletTemplate = css`
   width: 600px;
   height: 431px;
+  background: #fff;
   border: 1px solid gray;
   border-radius: 20px;
   display: flex;
@@ -31,6 +32,8 @@ function TabletIcon() {
             ${tabletTemplate}
             width: 95%;
             height: 95%;
+            overflow: hidden;
+            position: relative;
           `}
         >
           <embed src={tabletIcon} alt="tablet icon" />
