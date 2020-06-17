@@ -1,4 +1,4 @@
-# Co-Make
+# Vase
 
 ## Overview
 Vase is an application designed to project citizens’ voices within their local communities by providing them the ability to post issues or concerns within their communities that they would like to see addressed by their local governments. Once an issue or concern is posted, fellow citizens would be able to upvote the ones they’d like to see addressed--essentially creating a prioritized list of actions for local governments created by its constituents.
