@@ -1,13 +1,7 @@
 # Co-Make
 
-## Contributors
-* Philip Johnson
-* Trevor Von Bruenchenhein
-* Jessica Morrison
-* Jonathan Ho
-
 ## Overview
-Co-Make is an application designed to project citizens’ voices within their local communities by providing them the ability to post issues or concerns within their communities that they would like to see addressed by their local governments. Once an issue or concern is posted, fellow citizens would be able to upvote the ones they’d like to see addressed--essentially creating a prioritized list of actions for local governments created by its constituents.
+Vase is an application designed to project citizens’ voices within their local communities by providing them the ability to post issues or concerns within their communities that they would like to see addressed by their local governments. Once an issue or concern is posted, fellow citizens would be able to upvote the ones they’d like to see addressed--essentially creating a prioritized list of actions for local governments created by its constituents.
 
 ### User Flow
 1.  You live in a city or town and notice there are several bad accidents every year at a particularly dangerous intersection with blind corners and want to voice your concern within the community.
@@ -22,7 +16,7 @@ Co-Make is an application designed to project citizens’ voices within their lo
 #### Front end built with:
 * React
 * Semantic-UI
-* Styled Components
+* Emotion
 * Formik
 * Yup
 
