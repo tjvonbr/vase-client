@@ -1,7 +1,7 @@
 # Vase
 
 ## Overview
-Vase is an application designed to project citizens’ voices within their local communities by providing them the ability to post issues or concerns within their communities that they would like to see addressed by their local governments. Once an issue or concern is posted, fellow citizens would be able to upvote the ones they’d like to see addressed--essentially creating a prioritized list of actions for local governments created by its constituents.
+Political engagement in the United States is an obviously complex phenomenon to study.  Because of our federalist structure, there are many levels of government that encourage our participation.  Some argue that our participation at the local level is more important and meaningful than at the state or national level while others argue the opposite.  In addition, there are many political 'acts' that might constitute political engagement.  For example, voting in an election would be considered a political act.  So would attending, and participating in, a poltical demonstation.  The Pew Research Center has conveniently polled Americans attempting to measure their levels of political engagement by asking if they've participated in any number of 11 acts (the study containing the list can be found [here](https://www.pewresearch.org/internet/2009/09/01/the-current-state-of-civic-engagement-in-america/)). 
 
 ### User Flow
 1.  You live in a city or town and notice there are several bad accidents every year at a particularly dangerous intersection with blind corners and want to voice your concern within the community.
