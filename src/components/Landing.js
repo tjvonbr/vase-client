@@ -6,8 +6,10 @@ import { Link } from 'react-router-dom';
 import Banner from './Banner';
 import DeviceContainer from './DeviceContainer'
 
+// Basic styles for two 'features' boxes toward bottom of page
 const featuresTemplate = css`
-	width: 50%;
+	width: 49%;
+	background: #fff;
 `;
 
 const featuresH2 = css`
@@ -28,45 +30,47 @@ const featuresP = css`
 	line-height: 28px;
 `;
 
-function Landing() {
+function Landing(props) {
   return (
 		<div>
-    <header
-      css={css`
-        display: block;
-        overflow: hidden;
-				width: 100%;
-				height: 700px;
-      `}
-    >
+			<header
+				css={css`
+					display: block;
+					overflow: hidden;
+					width: 100%;
+					height: 700px;
+				`}
+			>
       <Banner />
-      <div 
-        css={{
-          width: '100%',
-          height: '600px',
-          background: 'linear-gradient(150deg, #53f 15%, #05d5ff 70%, #a6ffcb 94%)',
-          transform: 'skewY(-10deg)',
-          transformOrigin: '0',
-          zIndex: 0
-        }}
-      />
-      <section css={css`display: flex;`}>
-				<div
-					css={css`
-						width: 500px;
-						height: 900px;
-						position: absolute;
-						top: 200px;
-						left: 200px;
-						color: #fff;
-					`}
-     		>	
+				<div 
+					css={{
+						width: '100%',
+						height: '600px',
+						background: 'linear-gradient(150deg, #53f 15%, #05d5ff 70%, #a6ffcb 94%)',
+						transform: 'skewY(-10deg)',
+						transformOrigin: '0',
+						zIndex: 0
+					}}
+				/>
+				<section css={css`display: flex;`}>
+					<div
+						css={css`
+							width: 500px;
+							height: 900px;
+							position: absolute;
+							top: 200px;
+							left: 10%;
+							color: #fff;
+						`}
+					>	
 					<h1
 						css={css`
 							letterSpacing: 2px;
 							font-size: 40px;
 						`}
-					>A new way to engage</h1>
+					>
+						A new way to engage
+					</h1>
 					<p
 						css={{
 							color: 'rgb(217, 252, 255)',
@@ -99,6 +103,7 @@ function Landing() {
 								transform: 'translateY(1px)',
 							}
 						}}
+						onClick={() => props.history.push('/register')}
 					>
 						Get Started
 					</button>
@@ -106,6 +111,7 @@ function Landing() {
 				<DeviceContainer />
       </section>
     </header>
+		
 		<section
 				css={css`
 					display: flex;
@@ -113,21 +119,24 @@ function Landing() {
 					align-items: center;
 					width: 100%;
 					height: 500px;
+					background: #f6f9fc;
+					transform: skewY(-10deg);
 				`}
 			>
 				<div
 					css={css`
 						display: flex;
-						border: 1px solid black;
+						justify-content: space-between;
 						width: 50%;
 						height: 500px;
+						transform: skewY(10deg)
 					`}
 				>
-					<section css={css`${featuresTemplate}`}>
-						<h2 css={css`${featuresH2}`}>
+					<section css={featuresTemplate}>
+						<h2 css={featuresH2}>
 							Upvote community projects
 						</h2>
-						<p css={css`${featuresP}`}>
+						<p css={featuresP}>
 							We believe in democratic reform at all levels of government,
 							and we understand that not everyone has time to attend town hall meetings,
 							public demonstrations, or even vote for local offices.  Make your voice heard by creating community
@@ -140,7 +149,10 @@ function Landing() {
 							Organize community events
 						</h2>
 						<p css={css`${featuresP}`}>
-
+							Want to create a community event in your city?
+							March for something you believe in.  Demonstrate
+							for what you believe is right.  If your message needs
+							to be heard, we'll provide the platform.
 						</p>
 					</section>
 				</div>

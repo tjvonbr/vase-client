@@ -9,6 +9,7 @@ import AddIssue from './components/AddIssue';
 import Community from './components/Community';
 import Landing from './components/Landing';
 import Logout from './components/Logout';
+import NewRegister from './components/NewRegister';
 
 // Theme colors
 const theme = {
@@ -29,7 +30,7 @@ function App() {
         <Route exact path="/profile/:id" component={Profile} />
         <Route path="/profile/:id/edit" component={ProfileEdit} />
         <Route path="/login" component={Login} />
-        <Route path="/register" component={Register} />
+        <Route path="/register" component={NewRegister} />
         <Route path="/addissue" component={AddIssue} />
         <Route path="/community/:zipcode" component={Community} />
         <Route path="/logout" component={Logout} />
