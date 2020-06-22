@@ -6,19 +6,23 @@ import iphoneIcon from '../images/iphone.svg';
 
 // Base class for the Apple device styling
 const phoneTemplate = css`
-    width: 200px;
-    height: 400px;
-    border: 1px solid gray;
-    border-radius: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  width: 200px;
+  height: 400px;
+  background: #fff;
+  border: 1px solid gray;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `
 
 function PhoneIcon() {
   return (
-    <div css={css`${phoneTemplate}`}>
+    <div css={css`
+      ${phoneTemplate}
+      margin-right: 50px;
+      `}>
       <div
         css={css`
           ${phoneTemplate}
