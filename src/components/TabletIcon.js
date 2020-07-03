@@ -4,6 +4,13 @@ import React from "react";
 import { css, jsx } from '@emotion/core';
 import tabletIcon from '../images/tablet.svg';
 
+// MQ Breakpoints
+const breakpoints = [576, 768, 992, 1200];
+
+const mq = breakpoints.map(
+	bp => `@media (max-width: ${bp}px)`
+);
+
 // Base class for the Apple device styling
 const tabletTemplate = css`
   width: 600px;

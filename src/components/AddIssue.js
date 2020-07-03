@@ -11,7 +11,6 @@ import {
   Dimmer, 
   Loader } 
 from 'semantic-ui-react';
-import '../styles/addIssue.css';
 import NavBar from './NavBar';
 import Upgrade from '../images/bermuda/bermuda-upgrade.png';
 

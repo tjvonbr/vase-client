@@ -4,6 +4,13 @@ import React from 'react';
 import { jsx, css } from '@emotion/core';
 import { NavLink } from 'react-router-dom';
 
+// MQ Breakpoints
+const breakpoints = [576, 768, 992, 1200];
+
+const mq = breakpoints.map(
+	bp => `@media (max-width: ${bp}px)`
+);
+
 function Banner() {
   return (
     <div
