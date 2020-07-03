@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { css, jsx } from '@emotion/core';
 import axios from 'axios';
+import Button from './Button';
 import RegisterGrid from './RegisterGrid';
 import RegisterPerks from './RegisterPerks';
 
@@ -50,30 +51,90 @@ function NewRegister(props) {
             <h1 css={formHeader}>Create your Vase account</h1>
 
             {/* First Name */}
-            <p>
-              First Name
-            </p>
-            <input 
-                type="text"
-                name="first_name"
-                onChange={handleInput}
-                value={credentials.first_name}
-              />
-              <p>
-              Last Name
-              </p>
-              <input 
-                type="text"
-                name="last_name"
-                onChange={handleInput}
-                value={credentials.last_name}
-              />
+            <p css={inputLabels}>First Name</p>
+            <input
+              css={inputStyles}
+              type="text"
+              name="first_name"
+              onChange={handleInput}
+              value={credentials.first_name}
+            />
+            {/* Last Name */}
+            <p css={inputLabels}>Last Name</p>
+            <input
+              css={inputStyles}
+              type="text"
+              name="last_name"
+              onChange={handleInput}
+              value={credentials.last_name}
+            />
+            {/* Email */}
+            <p css={inputLabels}>Email</p>
+            <input
+              css={inputStyles}
+              type="email"
+              name="email"
+              onChange={handleInput}
+              value={credentials.email}
+            />
+            {/* Username */}
+            <p css={inputLabels}>Username</p>
+            <input
+              css={inputStyles}
+              type="text"
+              name="username"
+              onChange={handleInput}
+              value={credentials.username}
+            />
+            {/* Zipcode */}
+            <p css={inputLabels}>Zipcode</p>
+            <input
+              css={inputStyles}
+              type="text"
+              name="zipcode"
+              onChange={handleInput}
+              value={credentials.zipcode}
+            />
+            {/* Password */}
+            <p css={inputLabels}>Password</p>
+            <input
+              css={inputStyles}
+              type="password"
+              name="password"
+              onChange={handleInput}
+              value={credentials.password}
+            />
           </form>
+          <Button>Submit</Button>
+
+          <p>Have an account? Sign in.</p>
         </div>
       </div>
     </div>
   )
 }
+
+const buttonStyles = css`
+  background: blue;
+`
+
+const inputLabels = css`
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 2px;
+`
+
+const inputStyles = css`
+  width: 100%;
+  height: 30px;
+  margin-bottom: 30px;
+  border: 1px solid lightgray;
+  border-radius: 4px;
+  background: #fff;
+  &:focus {
+    border: 1px solid lightblue;
+  }
+`
 
 const formHeader = css`
   margin-bottom: 50px;
@@ -85,6 +146,7 @@ const formInnerWrapper = css`
   position: absolute;
   top: 100px;
   left: 10%;
+  width: 400px;
 `
 
 const formOuterWrapper = css`
@@ -93,7 +155,6 @@ const formOuterWrapper = css`
   left: 50%;
   height: 100vh;
   width: 50vw;
-  z-index: 2;
   background: #fff;
   border-left: 1px solid #f6f9fc;
 `

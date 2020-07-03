@@ -4,6 +4,13 @@ import React from "react";
 import { css, jsx } from '@emotion/core';
 import iphoneIcon from '../images/iphone.svg';
 
+// MQ Breakpoints
+const breakpoints = [576, 768, 992, 1200];
+
+const mq = breakpoints.map(
+	bp => `@media (max-width: ${bp}px)`
+);
+
 // Base class for the Apple device styling
 const phoneTemplate = css`
   width: 200px;
@@ -15,6 +22,9 @@ const phoneTemplate = css`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  ${mq[2]} {
+    display: none;
+  };
 `
 
 function PhoneIcon() {
