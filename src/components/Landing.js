@@ -27,7 +27,6 @@ const featuresTemplate = css`
 		width: 95%;
 		height: 700px;
 	}
-
 `;
 
 const featuresH2 = css`
