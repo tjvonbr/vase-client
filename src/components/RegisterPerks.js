@@ -29,13 +29,23 @@ function RegisterPerks() {
   )
 }
 
+// MQ BREAKPOINTS
+const breakpoints = [576, 768, 992, 1200];
+
+const mq = breakpoints.map(
+	bp => `@media (max-width: ${bp}px)`
+);
+
 // Component Styles
 const perksContainer = css`
   position: absolute;
   top: 100px;
-  left: 30%;
+  right: 10%;
+  ${mq[2]} {
+    right: 10%;
+  }
   width: 300px;
-  height: 200px;
+  height: auto;
   z-index: 1
 `
 

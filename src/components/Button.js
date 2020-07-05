@@ -27,6 +27,9 @@ const buttonStyles = css`
     cursor: pointer;
     transform: translateY(1px)
   }
+  &:focus {
+    outline: none;
+  }
 `
 
 export default Button;
