@@ -28,7 +28,7 @@ function RegisterGrid(props) {
       </div>
 
       {/* Row 1 */}
-      <div css={css`${gridContainer}`}>
+      <div css={gridContainer}>
         <span css={gridRow} />
         <span css={gridRow} />
         <span 

@@ -120,8 +120,6 @@ function NewRegister(props) {
               />
             <Button css={buttonStyles}>Submit</Button>
           </form>
-
-
           <p css={signInLink}>Have an account? <a href="/login">Sign In</a></p>
         </div>
       </div>
