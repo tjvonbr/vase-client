@@ -19,16 +19,17 @@ function RegisterGrid(props) {
       {props.children}
       <div
         css={css`
-          height: 65%;
+          height: 600px;
           background: #f6f9fc;
           transform: skewY(-10deg);
           transform-origin: 0;
+          overflow: hidden;
         `}
       >
       </div>
 
       {/* Row 1 */}
-      <div css={css`${gridContainer}`}>
+      <div css={gridContainer}>
         <span css={gridRow} />
         <span css={gridRow} />
         <span 

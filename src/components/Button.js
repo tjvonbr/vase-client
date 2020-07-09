@@ -28,7 +28,7 @@ const buttonStyles = css`
     transform: translateY(1px)
   }
   &:focus {
-    outline: none;
+    outline: none
   }
 `
 
