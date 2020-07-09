@@ -19,10 +19,11 @@ function RegisterGrid(props) {
       {props.children}
       <div
         css={css`
-          height: 65%;
+          height: 600px;
           background: #f6f9fc;
           transform: skewY(-10deg);
           transform-origin: 0;
+          overflow: hidden;
         `}
       >
       </div>

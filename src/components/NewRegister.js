@@ -32,9 +32,7 @@ function NewRegister(props) {
       axios
         .post('http://localhost:4000/auth/register', credentials)
         .then(response => {
-          const id = response.data.id;
-          
-          // Set items three items to local storage
+          const { id } = response.data 
           window.localStorage.setItem('token', response.data.token);
           window.localStorage.setItem('id', response.data.id);
           window.localStorage.setItem('zipcode', response.data.zipcode);
@@ -47,7 +45,7 @@ function NewRegister(props) {
   }
 
   return (
-    <div css={mainWrapper}>
+    <div>
       <Dimmer active={ isLoading ? true : false }>
         <Loader>Loading...</Loader>
       </Dimmer>
@@ -69,7 +67,7 @@ function NewRegister(props) {
                 value={credentials.first_name}
               />
             {/* Last Name */}
-            <label htmlFor="lastNameInput" css={labelStyles}>Last name</label>
+            <label htmlFor="lastNameInput" css={labelStyles}>Last Name</label>
               <input
                 id="lastNameInput"
                 css={inputStyles}
@@ -109,7 +107,8 @@ function NewRegister(props) {
                 value={credentials.zipcode}
               />
             {/* Password */}
-            <label htmlFor="passwordInput" css={labelStyles}>Password</label>
+            <label css={labelStyles}>
+              Password
               <input
                 id="passwordInput"
                 css={inputStyles}
@@ -118,7 +117,8 @@ function NewRegister(props) {
                 onChange={handleInput}
                 value={credentials.password}
               />
-            <Button css={buttonStyles}>Submit</Button>
+            </label>
+            <Button>Submit</Button>
           </form>
           <p css={signInLink}>Have an account? <a href="/login">Sign In</a></p>
         </div>
@@ -134,15 +134,15 @@ const mq = breakpoints.map(
 	bp => `@media (max-width: ${bp}px)`
 );
 
-const buttonStyles = css`
-
-`
-
 const inputStyles = css`
+  display: block;
+  box-sizing: border-box;
   width: 100%;
-  height: 30px;
+  height: 36px;
+  margin-top: 5px;
   margin-bottom: 30px;
-  border: 1px solid lightgray;
+  padding: 8px 12px;
+  border: 1px solid #cdcfd1;
   border-radius: 4px;
   background: #fff;
   &:focus {
@@ -161,15 +161,19 @@ const formHeader = css`
 `
 
 const formInnerWrapper = css`
+  display: flex;
+  flex-direction: column;
   position: absolute;
   top: 100px;
-  left: 10%;
-  width: 50%;
-  ${mq[2]} {
-    width: 60%;
-  }
+  left: 5%;
+  width: 360px;
   ${mq[1]} {
-    width: 75%;
+    width: 60%;
+    left: 20%;
+  }
+  ${mq[0]} {
+    width: 80%;
+    left: 10%;
   }
 `
 
@@ -177,24 +181,21 @@ const formOuterWrapper = css`
   position: absolute;
   top: 0;
   left: 50%;
-  ${mq[1]} {
-    left: 0px;
-  }
   height: 100vh;
-  width: 60%;
-  ${mq[1]} {
-    width: 100%;
-  }
+  width: 50%;
   background: #fff;
   border-left: 1px solid #f6f9fc;
-`
-
-const mainWrapper = css`
-  display: flex;
+  ${mq[1]} {
+    width: 100%;
+    left: 0;
+  }
 `
 
 const signInLink = css`
   margin-top: 20px;
   text-align: center;
+  &:hover {
+    color: black;
+  }
 `
 export default NewRegister;

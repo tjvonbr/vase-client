@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { css, jsx } from '@emotion/core';
 import axios from 'axios';
+import { Dimmer, Loader } from 'semantic-ui-react';
 import Button from './Button';
 import LoginGrid from './LoginGrid';
 
@@ -20,8 +21,8 @@ function NewLogin(props) {
 
   // Submission handler
   function loginHandler(e) {
-    setIsLoading(true);
     e.preventDefault();
+    setIsLoading(true);
       axios
         .post("http://localhost:4000/auth/login", credentials)
         .then(response => {
@@ -38,7 +39,10 @@ function NewLogin(props) {
   }
 
   return (
-    <div>
+    <div css={mainWrapper}>
+      <Dimmer active={ isLoading ? true : false }>
+        <Loader>Loading...</Loader>
+      </Dimmer>
       <LoginGrid />
       <div css={outerWrapper}>
         <h2 css={containerh2}>Vase</h2>
@@ -85,10 +89,6 @@ const mq = breakpoints.map(
 );
 
 // ELEMENT STYLES
-const buttonStyles = css`
-  background-color: #9f84a3;
-`
-
 const containerh2 = css`
   padding-bottom: 10px;
   font-size: 32px;
@@ -113,20 +113,25 @@ const formInnerWrapper = css`
 
 const formOuterWrapper = css`
   width: 90%;
-  height: 70%;
-  bottom: 10px;
+  height: 90%;
   border-radius: 4px;
   box-shadow: rgba(60, 66, 87, 0.12) 0px 7px 14px 0px;
   background: white;
   display: flex;
   flex-direction: column;
   align-items: center;
+  ${mq[0]} {
+    height: 100%;
+    box-shadow: none;
+  }
 `
 
 const inputStyles = css`
+  display: block;
   font-size: 17px;
   width: 100%;
   height: 44px;
+  margin-top: 5px;
   margin-bottom: 50px;
   padding: 10px;
   border: 1px solid lightgray;
@@ -142,17 +147,23 @@ const labelStyles = css`
   font-weight: 600;
 `
 
+const mainWrapper = css`
+  height: 100%;
+  width: 100%;
+`
+
 const outerWrapper = css`
   width: 600px;
-  height: 600px;
+  height: 475px;
   position: absolute;
   left: 50%;
   margin-right: -50%;
-  transform: translate(-50%);
+  transform: translate(-50%, -10%);
   top: 200px;
   ${mq[0]} {
     top: 0;
     height: 100vh;
+    transform: translate(-50%)
   }
   display: flex;
   flex-direction: column;
@@ -161,5 +172,8 @@ const outerWrapper = css`
 const registerLink = css`
   margin-top: 20px;
   text-align: center;
+  &:hover {
+    color: black;
+  }
 `
 export default NewLogin;
