@@ -57,7 +57,7 @@ function Community() {
     return <NoIssues />
   } else {
     return (
-      <>
+      <div>
         <NavBar /> 
         <div
           css={{
@@ -80,7 +80,7 @@ function Community() {
           <h3>All community concerns posted in {zip}:</h3>
           <CommunityIssues issues={communityIssues} upvotes={userVotes} />
         </div>
-      </>
+      </div>
     )
   }
 };

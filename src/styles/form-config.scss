@@ -1,0 +1,14 @@
+@mixin input-base {
+  display: block;
+  height: 44px;
+  padding: 10px;
+  border: 1px solid lightgray;
+  border-radius: 4px;
+  background: #fff
+}
+
+.form-landing {
+  display: flex;
+  align-items: flex-start;
+}
+

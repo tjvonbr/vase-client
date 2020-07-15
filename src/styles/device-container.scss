@@ -1,0 +1,22 @@
+$break-desktop: 1200px;
+$break-tablet: 992px;
+$break-phone-landscape: 768px;
+$break-phone: 576px;
+
+#device-container {
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  position: absolute;
+  top: 100px;
+  left: 45%;
+  transform: rotate(-10deg);
+  z-index: 2;
+  @media screen and (max-width: $break-tablet) {
+    left: 65%
+  }
+  @media screen and (max-width: $break-phone-landscape) {
+    display: none;
+    left: 65%;
+  }
+}

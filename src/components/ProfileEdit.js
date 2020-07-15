@@ -12,7 +12,7 @@ import {
   Loader } 
 from 'semantic-ui-react';
 import NavBar from './NavBar';
-import Logo from '../images/bermuda/waiting-4.png';
+import Logo from '../assets/bermuda/waiting-4.png';
 
 // Send current user via props below
 function ProfileEdit(props) {

@@ -4,7 +4,7 @@ import React from 'react';
 import { Card, Image } from 'semantic-ui-react';
 import { jsx } from '@emotion/core';
 import MemberProfileP from './MemberProfileP';
-import placeholder from '../images/profile_placeholder.png';
+import placeholder from '../assets/profile_placeholder.png';
 
 function MostPopular(props) {
   return (

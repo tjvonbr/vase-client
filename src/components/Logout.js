@@ -10,7 +10,7 @@ import {
   Image }
 from 'semantic-ui-react'
 import NavBar from './NavBar';
-import comeback from '../images/bermuda/bermuda-come-back-later.png';
+import comeback from '../assets/bermuda/bermuda-come-back-later.png';
 
 function Logout(props) {
   const [loggedIn, setLoggedIn] = useState(true)
@@ -30,7 +30,7 @@ function Logout(props) {
   }
 
   return (
-    <>
+    <div>
       <NavBar />
       <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
         <Grid.Column style={{ maxWidth: 450 }}>
@@ -47,7 +47,7 @@ function Logout(props) {
           </Button>
         </Grid.Column>
       </Grid>
-    </>
+    </div>
   )
 };
 
