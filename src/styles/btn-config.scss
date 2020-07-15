@@ -1,0 +1,60 @@
+$mint-green: #3ecf8e;
+$deep-purple: #615263;
+$royal-blue: #2892f0;
+
+@mixin btn-base {
+    border: none;
+    border-radius: 4px;
+    padding: 0 14px;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    text-shadow: 0 1px 3px rgba(36, 180, 126, .4);
+    box-shadow: 0 10px 6px rgba(50, 50, 93, .11);
+    &:hover {
+      cursor: pointer;
+      transform: translateY(1px);
+      box-shadow: 0 11px 7px rgba(50, 50, 93, .15);
+    }
+    &:focus {
+      outline: none
+    }
+}
+
+@mixin btn-cta {
+    @include btn-base;
+
+    background: $mint-green;
+    height: 40px;
+    width: 140px;
+}
+
+@mixin btn-form {
+    @include btn-base;
+
+    height: 44px;
+    width: 100%;
+}
+
+.btn-cta {
+    @include btn-cta;
+}
+
+#btn-login {
+    @include btn-form;
+
+    background: $deep-purple;
+}
+
+#btn-register {
+  @include btn-form;
+
+  background: $royal-blue;
+}
+
+#btn-zip {
+  @include btn-form;
+
+  background: $mint-green;
+  width: 60px;
+}

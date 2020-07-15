@@ -2,12 +2,9 @@
 
 import React from 'react';
 import { jsx } from '@emotion/core';
-import { useTheme } from 'emotion-theming';
 import { SocialIcon } from 'react-social-icons';
 
 function SocialBar() {
-  const theme = useTheme();
-
   return (
     <div 
       css={{ 
@@ -21,7 +18,7 @@ function SocialBar() {
       <SocialIcon 
         network='github'
         url='https://github.com/tjvonbr'
-        bgColor={theme.colors.blue}
+        bgColor='#fff'
         fgColor='white'
         style={{ height: 45, width: 45 }}
       />

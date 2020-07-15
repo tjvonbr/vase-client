@@ -1,57 +1,30 @@
-/** @jsx jsx */
-
 import React from 'react';
-import { jsx } from '@emotion/core';
-import { useTheme } from 'emotion-theming';
-import NavBarLink from './NavBarLink';
-import SocialBar from './SocialBar';
-import logo from '../images/logo.png';
 
-function NavBar(props) {
-  const theme = useTheme();
-
+function NavBar() {
   const id = window.localStorage.getItem('id');
-  const zip = window.localStorage.getItem('zipcode');
+  const zipcode = window.localStorage.getItem('zipcode');
 
   return (
-    <>
-      <nav
-        css={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          height: '7vh',
-          backgroundColor: theme.colors.blue
-        }}
-      >
-        <div
-          css={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            marginLeft: '20px',
-          }}
-        >
-          <img src={logo} alt="Co-Make Logo"/>
-
-          <div css={{ marginLeft: '20px '}}>
-            <NavBarLink 
-              path={`/profile/${id}`}
-              page={'Profile'}
-            />
-            <NavBarLink 
-              path={`/community/${zip}`}
-              page={'Your Community'}
-            />
-            <NavBarLink 
-              path={'/logout'} 
-              page={'Logout'}  
-            />
-          </div>
-        </div>
-
-        <SocialBar />
+    <div className='navbar-wrapper'>
+      <nav>
+        <a href="/">
+          <h1 className='nav-vase-logo blue'>Vase</h1>
+        </a>
       </nav>
-    </>
+      <nav className='navbar-items-wrapper'>
+        <a className='navbar-item' href={`/profile/${id}`}>
+          Profile
+        </a>
+        <a className='navbar-item' href={`/community/${zipcode}`}>
+          Community
+        </a>
+      </nav>
+      <nav>
+        <a className='navbar-signout' href='/logout'>
+          Sign out
+        </a>
+      </nav>
+    </div>
   )
 };
 

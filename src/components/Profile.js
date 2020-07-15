@@ -8,7 +8,8 @@ import { Link } from 'react-router-dom';
 import NavBar from './NavBar';
 import { Button, Card, Icon, Image } from 'semantic-ui-react'
 import IssuesList from './IssuesList';
-import profile_placeholder from '../images/profile_placeholder.png';
+import profile_placeholder from '../assets/profile_placeholder.png';
+import NewProfileCard from './NewProfileCard';
 
 function Profile(props) {
     const [currentUser, setCurrentUser] = useState("");
@@ -57,7 +58,7 @@ function Profile(props) {
   };
 
     return (
-      <>
+      <div className='profile-main-wrapper'>
         <NavBar user={currentUser} />
         <div
           css={{
@@ -73,7 +74,8 @@ function Profile(props) {
               marginTop: '50px'
             }}
           >
-            <Card>
+            <NewProfileCard />
+            {/* <Card>
               <Image src={profile_placeholder} wrapped ui={false} />
               <Card.Content>
                 <Card.Header>{ currentUser.username }</Card.Header>
@@ -86,7 +88,7 @@ function Profile(props) {
                   <Icon name='user' />
                     Posted Issues: {currentUser.posted_issues}
               </Card.Content>
-            </Card>
+            </Card> */}
           </div>
 
           <div
@@ -133,20 +135,20 @@ function Profile(props) {
           <div
             css={{
               marginTop: '20px',
-              backgroundColor: theme.colors.turquoise,
+              backgroundColor: '#fff',
               width: '50%'
             }}
           >
             <h3
               css={{
                 margin: '0px 10px',
-                color: theme.colors.white
+                color: '#fff'
               }}
             >Issues created by { currentUser.username }:</h3>
           </div>
           <IssuesList issues={issues} fetch={fetchIssues} />
         </div>
-      </>
+      </div>
     )
   }
 

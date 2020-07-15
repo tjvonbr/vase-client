@@ -1,0 +1,42 @@
+.navbar-wrapper {
+  height: 5vh;
+  width: 70%;
+  margin: 0 15%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: none;
+}
+
+.navbar-items-wrapper {
+  width: 200px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.navbar-item {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: $royal-blue;
+
+  -webkit-transition: color .2s;
+
+  &:hover {
+    color: $dark-blue;
+    transition: color .2s
+  }
+}
+
+.navbar-signout {
+  border: 2px solid $royal-blue; 
+  border-radius: 4px;
+  padding: 10px 10px;
+  font-weight: 600;
+
+  -webkit-transition: color .2s;
+
+  &:hover {
+    color: $dark-blue;
+    transition: color .2s;
+  }
+}

@@ -2,7 +2,7 @@
 
 import React from "react";
 import { css, jsx } from '@emotion/core';
-import tabletIcon from '../images/tablet.svg';
+import tabletIcon from '../assets/tablet.svg';
 
 // MQ Breakpoints
 const breakpoints = [576, 768, 992, 1200];

@@ -12,7 +12,7 @@ import {
   Loader } 
 from 'semantic-ui-react';
 import NavBar from './NavBar';
-import Upgrade from '../images/bermuda/bermuda-upgrade.png';
+import Upgrade from '../assets/bermuda/bermuda-upgrade.png';
 
 
 function AddIssue(props) {

@@ -2,7 +2,7 @@
 
 import React from "react";
 import { css, jsx } from '@emotion/core';
-import iphoneIcon from '../images/iphone.svg';
+import iphoneIcon from '../assets/iphone.svg';
 
 // MQ Breakpoints
 const breakpoints = [576, 768, 992, 1200];
@@ -13,8 +13,8 @@ const mq = breakpoints.map(
 
 // Base class for the Apple device styling
 const phoneTemplate = css`
-  width: 200px;
-  height: 400px;
+  width: 250px;
+  height: 500px;
   background: #fff;
   border: 1px solid gray;
   border-radius: 20px;
