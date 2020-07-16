@@ -12,13 +12,10 @@ import profile_placeholder from '../assets/profile_placeholder.png';
 import NewProfileCard from './NewProfileCard';
 
 function Profile(props) {
-    const [currentUser, setCurrentUser] = useState("");
+    const [user, setUser] = useState("");
     const [issues, setIssues] = useState([]);
     let token = window.localStorage.getItem('token')
     let id = window.localStorage.getItem('id')
-
-    // Importing theme colors
-    const theme = useTheme();
 
     useEffect(() => {
       fetchUser();
@@ -50,7 +47,8 @@ function Profile(props) {
         }
       })
       .then(response => {
-        setCurrentUser(response.data);
+        console.log("USER DATA", response.data)
+        setUser(response.data);
       })
       .catch(error => {
         console.log(error);
@@ -59,95 +57,13 @@ function Profile(props) {
 
     return (
       <div className='profile-main-wrapper'>
-        <NavBar user={currentUser} />
-        <div
-          css={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            marginBottom: '50px'
-          }}
-        >
-          <div
-            css={{
-              display: 'flex',
-              marginTop: '50px'
-            }}
-          >
-            <NewProfileCard />
-            {/* <Card>
-              <Image src={profile_placeholder} wrapped ui={false} />
-              <Card.Content>
-                <Card.Header>{ currentUser.username }</Card.Header>
-                <Card.Meta>{ currentUser.email }</Card.Meta>
-                <Card.Description>
-                  { currentUser.biography }
-                </Card.Description>
-              </Card.Content>
-              <Card.Content extra>
-                  <Icon name='user' />
-                    Posted Issues: {currentUser.posted_issues}
-              </Card.Content>
-            </Card> */}
-          </div>
-
-          <div
-            css={{
-              display: 'flex',
-              marginTop: '20px'
-            }}
-          >
-            <Link 
-              to={{
-                pathname: "/addIssue",
-                state: {user: currentUser}
-              }}
-            >
-              <Button 
-                icon 
-                labelPosition="left"
-                color="facebook"
-                size="huge"
-              >
-                <Icon name="add" />
-                Add Issue
-              </Button>
-            </Link>
-
-            <Link 
-              to={{
-                pathname: `/profile/${id}/edit`,
-                state: {user: currentUser}
-              }}
-            >
-              <Button 
-                icon 
-                labelPosition="left"
-                color="facebook"
-                size="huge"
-                >
-                <Icon name="redo" />
-                Edit Profile
-              </Button>
-            </Link>
-          </div>
-
-          <div
-            css={{
-              marginTop: '20px',
-              backgroundColor: '#fff',
-              width: '50%'
-            }}
-          >
-            <h3
-              css={{
-                margin: '0px 10px',
-                color: '#fff'
-              }}
-            >Issues created by { currentUser.username }:</h3>
-          </div>
-          <IssuesList issues={issues} fetch={fetchIssues} />
-        </div>
+        <NavBar user={user} />
+          <section className='profile-card-wrapper'>
+            <NewProfileCard user={user} />
+          </section>
+          <section className='profile-user-issues-wrapper'>
+            <IssuesList issues={issues} fetch={fetchIssues} />
+          </section>
       </div>
     )
   }

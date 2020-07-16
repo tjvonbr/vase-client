@@ -3,3 +3,22 @@
   width: 100vw;
   background: $profile-gray
 }
+
+.profile-card-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 50px 0;
+}
+
+.profile-btn-wrapper {
+  width: 400px;
+  border: 1px solid black;
+  display: flex;
+}
+
+.profile-user-issues-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
