@@ -2,17 +2,17 @@ import React from 'react'
 import { Card, Icon, Image } from 'semantic-ui-react';
 import '../styles/ProfileStyles.css';
 
-function ProfileCard(props) {
+function ProfileCard({user}) {
   return (
     <Card className='cardstyle' raised='true'>
-      <Image src={props.currentUser.picture} wrapped ui={false} />
+      <Image src={user.picture} wrapped ui={false} />
       <Card.Content>
-        <Card.Header>{props.currentUser.username}</Card.Header>
+        <Card.Header>{user.username}</Card.Header>
         <Card.Meta>
-          <span className='date'><i class="map pin icon"></i>{props.currentUser.zipCode}</span>
+          <span className='date'><i class="map pin icon"></i>{user.zipCode}</span>
         </Card.Meta>
         <Card.Description>
-          {props.currentUser.email}
+          {user.email}
         </Card.Description>
       </Card.Content>
       <Card.Content extra>

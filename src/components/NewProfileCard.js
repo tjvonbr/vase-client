@@ -1,22 +1,19 @@
 import React from 'react';
 import placeholder from '../assets/profile_placeholder.png'
 
-function NewProfileCard() {
+function NewProfileCard({user}) {
   return (
     <div className='card-main-wrapper'>
       <div className='card-profile-img-wrapper'>
         <img src={placeholder} alt="User's profile picture" />
       </div>
       <div className='card-profile-content-wrapper'>
-        <h1 className='card-profile-content-name'>Trevor Von Bruenchenhein</h1>
-        <div className='card-profile-content-contact-wrapper'>
-          <p>Username: tjvonbr</p>
-          <address>Email: tjvonbr@gmail.com</address>
-        </div>
-        <div className='card-profile-content-bio'>
-          <p>Bio: Former educator looking for work as a software engineer!</p>
-        </div>
-
+        <h1 className='card-profile-content-name'>
+          {user.first_name} {user.last_name}
+        </h1>
+        <p className='profile-card-username'>{`@${user.username}`}</p>
+        <p><strong>Issues Created:</strong> {user.posted_issues}</p>
+        <p><strong>Bio:</strong> {user.bio}</p>
       </div>
     </div>
   )
