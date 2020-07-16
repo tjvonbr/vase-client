@@ -17,22 +17,22 @@ import Upgrade from '../assets/bermuda/bermuda-upgrade.png';
 
 function AddIssue(props) {
   // Variable to reference in PUT request
-  const numPosts = props.location.state.user.posted_issues;
+  const numPosts = props.location;
   const token = window.localStorage.getItem('token');
   const id = window.localStorage.getItem('id');
-  const zipcode = window.localStorage.getItem('zipcode');
 
   const [createIssue, setCreateIssue] = useState({ 
-    zipcode: zipcode,
-    user_id: id, 
+    zipcode: window.localStorage.getItem('zipcode'),
+    user_id: id,
     title: "",
-    description: "" });
+    description: "" 
+  });
   const [isLoading, setIsLoading] = useState(false)
 
   // Functionality for increasing users # of posted issues +1
   function addIssuesPosted() {
     axios
-      .put(`http://localhost:4000/users/${id}`, { posted_issues: numPosts + 1 }, {
+      .put(`http://localhost:4000/users/${id}`, { posted_issues: numPosts + 1 },{
         headers: {
           Authorization: token
         }
@@ -51,8 +51,9 @@ function AddIssue(props) {
       })
       .then(response => {
         addIssuesPosted();
-        props.history.push(`/profile/${id}`)
         setIsLoading(false);
+        props.history.push(`/profile/${id}`)
+
       })
       .catch(error => console.log(error))
   }

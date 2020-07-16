@@ -16,6 +16,7 @@ import Logo from '../assets/bermuda/waiting-4.png';
 
 // Send current user via props below
 function ProfileEdit(props) {
+  console.log("PROPS", props)
   const [editProfile, setEditProfile] = useState({
     first_name: "",
     last_name: "",
@@ -70,7 +71,7 @@ function ProfileEdit(props) {
                 name="first_name"
                 value={editProfile.first_name}
                 onChange={handleInput}
-                placeholder={props.location.state.user.first_name}
+                placeholder="First Name"
               />
               <Form.Input
                 fluid
@@ -78,7 +79,7 @@ function ProfileEdit(props) {
                 iconPosition='left'
                 type='text'
                 name="last_name"
-                placeholder={props.location.state.user.last_name}
+                placeholder="Last Name"
                 value={editProfile.last_name}
                 onChange={handleInput}
               />
@@ -87,9 +88,7 @@ function ProfileEdit(props) {
                 icon='mail'
                 type='text'
                 name="bio"
-                placeholder={props.location.state.user.bio ? 
-                  props.location.state.user.bio : 
-                  'Bio -- please limit to 255 characters!'}
+                placeholder='Bio -- please limit to 255 characters!'
                 value={editProfile.bio}
                 onChange={handleInput}
               />
