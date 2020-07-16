@@ -47,7 +47,6 @@ function Profile(props) {
         }
       })
       .then(response => {
-        console.log("USER DATA", response.data)
         setUser(response.data);
       })
       .catch(error => {
@@ -60,6 +59,17 @@ function Profile(props) {
         <NavBar user={user} />
           <section className='profile-card-wrapper'>
             <NewProfileCard user={user} />
+            <div className='profile-card-btn-wrapper'>
+              <button 
+                className='profile-card-btn--addIssue'
+                onClick={() => props.history.push({
+                  pathname: '/addissue',
+                  data: user
+                })}
+              >
+                Add Issue
+              </button>
+            </div>
           </section>
           <section className='profile-user-issues-wrapper'>
             <IssuesList issues={issues} fetch={fetchIssues} />

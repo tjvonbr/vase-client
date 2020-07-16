@@ -6,6 +6,21 @@
   box-shadow: 3px 3px 5px 2px lightgray;
 }
 
+.profile-card-btn--edit {
+  position: relative;
+  top: 5px;
+  left: 370px;
+  color: $dark-blue;
+
+  -webkit-transition: color .2s;
+
+  &:hover {
+    cursor: pointer;
+    color: $royal-blue;
+    transition: color .2s;
+  }
+}
+
 .card-profile-img-wrapper {
   height: 60%;
   width: 100%;
