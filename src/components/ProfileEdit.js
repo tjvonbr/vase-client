@@ -1,27 +1,19 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { 
-  Button, 
-  Form, 
-  Grid, 
-  Header, 
-  Image, 
-  Message, 
-  Segment, 
-  Dimmer, 
-  Loader } 
-from 'semantic-ui-react';
+import { Dimmer, Loader } from 'semantic-ui-react';
 import NavBar from './NavBar';
-import Logo from '../assets/bermuda/waiting-4.png';
+import EditGrid from './EditGrid';
 
 // Send current user via props below
 function ProfileEdit(props) {
-  console.log("PROPS", props)
-  const [editProfile, setEditProfile] = useState({
-    first_name: "",
-    last_name: "",
-    email: "",
-    bio: ""
+  const { user } = props.location;
+  console.log(user)
+
+  const [editCreds, setEditCreds] = useState({
+    first_name: user.first_name,
+    last_name: user.last_name,
+    email: user.email,
+    bio: user.bio
   });
   const [isLoading, setIsLoading] = useState(false);
   let token = window.localStorage.getItem('token')
@@ -30,7 +22,7 @@ function ProfileEdit(props) {
   // Handle submit
   function handleSubmit() {
     axios
-      .put(`http://localhost:4000/users/${id}`, editProfile, {
+      .put(`http://localhost:4000/users/${id}`, editCreds, {
         headers: {
           Authorization: token
         }
@@ -46,68 +38,71 @@ function ProfileEdit(props) {
 
   // Handle input
   function handleInput(e) {
-    setEditProfile({ ...editProfile, [e.target.name]: e.target.value });
+    setEditCreds({ ...editCreds, [e.target.name]: e.target.value });
   };
 
   return (
-    <>
-      <NavBar />
+    <div className='edit-main-wrapper'>
       <Dimmer active={ isLoading ? true : false }>
-          <Loader>Loading</Loader>
-        </Dimmer>
-      <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
-        <Grid.Column style={{ maxWidth: 450 }}>
-            <Image src={Logo} centered size="medium" />
-          <Header as='h2' textAlign='center'>
-            Edit your profile!
-          </Header>
-          <Form size='large' onSubmit={handleSubmit}>
-            <Segment stacked>
-              <Form.Input
-                fluid
-                icon='address card'
-                iconPosition='left'
-                type='text'
-                name="first_name"
-                value={editProfile.first_name}
-                onChange={handleInput}
-                placeholder="First Name"
-              />
-              <Form.Input
-                fluid
-                icon='address card outline'
-                iconPosition='left'
-                type='text'
-                name="last_name"
-                placeholder="Last Name"
-                value={editProfile.last_name}
-                onChange={handleInput}
-              />
-              {/* Check in to icon */}
-              <Form.TextArea
-                icon='mail'
-                type='text'
-                name="bio"
-                placeholder='Bio -- please limit to 255 characters!'
-                value={editProfile.bio}
-                onChange={handleInput}
-              />
-              <Button type="submit" color='facebook' fluid size='large'>
-                Save Changes
-              </Button>
-            </Segment>
-          </Form>
-          <Message>
-              Cancel?
-              <Button className="register-button"
-              onClick={()=> props.history.goBack()}
-              content='Go Back'
-              positive
-              size='medium' />
-            </Message>
-        </Grid.Column>
-      </Grid>
-    </>
+        <Loader>Loading...</Loader>
+      </Dimmer>
+      
+      <EditGrid />
+      <div className='edit-form-wrapper'>
+        <div className='edit-form-content-wrapper'>
+          <div className='edit-form-content'>
+            <form>
+              <h3 className='edit-form-header'>Edit your profile</h3>
+              <label className='edit-form-label'>
+                First Name
+                <input 
+                  className='edit-form-input'
+                  type='text'
+                  name='first_name'
+                  onChange={handleInput}
+                  value={editCreds.first_name}
+                  placeholder={editCreds.first_name}
+                />  
+              </label>
+              <label className='edit-form-label'>
+                Last Name
+                <input 
+                  className='edit-form-input'
+                  type='text'
+                  name='last_name'
+                  onChange={handleInput}
+                  value={editCreds.last_name}
+                  placeholder={editCreds.last_name}
+                />  
+              </label>
+              <label className='edit-form-label'>
+                Email
+                <input 
+                  className='edit-form-input'
+                  type='email'
+                  name='email'
+                  onChange={handleInput}
+                  value={editCreds.email}
+                  placeholder={editCreds.email}
+                />
+              </label>
+              <label className='edit-form-label'>
+                Bio
+                <textarea
+                  className='edit-form-textarea'
+                  type='text'
+                  name='bio'
+                  onChange={handleInput}
+                  value={editCreds.bio}
+                  placeholder={editCreds.bio}
+                />
+              </label>
+            </form>
+          </div>
+        </div>
+      </div>
+      <NavBar />
+    </div>
   )
 };
 

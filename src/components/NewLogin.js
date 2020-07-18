@@ -1,45 +1,36 @@
-/** @jsx jsx */
-
-import React, { useState } from 'react';
-import { css, jsx } from '@emotion/core';
+import React, { useContext, useState } from 'react';
 import axios from 'axios';
 import { Dimmer, Loader } from 'semantic-ui-react';
 import LoginGrid from './LoginGrid';
+import UserContext from '../context/user/userContext';
 
 function NewLogin(props) {
+  const userContext = useContext(UserContext);
+  console.log(userContext)
+
   const [credentials, setCredentials] = useState({
     username: '',
     password: '',
   });
-  const [isLoading, setIsLoading] = useState(false);
 
   // Handle input
   function handleInput(e) {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
   }
 
-  // Submission handler
-  function loginHandler(e) {
+  // Login user
+  async function onSubmit(e) {
     e.preventDefault();
-    setIsLoading(true);
-      axios
-        .post("http://localhost:4000/auth/login", credentials)
-        .then(response => {
-          const { id, token, zipcode } = response.data;
-          window.localStorage.setItem('id', id);
-          window.localStorage.setItem('token', token);
-          window.localStorage.setItem('zipcode', zipcode)
-          setIsLoading(false);
-          props.history.push(`/profile/${id}`)
-        })
-        .catch(err => {
-          setIsLoading(false)
-        });
+    const response = await axios
+      .post("http://localhost:4000/auth/login", credentials);
+    let { id } = await response.data;
+    userContext.loginUser(response)
+    props.history.push(`/profile/${id}`);
   }
 
   return (
     <div className='login-main-container'>
-      <Dimmer active={ isLoading ? true : false }>
+      <Dimmer active={ userContext.loading ? true : false }>
         <Loader>Loading...</Loader>
       </Dimmer>
       <LoginGrid />
@@ -47,17 +38,19 @@ function NewLogin(props) {
         <h2 className='login-form-wrapper-header'>Vase</h2>
         <div className='login-form-content-wrapper'>
           <div className='login-form-content'>
-            <form onSubmit={loginHandler}>
+            <form onSubmit={onSubmit}>
               <h3 className='login-form-header'>Please sign in to your account</h3>
-              <label htmlFor="username" className='login-form-label'>Username</label>
-              <input
-                id="usernameInput"
-                className='login-form-input'
-                type="text"
-                name="username"
-                onChange={handleInput}
-                value={credentials.username}
-              />
+              <label className='login-form-label'>
+                Username
+                <input
+                  id="usernameInput"
+                  className='login-form-input'
+                  type="text"
+                  name="username"
+                  onChange={handleInput}
+                  value={credentials.username}
+                />
+              </label>
               <label htmlFor="password" className='login-form-label'>Password</label>
               <input
                 id="passwordInput"
