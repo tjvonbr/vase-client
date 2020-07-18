@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { Icon } from 'semantic-ui-react';
 import placeholder from '../assets/profile_placeholder.png'
@@ -18,17 +18,16 @@ function NewProfileCard({ user }) {
           size='large'
         />
       </Link>
-
       <div className='card-profile-img-wrapper'>
         <img src={placeholder} alt="User's profile card" />
       </div>
       <div className='card-profile-content-wrapper'>
         <h1 className='card-profile-content-name'>
-          {user.first_name} {user.last_name}
+          Trevor Von Bruenchenhein
         </h1>
-        <p className='profile-card-username'>{`@${user.username}`}</p>
-        <p><strong>Issues Created:</strong> {user.posted_issues}</p>
-        <p><strong>Bio:</strong> {user.bio}</p>
+        <p className='profile-card-username'>@tjvonbr</p>
+        <p><strong>Issues Created:</strong> 0</p>
+        <p><strong>Bio:</strong> No bio</p>
       </div>
     </div>
   )

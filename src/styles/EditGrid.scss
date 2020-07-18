@@ -1,0 +1,22 @@
+.editGrid-wrapper-style {
+  height: 80vh;
+  width: 100vw;
+  background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(198,177,212,1) 100%);
+  transform: skewY(-10deg);
+  transform-origin: 0;
+  display: grid;
+  grid-template-columns: repeat(10, 200px);
+  grid-template-rows: repeat(10, 1fr);
+}
+
+.editGrid--line-one {
+  border: 2px solid $deep-purple;
+}
+
+.editGrid--line-two {
+  background: $deep-purple;
+}
+
+.editGrid--line-three {
+  background: $royal-blue;
+}

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import Banner from './Banner';
-import DeviceContainer from './DeviceContainer'
+import DeviceContainer from './DeviceContainer';
 
 function Landing(props) {
-	const [previewZipcode, setPreviewZipcode] = useState("");
+  const [previewZipcode, setPreviewZipcode] = useState("");
 
 	function handleChange(event) {
 		setPreviewZipcode(event.target.value)

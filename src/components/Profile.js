@@ -1,25 +1,22 @@
-/** @jsx jsx */
 
-import React, { useState, useEffect } from 'react';
-import { jsx } from '@emotion/core';
-import { useTheme } from 'emotion-theming';
+
+import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 import NavBar from './NavBar';
-import { Button, Card, Icon, Image } from 'semantic-ui-react'
 import IssuesList from './IssuesList';
-import profile_placeholder from '../assets/profile_placeholder.png';
 import NewProfileCard from './NewProfileCard';
+import UserContext from '../context/user/userContext';
 
 function Profile(props) {
-    const [user, setUser] = useState("");
-    const [issues, setIssues] = useState([]);
-    let token = window.localStorage.getItem('token')
-    let id = window.localStorage.getItem('id')
+  const userContext = useContext(UserContext);
+
+  const [issues, setIssues] = useState([]);
+  let token = window.localStorage.getItem('token')
+  let id = window.localStorage.getItem('id')
 
     useEffect(() => {
-      fetchUser();
-      fetchIssues();
+      userContext.fetchUser()
+      // fetchIssues();
     }, [])
 
     function fetchIssues() {
@@ -47,7 +44,7 @@ function Profile(props) {
         }
       })
       .then(response => {
-        setUser(response.data);
+        console.log("DATA FROM FETCHUSER", response.data)
       })
       .catch(error => {
         console.log(error);
@@ -56,16 +53,12 @@ function Profile(props) {
 
     return (
       <div className='profile-main-wrapper'>
-        <NavBar user={user} />
+        <NavBar />
           <section className='profile-card-wrapper'>
-            <NewProfileCard user={user} />
+            <NewProfileCard />
             <div className='profile-card-btn-wrapper'>
               <button 
                 className='profile-card-btn--addIssue'
-                onClick={() => props.history.push({
-                  pathname: '/addissue',
-                  data: user
-                })}
               >
                 Add Issue
               </button>
