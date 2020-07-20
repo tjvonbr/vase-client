@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import UserContext from './userContext';
 import UserReducer from './userReducer';
 import {
+  EDIT_USER,
   GET_ISSUES,
   GET_USER,
   LOGIN_USER,
@@ -21,7 +22,7 @@ function UserState(props) {
 
   const [state, dispatch] = useReducer(UserReducer, initialState);
 
-  // Stores user data in Context
+  // Stores user data in Context  
   async function loginUser(response) {
     setLoading();
 
@@ -31,20 +32,24 @@ function UserState(props) {
     })
   }
 
-  // Fetch user
-  async function fetchUser() {
-    const id = initialState.user.id;
+  // Edit user
+  function editUser(response) {
     setLoading();
-    const response = await axios
-      .get(`http://localhost:4000/users/${id}/issues`)
-    
+    console.log('IN STATE', response.data);
+
     dispatch({
-      type: GET_USER,
+      type: EDIT_USER,
       payload: response.data
     })
   }
 
-  // Get issues
+  // Fetch issues
+  async function fetchIssues(issues) {
+    dispatch({
+      type: GET_ISSUES,
+      payload: issues.data
+    })
+  }
 
   // Set loading
   function setLoading() {
@@ -56,8 +61,9 @@ function UserState(props) {
       user: state.user,
       issues: state.issues,
       loading: state.loading,
-      loginUser,
-      fetchUser
+      editUser,
+      fetchIssues,
+      loginUser
     }}
   >
     {props.children}

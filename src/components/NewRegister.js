@@ -21,12 +21,12 @@ function NewRegister(props) {
   const [isLoading, setIsLoading] = useState(false)
 
   // Handle input
-  function handleInput(e) {
-    setCredentials({ ...credentials, [e.target.name]: e.target.value });
+  function handleInput(event) {
+    setCredentials({ ...credentials, [event.target.name]: event.target.value });
   };
 
-  function submitHandler(e) {
-    e.preventDefault()
+  function registerHandler(event) {
+    event.preventDefault()
     setIsLoading(true)
       axios
         .post('http://localhost:4000/auth/register', credentials)
@@ -53,7 +53,7 @@ function NewRegister(props) {
       </RegisterGrid>
       <div className='register-form-outerWrapper'>
         <div className='register-form-innerWrapper'>
-          <form onSubmit={submitHandler}>
+          <form onSubmit={registerHandler}>
             <h1 className='register-form-header'>
               Create your Vase account
             </h1>
