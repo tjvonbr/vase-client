@@ -1,57 +1,61 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import axios from 'axios';
 import { Dimmer, Loader } from 'semantic-ui-react';
 import NavBar from './NavBar';
 import EditGrid from './EditGrid';
+import UserContext from '../context/user/userContext'
 
 // Send current user via props below
 function ProfileEdit(props) {
-  const { user } = props.location;
-  console.log(user)
+  const userContext = useContext(UserContext);
+  console.log("USER CONTEXT FROM EDIT", userContext);
+  const { 
+    id,
+    token,
+    first_name,
+    last_name,
+    email,
+    bio } = userContext.user;
 
   const [editCreds, setEditCreds] = useState({
-    first_name: user.first_name,
-    last_name: user.last_name,
-    email: user.email,
-    bio: user.bio
+    first_name: first_name,
+    last_name: last_name,
+    email: email,
+    bio: bio
   });
-  const [isLoading, setIsLoading] = useState(false);
-  let token = window.localStorage.getItem('token')
-  let id = window.localStorage.getItem('id')
+
+  console.log('edit creds', editCreds);
 
   // Handle submit
-  function handleSubmit() {
-    axios
+  async function handleSubmit(e) {
+    e.preventDefault();
+    // Wait for changes to be made
+    const changes = await axios
       .put(`http://localhost:4000/users/${id}`, editCreds, {
         headers: {
           Authorization: token
         }
       })
-      .then(response => {
-        console.log(response.data);
-        props.history.push(`/profile/${id}`)
-      })
-      .catch(error => {
-        console.log(error);
-      })
+    userContext.editUser(changes);
+    props.history.push(`/profile/${id}`);
   };
 
   // Handle input
   function handleInput(e) {
     setEditCreds({ ...editCreds, [e.target.name]: e.target.value });
+    console.log(editCreds);
   };
 
   return (
     <div className='edit-main-wrapper'>
-      <Dimmer active={ isLoading ? true : false }>
+      <Dimmer active={ userContext.loading ? true : false }>
         <Loader>Loading...</Loader>
       </Dimmer>
-      
       <EditGrid />
       <div className='edit-form-wrapper'>
         <div className='edit-form-content-wrapper'>
           <div className='edit-form-content'>
-            <form>
+            <form onSubmit={handleSubmit}>
               <h3 className='edit-form-header'>Edit your profile</h3>
               <label className='edit-form-label'>
                 First Name
@@ -97,6 +101,7 @@ function ProfileEdit(props) {
                   placeholder={editCreds.bio}
                 />
               </label>
+              <button>Submit</button>
             </form>
           </div>
         </div>

@@ -4,14 +4,11 @@ import { Icon } from 'semantic-ui-react';
 import placeholder from '../assets/profile_placeholder.png'
 
 function NewProfileCard({ user }) {
-  const id = window.localStorage.getItem('id')
+  const { id } = user;
 
   return (
     <div className='card-main-wrapper'>
-      <Link to={{
-        pathname: `/profile/${id}/edit`,
-        user: user
-      }}>
+      <Link to={`/profile/${id}/edit`}>
         <Icon 
           className='profile-card-btn--edit'
           name='edit' 
@@ -23,11 +20,11 @@ function NewProfileCard({ user }) {
       </div>
       <div className='card-profile-content-wrapper'>
         <h1 className='card-profile-content-name'>
-          Trevor Von Bruenchenhein
+          {user.first_name} {user.last_name}
         </h1>
-        <p className='profile-card-username'>@tjvonbr</p>
-        <p><strong>Issues Created:</strong> 0</p>
-        <p><strong>Bio:</strong> No bio</p>
+        <p className='profile-card-username'>@{user.username}</p>
+        <p><strong>Issues Created: {user.issuesCreated}</strong> 0</p>
+        <p><strong>Bio: </strong>{user.bio}</p>
       </div>
     </div>
   )

@@ -6,31 +6,45 @@ import UserContext from '../context/user/userContext';
 
 function NewLogin(props) {
   const userContext = useContext(UserContext);
-  console.log(userContext)
 
   const [credentials, setCredentials] = useState({
     username: '',
     password: '',
   });
+  const [loading, setLoading] = useState(userContext.loading);
 
   // Handle input
-  function handleInput(e) {
-    setCredentials({ ...credentials, [e.target.name]: e.target.value });
+  function handleInput(event) {
+    setCredentials({ ...credentials, [event.target.name]: event.target.value });
   }
 
   // Login user
-  async function onSubmit(e) {
-    e.preventDefault();
-    const response = await axios
+  async function onSubmit(event) {
+    event.preventDefault();
+    // Wait for request to authenticate user
+    const user = await axios
       .post("http://localhost:4000/auth/login", credentials);
-    let { id } = await response.data;
-    userContext.loginUser(response)
+    // Store user's creds in Context
+    userContext.loginUser(user)
+    // Destructure user's ID so we can redirect upon login
+    let { id, token } = await user.data;
+    // Wait for request to fetch issues
+    const issues = await axios
+      .get(`http://localhost:4000/users/${id}/issues`,
+        {
+          headers: {
+            Authorization: token
+          }
+        })
+    // Store user's issues in Context
+    userContext.fetchIssues(issues)
+    // Direct to user's profile
     props.history.push(`/profile/${id}`);
   }
 
   return (
     <div className='login-main-container'>
-      <Dimmer active={ userContext.loading ? true : false }>
+      <Dimmer active={ loading ? true : false }>
         <Loader>Loading...</Loader>
       </Dimmer>
       <LoginGrid />

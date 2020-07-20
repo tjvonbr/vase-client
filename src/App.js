@@ -13,9 +13,6 @@ import { BrowserRouter } from 'react-router-dom';
 import UserState from './context/user/UserState';
 
 function App() {
-  const [issues, setIssues] = useState([]);
-  const [loading, setLoading] = useState(false);
-
   return (
     <UserState>
       <BrowserRouter>
