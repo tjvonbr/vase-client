@@ -1,51 +1,45 @@
-/** @jsx jsx */
-
-import React, { useState } from "react";
-import { css, jsx } from '@emotion/core';
+import React, { useContext, useState } from 'react';
 import axios from 'axios';
-import { Formik } from 'formik';
 import { Dimmer, Loader } from 'semantic-ui-react';
-import RegisterGrid from './RegisterGrid';
-import RegisterPerks from "./RegisterPerks";
+import RegisterGrid from '../components/RegisterGrid';
+import RegisterPerks from '../components/RegisterPerks';
+import { AuthContext } from '../context/AuthContext';
 
-function NewRegister(props) {
-  // Check to see if there is an easier way to initialize this
+function Register(props) {
+  const authContext = useContext(AuthContext);
   const [credentials, setCredentials] = useState({
-    first_name: "",
-    last_name: "",
-    email: "", 
-    password : "", 
-    username: "", 
-    zipcode: ""
+    first_name: '',
+    last_name: '',
+    email: '', 
+    password : '', 
+    username: '', 
+    zipcode: ''
   });
-  const [isLoading, setIsLoading] = useState(false)
+  const [loading, setLoading] = useState(false)
 
   // Handle input
   function handleInput(event) {
     setCredentials({ ...credentials, [event.target.name]: event.target.value });
   };
 
-  function registerHandler(event) {
-    event.preventDefault()
-    setIsLoading(true)
-      axios
+  async function registerHandler(event) {
+    try {
+      event.preventDefault()
+      setLoading(true)
+      const { data } = await axios
         .post('http://localhost:4000/auth/register', credentials)
-        .then(response => {
-          const { id } = response.data 
-          window.localStorage.setItem('token', response.data.token);
-          window.localStorage.setItem('id', response.data.id);
-          window.localStorage.setItem('zipcode', response.data.zipcode);
-          setIsLoading(false);
-          props.history.push(`/profile/${id}`);
-        })
-        .catch(err => {
-          console.log(err);;
-        });
+      authContext.setAuthState(data)
+      setLoading(false);
+      const { id } = data.userInfo;
+      props.history.push(`profile/${id}`);
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   return (
     <div>
-      <Dimmer active={ isLoading ? true : false }>
+      <Dimmer active={ loading ? true : false }>
         <Loader>Loading...</Loader>
       </Dimmer>
       <RegisterGrid>
@@ -126,25 +120,10 @@ function NewRegister(props) {
             <p className='register-form-link-p'>
               Have an account?<a className='register-form-link-a' href='/login'> Sign In</a>
             </p>
-
         </div>
       </div>
     </div>
   )
 }
 
-// MQ BREAKPOINTS
-const breakpoints = [576, 768, 992, 1200];
-
-const mq = breakpoints.map(
-	bp => `@media (max-width: ${bp}px)`
-);
-
-const signInLink = css`
-  margin: 20px 0;
-  text-align: center;
-  &:hover {
-    color: black;
-  }
-`
-export default NewRegister;
+export default Register;

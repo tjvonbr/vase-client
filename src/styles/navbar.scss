@@ -20,6 +20,7 @@
   font-size: 1.4rem;
   font-weight: 600;
   color: $royal-blue;
+  transition: color .2s;
 
   -webkit-transition: color .2s;
 
@@ -29,11 +30,12 @@
   }
 }
 
-.navbar-signout {
+.navbar-auth {
   border: 2px solid $royal-blue; 
   border-radius: 4px;
   padding: 10px 10px;
   font-weight: 600;
+  transition: color .2s;
 
   -webkit-transition: color .2s;
 

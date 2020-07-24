@@ -16,16 +16,15 @@ import Upgrade from '../assets/bermuda/bermuda-upgrade.png';
 
 
 function AddIssue(props) {
-  // Variable to reference in PUT request
-  const numPosts = props.location;
-  const token = window.localStorage.getItem('token');
-  const id = window.localStorage.getItem('id');
+  // Pulling necessary credentials from local storage
+  const user = JSON.parse(localStorage.getItem('user'));
+  const { id, numPosts, token, zipcode  } = user;
 
   const [createIssue, setCreateIssue] = useState({ 
-    zipcode: window.localStorage.getItem('zipcode'),
+    zipcode: zipcode,
     user_id: id,
-    title: "",
-    description: "" 
+    title: '',
+    description: '' 
   });
   const [isLoading, setIsLoading] = useState(false)
 

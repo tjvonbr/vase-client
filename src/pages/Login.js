@@ -1,17 +1,16 @@
 import React, { useContext, useState } from 'react';
 import axios from 'axios';
 import { Dimmer, Loader } from 'semantic-ui-react';
-import LoginGrid from './LoginGrid';
-import UserContext from '../context/user/userContext';
+import LoginGrid from '../components/LoginGrid';
+import { AuthContext } from '../context/AuthContext';
 
-function NewLogin(props) {
-  const userContext = useContext(UserContext);
-
+function Login(props) {
+  const authContext = useContext(AuthContext);
   const [credentials, setCredentials] = useState({
     username: '',
     password: '',
   });
-  const [loading, setLoading] = useState(userContext.loading);
+  const [loading, setLoading] = useState(false);
 
   // Handle input
   function handleInput(event) {
@@ -19,27 +18,19 @@ function NewLogin(props) {
   }
 
   // Login user
-  async function onSubmit(event) {
-    event.preventDefault();
-    // Wait for request to authenticate user
-    const user = await axios
-      .post("http://localhost:4000/auth/login", credentials);
-    // Store user's creds in Context
-    userContext.loginUser(user)
-    // Destructure user's ID so we can redirect upon login
-    let { id, token } = await user.data;
-    // Wait for request to fetch issues
-    const issues = await axios
-      .get(`http://localhost:4000/users/${id}/issues`,
-        {
-          headers: {
-            Authorization: token
-          }
-        })
-    // Store user's issues in Context
-    userContext.fetchIssues(issues)
-    // Direct to user's profile
-    props.history.push(`/profile/${id}`);
+  async function loginHandler(event) {
+    try {
+      event.preventDefault();
+      setLoading(true);
+      const { data } = await axios
+        .post('http://localhost:4000/auth/login', credentials)
+      authContext.setAuthState(data);
+      setLoading(false);
+      const { id } = data.userInfo;
+      props.history.push(`profile/${id}`);
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   return (
@@ -52,8 +43,10 @@ function NewLogin(props) {
         <h2 className='login-form-wrapper-header'>Vase</h2>
         <div className='login-form-content-wrapper'>
           <div className='login-form-content'>
-            <form onSubmit={onSubmit}>
-              <h3 className='login-form-header'>Please sign in to your account</h3>
+            <form onSubmit={loginHandler}>
+              <h3 className='login-form-header'>
+                Please sign in to your account
+              </h3>
               <label className='login-form-label'>
                 Username
                 <input
@@ -89,4 +82,4 @@ function NewLogin(props) {
   )
 }
 
-export default NewLogin;
+export default Login;
