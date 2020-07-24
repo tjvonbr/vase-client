@@ -1,33 +1,62 @@
-import React, { useState } from 'react';
-import { Route } from 'react-router-dom';
+import React, { useContext } from 'react';
 import AddIssue from './components/AddIssue';
+import { AuthContext } from './context/AuthContext';
+import { AuthProvider } from './context/AuthContext';
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import Community from './components/Community';
-import Landing from './components/Landing';
-import Logout from './components/Logout';
-import NewLogin from './components/NewLogin';
-import NewRegister from './components/NewRegister';
-import Profile from './components/Profile';
-import ProfileEdit from './components/ProfileEdit';
+import { FetchProvider } from './context/FetchContext';
+import Landing from './pages/Landing';
+import Logout from './pages/Logout';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import Profile from './pages/Profile';
+import EditProfile from './pages/EditProfile';
 import '../src/styles/index.scss';
-import { BrowserRouter } from 'react-router-dom';
-import UserState from './context/user/UserState';
 
-function App() {
+function AuthenticatedRoute({ children, ...rest }) {
+  const authContext = useContext(AuthContext);
+
   return (
-    <UserState>
-      <BrowserRouter>
-        <div className="App">
-          <Route exact path="/" component={Landing} />
-          <Route exact path="/profile/:id" component={Profile} />
-          <Route path="/profile/:id/edit" component={ProfileEdit} />
-          <Route path="/login" component={NewLogin} />
-          <Route path="/register" component={NewRegister} />
-          <Route path="/addissue" component={AddIssue} />
-          <Route path="/community/:zipcode" component={Community} />
-          <Route path="/logout" component={Logout} />
-        </div>
-      </BrowserRouter>
-    </UserState>
+    <Route {...rest} render={() => 
+      authContext.isAuthenticated() ? (
+        children
+      ) : (
+        <Redirect to='/' />
+      )
+    } 
+    />
+  )
+}
+function App() {  
+  return (
+    <Router>
+      <AuthProvider>
+        <FetchProvider>
+          <div className="App">
+            {/* Public Routes */}
+            <Route exact path="/" component={Landing} />
+            <Route path="/login" component={Login} />
+            <Route path="/register" component={Register} />
+            {/* Private Routes */}
+            <AuthenticatedRoute exact path='/profile/:id'>
+              <Profile />
+            </AuthenticatedRoute>
+            <AuthenticatedRoute path='/profile/:id/edit'>
+              <EditProfile />
+            </AuthenticatedRoute>
+            <AuthenticatedRoute path='/addissue'>
+              <AddIssue />
+            </AuthenticatedRoute>
+            <AuthenticatedRoute path='/community/:zipcode'>
+              <Community />
+            </AuthenticatedRoute>
+            <AuthenticatedRoute path='/logout'>
+              <Logout />
+            </AuthenticatedRoute>
+          </div>
+        </FetchProvider>
+      </AuthProvider>
+    </Router>
   );
 }
 

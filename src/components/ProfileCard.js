@@ -1,28 +1,35 @@
-import React from 'react'
-import { Card, Icon, Image } from 'semantic-ui-react';
-import '../styles/ProfileStyles.css';
+import React, { useContext } from 'react';
+import { AuthContext } from '../context/AuthContext';
+import { Link } from 'react-router-dom';
+import { Icon } from 'semantic-ui-react';
+import placeholder from '../assets/profile_placeholder.png'
 
-function ProfileCard({user}) {
+function ProfileCard() {
+  const auth = useContext(AuthContext);
+  const { authState } = auth;
+
   return (
-    <Card className='cardstyle' raised='true'>
-      <Image src={user.picture} wrapped ui={false} />
-      <Card.Content>
-        <Card.Header>{user.username}</Card.Header>
-        <Card.Meta>
-          <span className='date'><i class="map pin icon"></i>{user.zipCode}</span>
-        </Card.Meta>
-        <Card.Description>
-          {user.email}
-        </Card.Description>
-      </Card.Content>
-      <Card.Content extra>
-        <a>
-          <Icon name='user' />
-          <i class="pencil alternate icon" onClick={props.dog}></i>
-        </a>
-      </Card.Content>
-    </Card> 
+    <div className='card-main-wrapper'>
+      <Link to={`/profile/26/edit`}>
+        <Icon 
+          className='profile-card-btn--edit'
+          name='edit' 
+          size='large'
+        />
+      </Link>
+      <div className='card-profile-img-wrapper'>
+        <img src={placeholder} alt="User's profile card" />
+      </div>
+      <div className='card-profile-content-wrapper'>
+        <h1 className='card-profile-content-name'>
+          {authState.userInfo.first_name} {authState.userInfo.last_name}
+        </h1>
+        <p className='profile-card-username'>@{authState.userInfo.username}</p>
+        <p><strong>Issues Created: </strong>{authState.userInfo.posted_issues}</p>
+        <p><strong>Bio: </strong>{authState.userInfo.bio}</p>
+      </div>
+    </div>
   )
-};
+}
 
 export default ProfileCard;

@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
-import Banner from './Banner';
-import DeviceContainer from './DeviceContainer';
+import React, { useContext, useState } from 'react';
+import { AuthContext } from '../context/AuthContext';
+import Banner from '../components/Banner';
+import DeviceContainer from '../components/DeviceContainer';
 
 function Landing(props) {
-  const [previewZipcode, setPreviewZipcode] = useState("");
+  const authContext = useContext(AuthContext);
+  const { id } = authContext.authState.userInfo;
+  const [previewZipcode, setPreviewZipcode] = useState('');
 
 	function handleChange(event) {
 		setPreviewZipcode(event.target.value)
@@ -30,7 +33,11 @@ function Landing(props) {
             </p>
             <button
               className="btn-cta"
-              onClick={() => props.history.push('/register')}
+              onClick={
+                authContext.isAuthenticated() ?
+                () => props.history.push(`/profile/${id}`) :
+                () => props.history.push('/register')
+              }
             >
               Get Started
             </button>

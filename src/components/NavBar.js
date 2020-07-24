@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { AuthContext } from '../context/AuthContext';
 
 function NavBar() {
-  const id = window.localStorage.getItem('id');
-  const zipcode = window.localStorage.getItem('zipcode');
+  const authContext = useContext(AuthContext);
+  const { id, zipcode } = authContext.authState.userInfo;
 
   return (
     <div className='navbar-wrapper'>
@@ -20,8 +21,8 @@ function NavBar() {
         </a>
       </nav>
       <nav>
-        <a className='navbar-signout' href='/logout'>
-          Sign out
+        <a className='navbar-auth' href='/logout'>
+          Sign Out
         </a>
       </nav>
     </div>

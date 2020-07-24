@@ -1,30 +1,21 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import { Dimmer, Loader } from 'semantic-ui-react';
-import NavBar from './NavBar';
-import EditGrid from './EditGrid';
-import UserContext from '../context/user/userContext'
+import NavBar from '../components/NavBar';
+import EditGrid from '../components/EditGrid';
 
 // Send current user via props below
-function ProfileEdit(props) {
-  const userContext = useContext(UserContext);
-  console.log("USER CONTEXT FROM EDIT", userContext);
-  const { 
-    id,
-    token,
-    first_name,
-    last_name,
-    email,
-    bio } = userContext.user;
+function EditProfile(props) {
+  const id = 26;
+  const token = 'token';
 
   const [editCreds, setEditCreds] = useState({
-    first_name: first_name,
-    last_name: last_name,
-    email: email,
-    bio: bio
+    first_name: '',
+    last_name: '',
+    email: '',
+    bio: ''
   });
-
-  console.log('edit creds', editCreds);
+  const [loading, setLoading] = useState(false);
 
   // Handle submit
   async function handleSubmit(e) {
@@ -36,19 +27,17 @@ function ProfileEdit(props) {
           Authorization: token
         }
       })
-    userContext.editUser(changes);
     props.history.push(`/profile/${id}`);
   };
 
   // Handle input
   function handleInput(e) {
     setEditCreds({ ...editCreds, [e.target.name]: e.target.value });
-    console.log(editCreds);
   };
 
   return (
     <div className='edit-main-wrapper'>
-      <Dimmer active={ userContext.loading ? true : false }>
+      <Dimmer active={ loading ? true : false }>
         <Loader>Loading...</Loader>
       </Dimmer>
       <EditGrid />
@@ -111,4 +100,4 @@ function ProfileEdit(props) {
   )
 };
 
-export default ProfileEdit;
+export default EditProfile;

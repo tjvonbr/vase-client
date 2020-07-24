@@ -1,38 +1,28 @@
 /** @jsx jsx */
 
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
+import { AuthContext } from '../context/AuthContext';
 import { jsx } from '@emotion/core';
-import { useTheme } from 'emotion-theming';
 import { 
   Button, 
   Grid, 
   Header, 
   Image }
 from 'semantic-ui-react'
-import NavBar from './NavBar';
+import NavBar from '../components/NavBar';
 import comeback from '../assets/bermuda/bermuda-come-back-later.png';
 
-function Logout(props) {
-  const [loggedIn, setLoggedIn] = useState(true)
-
-
-  function authUser() {
-    const liveToken = window.localStorage.getItem('token');
-    if (!liveToken) {
-      setLoggedIn(false)
-    }
-  }
-
-  function logoutUser() {
-    window.localStorage.clear();
-    setLoggedIn(false);
-    props.history.push('/login')
-  }
+function Logout() {
+  const auth = useContext(AuthContext);
 
   return (
     <div>
       <NavBar />
-      <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
+      <Grid 
+        textAlign='center' 
+        style={{ height: '100vh' }} 
+        verticalAlign='middle'
+      >
         <Grid.Column style={{ maxWidth: 450 }}>
           <Image src={comeback} centered size='medium' />
           <Header as='h2' color='teal' textAlign='center'>
@@ -41,7 +31,7 @@ function Logout(props) {
           <Button 
             color='facebook' 
             size='huge'
-            onClick={logoutUser}  
+            onClick={auth.logout}  
           >
             Yes, log me out!
           </Button>
