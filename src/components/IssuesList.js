@@ -1,23 +1,22 @@
 /** @jsx jsx */
 
-import React from 'react';
+import React, { useContext } from 'react';
+import { IssueContext } from '../context/IssueContext';
 import { jsx } from '@emotion/core';
 import ProfIssueCard from './ProfIssueCard';
 
-function IssuesList({ issues, fetch }) {
-  // Local storage management
-  let token = window.localStorage.getItem('token')
-  let id = window.localStorage.getItem('id')
+function IssuesList({ fetch }) {
+  const issueContext = useContext(IssueContext);
+  const { issueState } = issueContext;
 
-  if (issues.length < 1) {
+  if (issueState.length < 1) {
     // If user hasn't posted yet, render this:
     return (
       <div css={{ marginTop: '20px' }}>
         <h3>You haven't posted any community concerns yet!</h3>
       </div>  
     )
-  } else {
-    return (
+  } return (
       <div
         css={{
           margin: '0 auto',
@@ -31,7 +30,7 @@ function IssuesList({ issues, fetch }) {
           justifyItems: 'center',
         }}
       >
-        {issues.map(issue => (
+        {issueState.map(issue => (
           <ProfIssueCard 
             issue={issue}
             fetch={fetch} 
@@ -40,8 +39,5 @@ function IssuesList({ issues, fetch }) {
       </div>
     )
   }
-  
-
-};
 
 export default IssuesList;

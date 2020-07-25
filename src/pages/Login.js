@@ -1,11 +1,14 @@
 import React, { useContext, useState } from 'react';
 import axios from 'axios';
 import { Dimmer, Loader } from 'semantic-ui-react';
+import { IssueContext} from '../context/IssueContext';
 import LoginGrid from '../components/LoginGrid';
 import { AuthContext } from '../context/AuthContext';
 
 function Login(props) {
   const authContext = useContext(AuthContext);
+  const issueContext = useContext(IssueContext);
+
   const [credentials, setCredentials] = useState({
     username: '',
     password: '',
@@ -22,11 +25,23 @@ function Login(props) {
     try {
       event.preventDefault();
       setLoading(true);
+      // Handles the login and storage of auth credentials
       const { data } = await axios
         .post('http://localhost:4000/auth/login', credentials)
       authContext.setAuthState(data);
-      setLoading(false);
       const { id } = data.userInfo;
+      const { token } = data;
+      // // Handles the fetching of the user's issues
+      const response = await axios
+      .get(`http://localhost:4000/users/${id}/issues`, 
+        {
+          headers: {
+            Authorization: token
+          }
+        }
+      )
+      issueContext.setIssueState(response.data);
+      setLoading(false);
       props.history.push(`profile/${id}`);
     } catch (error) {
       console.log(error)
