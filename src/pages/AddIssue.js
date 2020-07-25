@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { AuthContext } from '../context/AuthContext';
 import axios from 'axios';
 import { 
   Button, 
@@ -11,14 +12,21 @@ import {
   Dimmer, 
   Loader } 
 from 'semantic-ui-react';
-import NavBar from './NavBar';
+import { IssueContext } from '../context/IssueContext';
+import NavBar from '../components/NavBar';
 import Upgrade from '../assets/bermuda/bermuda-upgrade.png';
+import { useHistory } from 'react-router-dom';
 
 
 function AddIssue(props) {
-  // Pulling necessary credentials from local storage
-  const user = JSON.parse(localStorage.getItem('user'));
-  const { id, numPosts, token, zipcode  } = user;
+  const authContext = useContext(AuthContext);
+  const issueContext = useContext(IssueContext);
+
+  const history = useHistory();
+
+  const { authState } = authContext;
+  const { token } = authState;
+  const { id, posted_issues, zipcode} = authState.userInfo;
 
   const [createIssue, setCreateIssue] = useState({ 
     zipcode: zipcode,
@@ -31,7 +39,7 @@ function AddIssue(props) {
   // Functionality for increasing users # of posted issues +1
   function addIssuesPosted() {
     axios
-      .put(`http://localhost:4000/users/${id}`, { posted_issues: numPosts + 1 },{
+      .put(`http://localhost:4000/users/${id}`, { posted_issues: posted_issues + 1 },{
         headers: {
           Authorization: token
         }
@@ -41,20 +49,21 @@ function AddIssue(props) {
   };
 
   // Functionality for posting an issue
-  function addIssue(data) {
-    axios
-      .post('http://localhost:4000/issues', data, {
+  async function addIssue(issueData) {
+    try {
+      const { data } = await axios.post('http://localhost:4000/issues',
+        issueData, {
         headers: {
           Authorization: token
         }
       })
-      .then(response => {
-        addIssuesPosted();
-        setIsLoading(false);
-        props.history.push(`/profile/${id}`)
-
-      })
-      .catch(error => console.log(error))
+      issueContext.setIssueState(data)
+      console.log(data)
+      setIsLoading(false);
+      history.push(`/profile/${id}`)
+      } catch (error) {
+        console.log(error)
+      }
   }
 
   function handleChange(event) {

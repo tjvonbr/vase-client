@@ -1,4 +1,5 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useContext, useState } from 'react';
+import { IssueContext } from './IssueContext';
 import { useHistory } from 'react-router-dom';
 
 const AuthContext = createContext();
@@ -6,6 +7,7 @@ const { Provider } = AuthContext;
 
 function AuthProvider({ children }) {
   const history = useHistory();
+  const issueContext = useContext(IssueContext);
 
   const token = localStorage.getItem('token');
   const userInfo = localStorage.getItem('userInfo');
@@ -39,11 +41,13 @@ function AuthProvider({ children }) {
     localStorage.removeItem('token');
     localStorage.removeItem('userInfo');
     localStorage.removeItem('expiresAt');
+    localStorage.removeItem('issues')
     setAuthState({
       token: null,
       expiresAt: null,
       userInfo: {}
     });
+    issueContext.setIssueState([])
     history.push('/login');
   }
 
