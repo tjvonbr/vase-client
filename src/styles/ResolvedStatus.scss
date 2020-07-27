@@ -1,0 +1,18 @@
+.resolved-status-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    height: 100%;
+    width: 50%;
+}
+
+.resolved-status--resolved {
+    position: absolute;
+    right: 0;
+    font-weight: 600;
+    color: green;
+}
+
+.resolved-status--rejected {
+    font-weight: 600;
+    color: red;
+}

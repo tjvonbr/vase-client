@@ -1,16 +1,19 @@
 .profile-main-wrapper {
-  height: 100vh;
   width: 100vw;
   background: $profile-gray;
   display: flex;
   flex-direction: column;
 }
 
+.profile-background-div {
+  background: #7a73ff;
+}
+
 .profile-card-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 100px 0;
+  padding: 100px 0 50px 0;
 }
 
 .profile-btn-wrapper {

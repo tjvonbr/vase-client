@@ -6,18 +6,20 @@ const { Provider } = IssueContext;
 function IssueProvider({ children }) {
   const issues = localStorage.getItem('issues');
 
-  const [issueState, setIssueState] = useState(issues);
+  const [issueState, setIssueState] = useState(
+    issues ? [JSON.parse(issues)] : []);
+
+  localStorage.setItem('issues', JSON.stringify(issueState));
 
   function setIssueInfo({ issues }) {
-    localStorage.setItem('issues', JSON.stringify(issues));
-    setIssueState(issues);
+    setIssueState(...issueState, issues);
   }
 
   return (
     <Provider
       value={{
         issueState,
-        setIssueState: issueInfo => setIssueInfo(issueInfo)
+        setIssueInfo
       }}
     >
       {children}

@@ -2,6 +2,8 @@ import React, { createContext, useContext, useState } from 'react';
 import { IssueContext } from './IssueContext';
 import { useHistory } from 'react-router-dom';
 
+// setAuthState: authInfo => setAuthInfo(authInfo),
+
 const AuthContext = createContext();
 const { Provider } = AuthContext;
 
@@ -55,7 +57,7 @@ function AuthProvider({ children }) {
     <Provider
       value={{
         authState,
-        setAuthState: authInfo => setAuthInfo(authInfo),
+        setAuthInfo,
         isAuthenticated,
         logout
       }}

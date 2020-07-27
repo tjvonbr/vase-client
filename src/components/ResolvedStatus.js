@@ -1,32 +1,18 @@
-/** @jsx jsx */
-
 import React from 'react';
-import { jsx } from '@emotion/core';
 import { Icon } from 'semantic-ui-react';
 
 function ResolvedStatus({ issue }) {
   return (
-    <div
-      css={{
-        display: 'flex',
-        justifyContent: 'center',
-        height: '29px',
-        width: '100px',
-        borderRadius: '3px',
-        padding: '5px'
-      }}
-    >
+    <div className='resolved-status-wrapper'>
       <Icon 
         name={issue.resolved ? 'check' : 'x'} 
         color={issue.resolved ? 'green': 'red'}
       />
-      <p
-        css={{
-          fontWeight: '600',
-          color: issue.resolved ? 'green' : 'red'
-        }}
+      <p 
+        className=
+        {`resolved-status${issue.resolved ? "--resolved" : "--rejected"}`}
       >
-        { issue.resolved ? 'Resolved' : 'Unresolved' }
+        {issue.resolved ? 'Resolved' : 'Unresolved'}
       </p>
     </div>
   )
