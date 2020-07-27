@@ -1,15 +1,40 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import axios from 'axios';
+import { AuthContext } from '../context/AuthContext';
 import NavBar from '../components/NavBar';
 import IssuesList from '../components/IssuesList';
 import ProfileCard from '../components/ProfileCard';
 import { useHistory } from 'react-router-dom';
 
-function Profile(props) {
+function Profile() {
   const history = useHistory();
+  const auth = useContext(AuthContext);
+  const { token } = auth.authState;
+  const { id } = auth.authState.userInfo;
+
+  const [issues, setIssues] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:4000/users/${id}/issues`,
+        {
+          headers: {
+            Authorization: token
+          }
+        }
+      )
+      .then(response => {
+        setIssues(response.data.issues);
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  }, [])
 
   return (
     <div className='profile-main-wrapper'>
       <NavBar />
+      <div className='profile-background-div'/>
       <section className='profile-card-wrapper'>
           <ProfileCard />
           <div className='profile-card-btn-wrapper'>
@@ -22,7 +47,7 @@ function Profile(props) {
           </div>
         </section>
         <section className='profile-user-issues-wrapper'>
-          <IssuesList />
+          <IssuesList issues={issues} />
         </section>
     </div>
   )

@@ -12,15 +12,13 @@ import {
   Dimmer, 
   Loader } 
 from 'semantic-ui-react';
-import { IssueContext } from '../context/IssueContext';
 import NavBar from '../components/NavBar';
 import Upgrade from '../assets/bermuda/bermuda-upgrade.png';
 import { useHistory } from 'react-router-dom';
 
 
-function AddIssue(props) {
+function AddIssue() {
   const authContext = useContext(AuthContext);
-  const issueContext = useContext(IssueContext);
 
   const history = useHistory();
 
@@ -28,13 +26,13 @@ function AddIssue(props) {
   const { token } = authState;
   const { id, posted_issues, zipcode} = authState.userInfo;
 
-  const [createIssue, setCreateIssue] = useState({ 
+  const [postInfo, setPostInfo] = useState({ 
     zipcode: zipcode,
     user_id: id,
     title: '',
     description: '' 
   });
-  const [isLoading, setIsLoading] = useState(false)
+  const [loading, setLoading] = useState(false)
 
   // Functionality for increasing users # of posted issues +1
   function addIssuesPosted() {
@@ -48,40 +46,31 @@ function AddIssue(props) {
       .catch(error => console.log(error))
   };
 
-  // Functionality for posting an issue
-  async function addIssue(issueData) {
+  function handleChange(event) {
+    setPostInfo({...postInfo, [event.target.name]: event.target.value});
+  };
+
+  function handleSubmit(event) {
     try {
-      const { data } = await axios.post('http://localhost:4000/issues',
-        issueData, {
+      event.preventDefault();
+      setLoading(true);
+      axios.post('http://localhost:4000/issues', postInfo, {
         headers: {
           Authorization: token
         }
       })
-      issueContext.setIssueState(data)
-      console.log(data)
-      setIsLoading(false);
-      history.push(`/profile/${id}`)
-      } catch (error) {
-        console.log(error)
-      }
-  }
-
-  function handleChange(event) {
-    const updatedIssues = { ...createIssue, [event.target.name]: event.target.value };
-    setCreateIssue(updatedIssues);
-  };
-
-  function handleSubmit(event) {
-    setIsLoading(true);
-    event.preventDefault();
-    setCreateIssue({ title: "", description: "", zipcode: localStorage.getItem("zipcode"), user_id: localStorage.getItem("id")});
-    addIssue(createIssue);
+      addIssuesPosted();
+      setLoading(false);
+      history.push(`/profile/${id}`);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
     <>
     <NavBar />
-    <Dimmer active={ isLoading ? true : false }>
+    <Dimmer active={ loading ? true : false }>
         <Loader>Loading</Loader>
       </Dimmer>
     <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
@@ -98,7 +87,7 @@ function AddIssue(props) {
             iconPosition='left'
             type='text'
             name="title"
-            value={createIssue.title}
+            value={postInfo.title}
             onChange={handleChange}
 
             placeholder='Issue Title'
@@ -111,7 +100,7 @@ function AddIssue(props) {
               type='text'
               name="description"
               placeholder='Issue Description'
-              value={createIssue.description}
+              value={postInfo.description}
               onChange={handleChange}
             />
 
@@ -123,7 +112,7 @@ function AddIssue(props) {
         <Message>
             Cancel?
             <Button className="register-button"
-            onClick={()=> props.history.goBack()}
+            onClick={() => history.push(`/profile/${id}`)}
             content='Go Back'
             positive
             size='medium' />
