@@ -34,7 +34,6 @@ function Profile() {
   return (
     <div className='profile-main-wrapper'>
       <NavBar />
-      <div className='profile-background-div'/>
       <section className='profile-card-wrapper'>
           <ProfileCard />
           <div className='profile-card-btn-wrapper'>
