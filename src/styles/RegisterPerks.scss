@@ -1,0 +1,44 @@
+// MQ Breakpoints
+$break-desktop: 1200px;
+$break-tablet: 992px;
+$break-phone-landscape: 768px;
+$break-phone: 576px;
+
+.perks-container {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  top: 100px;
+  right: 10%;
+  width: 300px;
+  z-index: 1;
+  @media screen and (max-width: $break-tablet) {
+    right: 10%;
+  }
+}
+
+.containerh2 {
+  width: fit-content;
+  margin: 0 0 30px 30px;
+  font-size: 32px;
+  font-weight: 600;
+  letter-spacing: -2px;
+  color: $royal-blue;
+  text-transform: lowercase;
+  &:hover {
+    color: $dark-blue;
+  }
+}
+
+.perk-header {
+  margin-left: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  color: black;
+}
+
+.perk-paragraph {
+  margin-left: 30px;
+  line-height: 20px;
+}

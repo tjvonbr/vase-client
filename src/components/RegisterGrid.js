@@ -7,10 +7,11 @@ function RegisterGrid(props) {
   return (
     <div
       css={css`
-        height: 100vh;
+        height: 100%;
         width: 50%;
         background: #fff;
         position: absolute;
+        overflow: hidden;
         ${mq[1]} {
           display: none;
         }
