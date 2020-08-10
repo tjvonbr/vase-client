@@ -42,7 +42,12 @@ function Login(props) {
       </Dimmer>
       <LoginGrid />
       <div className='login-form-wrapper'>
-        <h2 className='login-form-wrapper-header'>Vase</h2>
+        <a 
+          href="/"
+          className='login-form-wrapper-header'
+        >
+          Vase
+        </a>
         <div className='login-form-content-wrapper'>
           <div className='login-form-content'>
             <form onSubmit={loginHandler}>

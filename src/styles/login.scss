@@ -10,7 +10,7 @@ $break-phone: 576px;
 }
 
 .login-form-wrapper {
-  height: 475px;
+  height: 500px;
   width: 600px;
   position: absolute;
   display: flex;
@@ -30,13 +30,16 @@ $break-phone: 576px;
 }
 
 .login-form-wrapper-header {
-  padding-bottom: 10px;
+  margin: 0 0 10px 0;
+  padding: 0;
   font-size: 32px;
   font-weight: 600;
   letter-spacing: -2px;
   color: #2892f0;
   text-transform: lowercase;
-  z-index: 2;
+  &:hover {
+    color: $royal-blue
+  }
 }
 
 .login-form-content-wrapper {
