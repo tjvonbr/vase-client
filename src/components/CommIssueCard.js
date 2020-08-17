@@ -1,12 +1,17 @@
 /** @jsx jsx */
 
-import { useState, useEffect } from 'react';
+import { useContext, useState, useEffect } from 'react';
+import { AuthContext } from '../context/AuthContext';
 import { jsx } from '@emotion/core';
 import axios from 'axios';
 import { Button, Card, Icon, Label } from 'semantic-ui-react';
 import ResolvedStatus from './ResolvedStatus';
 
 function CommIssueCard({ issue, upvotes }) {
+  const auth = useContext(AuthContext);
+  const { token } = auth.authState;
+  const { id } = auth.authState.userInfo;
+
   const [currentIssue, setCurrentIssue] =  useState(issue);
   const [alreadyVoted, setAlreadyVoted] = useState(false)
 
@@ -16,32 +21,25 @@ function CommIssueCard({ issue, upvotes }) {
         setAlreadyVoted(true)
       }
     })
-  }, [upvotes])
-
-  // Local storage management
-  const token = window.localStorage.getItem('token');
-  const user_id = JSON.parse(window.localStorage.getItem('id'));
-
-  // Issue ID to be used as dynamic param
-  const id = issue.id;
+  })
 
   // Upvote data to be passed with the addUpvote request
   const upvoteData = {
-    user_id: JSON.parse(window.localStorage.getItem('id')),
-    issue_id: id
+    user_id: id,
+    issue_id: issue.id
   }
 
   // Once chevron is clicked, the # of upvotes increases by 1
   function increaseUpvoteBy1() {
     // Request to increment upvote by +1
     axios
-      .put(`http://localhost:4000/issues/${id}`, {upvotes: currentIssue.upvotes + 1}, {
+      .put(`http://localhost:4000/issues/${issue.id}`, {upvotes: issue.upvotes + 1}, {
         headers: {
           Authorization: token
         }
       })
       .then(response => {
-        // When I log the response, the first click doesn't increase upvote, but the second click does
+        // Overwrites the issue data coming in from props
         setCurrentIssue(response.data)
       })
       .catch(error => {
@@ -53,9 +51,7 @@ function CommIssueCard({ issue, upvotes }) {
   function addUpvote() {
     axios
       .post(`http://localhost:4000/issues/${id}/upvotes`, upvoteData)
-      .then(() => {
-        increaseUpvoteBy1()
-      })
+      .then(() => increaseUpvoteBy1())
       .catch(error => {
         console.log(error)
       })
@@ -68,10 +64,10 @@ function CommIssueCard({ issue, upvotes }) {
         width: '300px',
       }}>
         <Card.Content>
-          <Card.Header>{ issue.title }</Card.Header>
-          <Card.Meta>{ issue.zipcode }</Card.Meta>
+          <Card.Header>{ currentIssue.title }</Card.Header>
+          <Card.Meta>{ currentIssue.zipcode }</Card.Meta>
           <Card.Description>
-            { issue.description }
+            { currentIssue.description }
           </Card.Description>
         </Card.Content>
         <div
@@ -84,11 +80,12 @@ function CommIssueCard({ issue, upvotes }) {
         >
           <Button 
             as='div' 
-            labelPosition='right' 
-            disabled={issue.user_id === user_id ? true : false || alreadyVoted ? true : false}>
+            labelPosition='right'
+            disabled={currentIssue.user_id === id ? true : false || alreadyVoted ? true : false}
+          >
             <Button 
             color='facebook'
-            size='large' 
+            size='large'
             onClick={addUpvote}>
               <Icon name='thumbs up outline' />
               Upvote
@@ -97,7 +94,7 @@ function CommIssueCard({ issue, upvotes }) {
               {currentIssue.upvotes}
             </Label>
           </Button>
-          <ResolvedStatus issue={currentIssue} />
+          <ResolvedStatus issue={issue} />
         </div>
       </Card>
     </div>

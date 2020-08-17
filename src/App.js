@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import AddIssue from './pages/AddIssue';
 import { AuthContext, AuthProvider } from './context/AuthContext';
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
-import Community from './components/Community';
+import Community from './pages/Community';
 import { FetchProvider } from './context/FetchContext';
 import { IssueProvider } from './context/IssueContext';
 import Landing from './pages/Landing';
