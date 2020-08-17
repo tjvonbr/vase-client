@@ -40,16 +40,12 @@ function AuthProvider({ children }) {
   }
 
   function logout() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('userInfo');
-    localStorage.removeItem('expiresAt');
-    localStorage.removeItem('issues')
+    window.localStorage.clear()
     setAuthState({
       token: null,
       expiresAt: null,
       userInfo: {}
     });
-    issueContext.setIssueState([])
     history.push('/login');
   }
 
