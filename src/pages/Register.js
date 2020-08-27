@@ -8,8 +8,8 @@ import { AuthContext } from '../context/AuthContext';
 function Register(props) {
   const authContext = useContext(AuthContext);
   const [credentials, setCredentials] = useState({
-    first_name: '',
-    last_name: '',
+    firstName: '',
+    lastName: '',
     email: '', 
     password : '', 
     username: '', 
@@ -28,7 +28,7 @@ function Register(props) {
       setLoading(true)
       const { data } = await axios
         .post('http://localhost:4000/auth/register', credentials)
-      authContext.setAuthState(data)
+      authContext.setAuthInfo(data)
       setLoading(false);
       const { id } = data.userInfo;
       props.history.push(`profile/${id}`);
@@ -57,9 +57,9 @@ function Register(props) {
               <input
                 className='register-form-input'
                 type="text"
-                name="first_name"
+                name="firstName"
                 onChange={handleInput}
-                value={credentials.first_name}
+                value={credentials.firstName}
               />
             </label>
             {/* Last Name */}
@@ -67,9 +67,9 @@ function Register(props) {
               <input
                 className='register-form-input'
                 type="text"
-                name="last_name"
+                name="lastName"
                 onChange={handleInput}
-                value={credentials.last_name}
+                value={credentials.lastName}
               />
             </label>
             {/* Email */}

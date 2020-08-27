@@ -22,10 +22,10 @@ function ProfileCard() {
       </div>
       <div className='card-profile-content-wrapper'>
         <h1 className='card-profile-content-name'>
-          {authState.userInfo.first_name} {authState.userInfo.last_name}
+          {authState.userInfo.firstName} {authState.userInfo.lastName}
         </h1>
         <p className='profile-card-username'>@{authState.userInfo.username}</p>
-        <p><strong>Issues Created: </strong>{authState.userInfo.posted_issues}</p>
+        <p><strong>Issues Created: </strong>{authState.userInfo.postedIssues}</p>
         <p><strong>Bio: </strong>{authState.userInfo.bio}</p>
       </div>
     </div>

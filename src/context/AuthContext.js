@@ -9,7 +9,6 @@ const { Provider } = AuthContext;
 
 function AuthProvider({ children }) {
   const history = useHistory();
-  const issueContext = useContext(IssueContext);
 
   const token = localStorage.getItem('token');
   const userInfo = localStorage.getItem('userInfo');
