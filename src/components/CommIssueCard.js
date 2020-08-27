@@ -30,7 +30,7 @@ function CommIssueCard({ issue, upvotes }) {
   }
 
   // Once chevron is clicked, the # of upvotes increases by 1
-  function increaseUpvoteBy1() {
+  function incrementUpvote() {
     // Request to increment upvote by +1
     axios
       .put(`http://localhost:4000/issues/${issue.id}`, {upvotes: issue.upvotes + 1}, {
@@ -51,11 +51,38 @@ function CommIssueCard({ issue, upvotes }) {
   function addUpvote() {
     axios
       .post(`http://localhost:4000/issues/${id}/upvotes`, upvoteData)
-      .then(() => increaseUpvoteBy1())
+      .then(() => incrementUpvote())
       .catch(error => {
         console.log(error)
       })
   };
+
+  // Updates the issue on the backend by adding a resolution
+  function incrementResolution() {
+    axios
+      .patch(`http://localhost:4000/issues/${issue.id}`, {resolutions: issue.resolutions + 1}, {
+        headers: {
+          Authorization: token
+        }
+      })
+      .then(response => {
+        setCurrentIssue(response.data);
+      })
+      .catch(error => {
+        console.log(error);
+      })
+  }
+
+  // Actually creates the record of the resolution between user and issue
+  function addResolution() {
+    axios
+      .post(`http://localhost:4000/resolutions`, upvoteData)
+      .then(response => {
+        console.log(response.data);
+        incrementResolution();
+      })
+      .catch(err => console.log(err));
+  }
 
   return (
     <div>
@@ -94,7 +121,20 @@ function CommIssueCard({ issue, upvotes }) {
               {currentIssue.upvotes}
             </Label>
           </Button>
-          <ResolvedStatus issue={issue} />
+
+          <Button 
+            as='div' 
+            labelPosition='left'
+            disabled={currentIssue.user_id === id ? true : false}
+          >
+            <Button 
+            color='red'
+            size='large'
+            onClick={addResolution}>
+              <Icon name='x' />
+              Not Resolved
+            </Button>
+          </Button>
         </div>
       </Card>
     </div>

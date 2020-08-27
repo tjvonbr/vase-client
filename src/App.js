@@ -7,7 +7,7 @@ import { FetchProvider } from './context/FetchContext';
 import { IssueProvider } from './context/IssueContext';
 import Landing from './pages/Landing';
 import Logout from './pages/Logout';
-import Login from './pages/Login';
+import {Login} from './pages/Login';
 import Register from './pages/Register';
 import Profile from './pages/Profile';
 import EditProfile from './pages/EditProfile';

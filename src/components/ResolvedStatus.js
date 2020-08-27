@@ -16,6 +16,6 @@ function ResolvedStatus({ issue }) {
       </p>
     </div>
   )
-};
+}
 
 export default ResolvedStatus;

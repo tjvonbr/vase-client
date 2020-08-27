@@ -42,7 +42,6 @@ function AddIssue() {
           Authorization: token
         }
       })
-      .then(response => console.log(response))
       .catch(error => console.log(error))
   };
 
@@ -89,7 +88,6 @@ function AddIssue() {
             name="title"
             value={postInfo.title}
             onChange={handleChange}
-
             placeholder='Issue Title'
             />
 

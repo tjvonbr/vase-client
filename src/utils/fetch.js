@@ -1,7 +1,10 @@
 import axios from 'axios';
 
-const publicFetch = axios.create({
-  baseURL: process.env.VASE_API_URL
-});
+function postLogin(creds) {
+  return axios
+    .post('http://localhost:4000/auth/login', creds)
+    .then(response => console.log(response))
+    .catch(err => console.log(err))
+};
 
-export { publicFetch };
+export { postLogin };

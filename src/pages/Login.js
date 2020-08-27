@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Dimmer, Loader } from 'semantic-ui-react';
 import LoginGrid from '../components/LoginGrid';
 import { AuthContext } from '../context/AuthContext';
+import { postLogin } from '../utils/fetch';
 
 function Login(props) {
   const authContext = useContext(AuthContext);
@@ -11,6 +12,7 @@ function Login(props) {
     username: '',
     password: '',
   });
+  const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
   // Handle input
@@ -24,14 +26,18 @@ function Login(props) {
       event.preventDefault();
       setLoading(true);
       // Handles the login and storage of auth credentials
-      const { data } = await axios
-        .post('http://localhost:4000/auth/login', credentials)
-      authContext.setAuthInfo(data);
-      const { id } = data.userInfo;
+      // const { data } = await axios
+      //   .post('http://localhost:4000/auth/login', credentials)
+      postLogin(credentials)
+        .then(response => console.log(response))
+        .catch(err => console.log(err))
+      // authContext.setAuthInfo(data);
+      // const { id } = data.userInfo;
       setLoading(false);
-      props.history.push(`profile/${id}`);
-    } catch (error) {
-      console.log(error)
+      // props.history.push(`profile/${id}`);
+    } catch (err) {
+      setLoading(false);
+      console.log(err);
     }
   }
 
@@ -89,4 +95,4 @@ function Login(props) {
   )
 }
 
-export default Login;
+export {Login};
