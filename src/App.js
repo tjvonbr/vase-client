@@ -14,12 +14,12 @@ import EditProfile from './pages/EditProfile';
 import '../src/styles/index.scss';
 
 function AuthenticatedRoute({ children, ...rest }) {
-  const authContext = useContext(AuthContext);
+  const auth = useContext(AuthContext);
   
 
   return (
     <Route {...rest} render={() => 
-      authContext.isAuthenticated() ? (
+      auth.isAuthenticated() ? (
         children
       ) : (
         <Redirect to='/' />
