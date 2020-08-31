@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 // setAuthState: authInfo => setAuthInfo(authInfo),

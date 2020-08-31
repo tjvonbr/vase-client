@@ -1,0 +1,205 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Login renders correctly 1`] = `
+<div
+  className="login-main-container"
+>
+  <div
+    className="ui dimmer"
+    onClick={[Function]}
+  >
+    <div
+      className="content"
+    >
+      <div
+        className="ui text loader"
+      >
+        Loading...
+      </div>
+    </div>
+  </div>
+  <div
+    className="css-f5hm5o-LoginGrid"
+  >
+    <span />
+    <span />
+    <span />
+    <span />
+    <span />
+    <span />
+    <span
+      className="css-g17t6r-LoginGrid"
+    />
+    <span
+      className="css-g17t6r-LoginGrid"
+    />
+    <span
+      className="css-g17t6r-LoginGrid"
+    />
+    <span />
+    <span />
+    <span />
+    <span />
+    <span />
+    <span />
+    <span />
+    <span />
+    <span />
+    <span />
+    <span />
+    <span />
+    <span />
+    <span />
+    <span />
+    <span
+      className="css-l6cq0a-LoginGrid"
+    />
+    <span
+      className="css-l6cq0a-LoginGrid"
+    />
+    <span
+      className="css-l6cq0a-LoginGrid"
+    />
+    <span />
+    <span />
+    <span />
+    <span />
+    <span />
+    <span />
+    <span />
+    <span />
+    <span />
+    <span />
+    <span />
+    <span />
+    <span />
+    <span />
+    <span />
+    <span />
+    <span />
+    <span />
+    <span />
+    <span />
+    <span />
+    <span />
+    <span />
+    <span
+      className="css-17omzbg-LoginGrid"
+    />
+    <span
+      className="css-17omzbg-LoginGrid"
+    />
+    <span />
+    <span />
+    <span />
+    <span />
+    <span />
+    <span />
+    <span />
+    <span />
+    <span />
+    <span />
+    <span />
+    <span />
+    <span />
+    <span />
+    <span />
+    <span />
+    <span />
+    <span />
+    <span />
+    <span
+      className="css-444w4b-LoginGrid"
+    />
+    <span
+      className="css-2nq4jk-LoginGrid"
+    />
+    <span
+      className="css-2nq4jk-LoginGrid"
+    />
+    <span />
+    <span />
+    <span />
+    <span />
+    <span />
+    <span />
+    <span
+      className="css-2nq4jk-LoginGrid"
+    />
+    <span
+      className="css-2nq4jk-LoginGrid"
+    />
+    <span />
+    <span />
+  </div>
+  <div
+    className="login-form-wrapper"
+  >
+    <a
+      className="login-form-wrapper-header"
+      href="/"
+    >
+      Vase
+    </a>
+    <div
+      className="login-form-content-wrapper"
+    >
+      <div
+        className="login-form-content"
+      >
+        <form
+          onSubmit={[Function]}
+        >
+          <h3
+            className="login-form-header"
+          >
+            Please sign in to your account
+          </h3>
+          <label
+            className="login-form-label"
+          >
+            Username
+            <input
+              className="login-form-input"
+              id="usernameInput"
+              name="username"
+              onChange={[Function]}
+              type="text"
+              value=""
+            />
+          </label>
+          <label
+            className="login-form-label"
+            htmlFor="password"
+          >
+            Password
+          </label>
+          <input
+            className="login-form-input"
+            id="passwordInput"
+            name="password"
+            onChange={[Function]}
+            type="password"
+            value=""
+          />
+          <button
+            id="btn-login"
+          >
+            Login
+          </button>
+        </form>
+        <p
+          className="login-form-register-link"
+        >
+          Still need an account?
+          <a
+            href="/register"
+          >
+             Register 
+          </a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+`;

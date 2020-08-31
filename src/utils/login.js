@@ -2,14 +2,16 @@ import axios from 'axios';
 
 const apiURL = process.env.REACT_APP_API_URL
 
-function login(credentials) {
+function login(credentials, ...props) {
 	return axios.post(`${apiURL}/auth/login`, credentials)
 		.then(response => {
-			return response.data
+			console.log(response.status)
+			if (response.status === 200) {
+				console.log("Great")
+			} else {
+				return Promise.reject("Sorry");
+			}
 		})	
-		.catch(err => {
-			return err
-		})
 }
 
 export {login}
