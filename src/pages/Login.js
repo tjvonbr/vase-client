@@ -25,13 +25,14 @@ function Login(props) {
       event.preventDefault();
       setLoading(true);
       const response = await login(credentials);
+      console.log(response);
       auth.setAuthInfo(response);
       const { id } = response.userInfo;
       setLoading(false);
       props.history.push(`profile/${id}`);
-    } catch (err) {
+    } catch (error) {
       setLoading(false);
-      console.log(err);
+      console.log(error.response);
     }
   }
 

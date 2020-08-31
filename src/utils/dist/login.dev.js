@@ -13,8 +13,12 @@ var apiURL = process.env.REACT_APP_API_URL;
 
 function login(credentials) {
   return _axios["default"].post("".concat(apiURL, "/auth/login"), credentials).then(function (response) {
-    return response.data;
-  })["catch"](function (err) {
-    return err;
+    console.log(response.status);
+
+    if (response.status === 200) {
+      console.log("Great");
+    } else {
+      return Promise.reject("Sorry");
+    }
   });
 }
