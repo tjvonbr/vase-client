@@ -90,4 +90,4 @@ function Login(props) {
   )
 }
 
-export {Login};
+export { Login };

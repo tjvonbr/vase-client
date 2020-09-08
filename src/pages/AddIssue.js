@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { AuthContext } from '../context/AuthContext';
+import { postIssue } from '../utils/postIssue';
 import axios from 'axios';
 import { 
   Button, 
@@ -18,15 +19,15 @@ import { useHistory } from 'react-router-dom';
 
 
 function AddIssue() {
-  const authContext = useContext(AuthContext);
+  const auth = useContext(AuthContext);
 
   const history = useHistory();
 
-  const { authState } = authContext;
+  const { authState } = auth;
   const { token } = authState;
-  const { id, posted_issues, zipcode} = authState.userInfo;
+  const { id, postedIssues, zipcode} = authState.userInfo;
 
-  const [postInfo, setPostInfo] = useState({ 
+  const [newIssue, setNewIssue] = useState({ 
     zipcode: zipcode,
     user_id: id,
     title: '',
@@ -37,7 +38,7 @@ function AddIssue() {
   // Functionality for increasing users # of posted issues +1
   function addIssuesPosted() {
     axios
-      .put(`http://localhost:4000/users/${id}`, { posted_issues: posted_issues + 1 },{
+      .put(`http://localhost:4000/users/${id}`, { postedIssues: postedIssues + 1 },{
         headers: {
           Authorization: token
         }
@@ -46,18 +47,19 @@ function AddIssue() {
   };
 
   function handleChange(event) {
-    setPostInfo({...postInfo, [event.target.name]: event.target.value});
+    setNewIssue({...newIssue, [event.target.name]: event.target.value});
   };
 
   function handleSubmit(event) {
     try {
       event.preventDefault();
       setLoading(true);
-      axios.post('http://localhost:4000/issues', postInfo, {
-        headers: {
-          Authorization: token
-        }
-      })
+      postIssue(newIssue);
+        // axios.post('http://localhost:4000/issues', newIssue, {
+        //   headers: {
+        //     Authorization: token
+        //   }
+        // })
       addIssuesPosted();
       setLoading(false);
       history.push(`/profile/${id}`);
@@ -86,7 +88,7 @@ function AddIssue() {
             iconPosition='left'
             type='text'
             name="title"
-            value={postInfo.title}
+            value={newIssue.title}
             onChange={handleChange}
             placeholder='Issue Title'
             />
@@ -98,7 +100,7 @@ function AddIssue() {
               type='text'
               name="description"
               placeholder='Issue Description'
-              value={postInfo.description}
+              value={newIssue.description}
               onChange={handleChange}
             />
 
@@ -121,6 +123,4 @@ function AddIssue() {
   )
 }
 
-export default AddIssue;
-
-
+export { AddIssue };
