@@ -13,7 +13,7 @@
     "facepaint": "^1.2.1",
     "formik": "^1.5.8",
     "jest-cli": "^26.4.2",
-    "node-sass": "^4.14.1",
+    "node-sass": "^7.0.0",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "react-router-dom": "^5.1.2",
